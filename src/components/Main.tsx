@@ -45,14 +45,12 @@ const Main = () => {
         Pause
       </button>
       <section>
-        <form>
-          <input
-            type="file"
-            accept="audio/*"
-            onChange={handleSampleChange}
-            className="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-100"
-          />
-        </form>
+        <input
+          type="file"
+          accept="audio/*"
+          onChange={handleSampleChange}
+          className="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-100"
+        />
       </section>
     </main>
   );
