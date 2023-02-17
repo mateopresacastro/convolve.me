@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const ctx = new AudioContext();
 const out = ctx.destination;
@@ -9,7 +9,8 @@ const Main = () => {
     new AudioBuffer({ length: 1, numberOfChannels: 1, sampleRate: 41000 })
   );
 
-  const handleSampleChange = async (e) => {
+  const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) return;
     const sample = e.target.files[0];
     const sampleUrl = URL.createObjectURL(sample);
     const res = await fetch(sampleUrl);
