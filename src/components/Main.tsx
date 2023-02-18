@@ -1,49 +1,68 @@
 import { ChangeEvent, useState } from 'react';
 import Blob from './Blob';
 
-const ctx = new AudioContext();
-const out = ctx.destination;
-let sampleSourceNode: AudioBufferSourceNode;
-const compressor = new DynamicsCompressorNode(ctx, { ratio: 20 });
-
-
-
 const Main = () => {
-  const [sampleBuffer, setSampleBuffer] = useState(
-    new AudioBuffer({ length: 1, numberOfChannels: 1, sampleRate: 41000 })
-  );
-  const [sampleBuffer2, setSampleBuffer2] = useState(
-    new AudioBuffer({ length: 1, numberOfChannels: 1, sampleRate: 41000 })
-  );
+  const [audioBuffers, setAudioBuffers] = useState({
+    firstSample: new AudioBuffer({
+      length: 1,
+      numberOfChannels: 1,
+      sampleRate: 41000,
+    }),
+    secondSample: new AudioBuffer({
+      length: 1,
+      numberOfChannels: 1,
+      sampleRate: 41000,
+    }),
+  });
+
+  const [ctx] = useState(new AudioContext());
+  const compressor = new DynamicsCompressorNode(ctx, { ratio: 20 });
+  const gain = new GainNode(ctx, { gain: 0.5 });
+  const out = ctx.destination;
+
+  const getAudioBufferFromFile = async (sample: File) => {
+    const sampleUrl = URL.createObjectURL(sample);
+    const res = await fetch(sampleUrl);
+    const buffer = await res.arrayBuffer();
+    return ctx.decodeAudioData(buffer);
+  };
 
   const handleSampleChange1 = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     const sample = e.target.files[0];
-    const sampleUrl = URL.createObjectURL(sample);
-    const res = await fetch(sampleUrl);
-    const buffer = await res.arrayBuffer();
-    const decodedAudio = await ctx.decodeAudioData(buffer);
-    setSampleBuffer(decodedAudio);
+    const decodedAudio = await getAudioBufferFromFile(sample);
+    setAudioBuffers((audioBuffers) => ({
+      ...audioBuffers,
+      firstSample: decodedAudio,
+    }));
   };
 
   const handleSampleChange2 = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     const sample = e.target.files[0];
-    const sampleUrl = URL.createObjectURL(sample);
-    const res = await fetch(sampleUrl);
-    const buffer = await res.arrayBuffer();
-    const decodedAudio = await ctx.decodeAudioData(buffer);
-    setSampleBuffer2(decodedAudio);
+    const decodedAudio = await getAudioBufferFromFile(sample);
+    setAudioBuffers((audioBuffers) => ({
+      ...audioBuffers,
+      secondSample: decodedAudio,
+    }));
   };
 
   const handleConvolve = () => {
-    const convolverNode = new ConvolverNode(ctx, { buffer: sampleBuffer2 });
-    sampleSourceNode = new AudioBufferSourceNode(ctx, {
-      buffer: sampleBuffer,
+    const firstSampleSourceNode = new AudioBufferSourceNode(ctx, {
+      buffer: audioBuffers.firstSample,
     });
-    sampleSourceNode.connect(convolverNode).connect(compressor).connect(out);
-    sampleSourceNode.start();
+    const convolverNode = new ConvolverNode(ctx, {
+      buffer: audioBuffers.secondSample,
+    });
+
+    firstSampleSourceNode
+      .connect(convolverNode)
+      .connect(gain)
+      .connect(compressor)
+      .connect(out);
+    firstSampleSourceNode.start();
   };
+
   return (
     <main className="flex h-full flex-col items-center justify-center bg-zinc-900">
       <Blob />
