@@ -44,24 +44,51 @@ const Main = () => {
   return (
     <main className="flex h-full flex-col items-center justify-center bg-zinc-900">
       <section>
+        <label
+          className="mb-2 block text-sm font-medium text-gray-500"
+          htmlFor="file_input"
+        >
+          Upload Sample One
+        </label>
         <input
+          className="block w-96 cursor-pointer rounded border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+          aria-describedby="file_input_help"
+          id="file_input"
           type="file"
           accept="audio/*"
           onChange={handleSampleChange1}
-          className="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-100"
         />
       </section>
       <section>
+        <label
+          className="mb-2 mt-5 block text-sm font-medium text-gray-500 "
+          htmlFor="file_input"
+        >
+          Upload Sample Two
+        </label>
+        <input
+          className="block w-96 cursor-pointer rounded border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+          aria-describedby="file_input_help"
+          id="file_input"
+          type="file"
+          accept="audio/*"
+          onChange={handleSampleChange2}
+        />
+        <p className="mt-1 mb-5 text-sm text-gray-500" id="file_input_help">
+          All audio files allowed. Must be 41000 Hz.
+        </p>
+      </section>
+      {/* <section>
         <input
           type="file"
           accept="audio/*"
           onChange={handleSampleChange2}
           className="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-100"
         />
-      </section>
+      </section> */}
       <button
         onClick={handleConvolve}
-        className="rounded-md bg-blue-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm hover:bg-gray-100"
+        className="rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm hover:bg-gray-100"
       >
         Convolve
       </button>
