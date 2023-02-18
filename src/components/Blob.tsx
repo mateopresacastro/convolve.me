@@ -1,11 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const Blob = () => {
-  useEffect(() => {
-    window.onpointermove = (event) => handlePointerMove(event);
-  }, []);
-
   const myRef = useRef<HTMLDivElement>(null);
+
+  window.onpointermove = (event) => handlePointerMove(event);
 
   const handlePointerMove = (event: globalThis.PointerEvent) => {
     if (myRef.current) {
