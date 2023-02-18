@@ -1,9 +1,12 @@
 import { ChangeEvent, useState } from 'react';
+import Blob from './Blob';
 
 const ctx = new AudioContext();
 const out = ctx.destination;
 let sampleSourceNode: AudioBufferSourceNode;
 const compressor = new DynamicsCompressorNode(ctx, { ratio: 20 });
+
+
 
 const Main = () => {
   const [sampleBuffer, setSampleBuffer] = useState(
@@ -43,7 +46,8 @@ const Main = () => {
   };
   return (
     <main className="flex h-full flex-col items-center justify-center bg-zinc-900">
-      <section>
+      <Blob />
+      <section className="z-20">
         <label
           className="mb-2 block text-sm font-medium text-gray-500"
           htmlFor="file_input"
@@ -59,7 +63,7 @@ const Main = () => {
           onChange={handleSampleChange1}
         />
       </section>
-      <section>
+      <section className="z-20">
         <label
           className="mb-2 mt-5 block text-sm font-medium text-gray-500 "
           htmlFor="file_input"
@@ -78,17 +82,9 @@ const Main = () => {
           All audio files allowed. Must be 41000 Hz.
         </p>
       </section>
-      {/* <section>
-        <input
-          type="file"
-          accept="audio/*"
-          onChange={handleSampleChange2}
-          className="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold text-gray-900 shadow-sm hover:bg-gray-100"
-        />
-      </section> */}
       <button
         onClick={handleConvolve}
-        className="rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm hover:bg-gray-100"
+        className="z-20 rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm hover:bg-gray-100"
       >
         Convolve
       </button>

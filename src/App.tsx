@@ -1,5 +1,6 @@
-import React from 'react';
 import Main from './components/Main';
+
+const blob = document.getElementById('blob');
 
 function App() {
   return (
