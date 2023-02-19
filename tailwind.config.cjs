@@ -14,7 +14,7 @@ module.exports = {
         },
       },
       blur: {
-        '4xl': '90px',
+        '4xl': '150px',
       },
     },
   },
