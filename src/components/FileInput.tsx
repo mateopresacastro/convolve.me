@@ -21,7 +21,7 @@ const FileInput = ({ setAudioBuffers, label, id }: FileInputProps) => {
       <label
         className="mb-2 block text-sm font-medium text-gray-500"
         htmlFor="file_input"
-        aria-labelledBy={label}
+        aria-label={label}
       >
         {label}
       </label>
