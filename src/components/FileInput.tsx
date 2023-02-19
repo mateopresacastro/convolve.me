@@ -1,6 +1,21 @@
+import { ChangeEvent, useContext } from 'react';
+import { getAudioBufferFromFile } from '../lib/audioUtils';
+import { MyAudioContext } from '../contexts/MyAudioContext';
 import { FileInputProps } from '../types/types';
 
-const FileInput = ({ handleSampleChange, label, id }: FileInputProps) => {
+const FileInput = ({ setAudioBuffers, label, id }: FileInputProps) => {
+  const ctx = useContext(MyAudioContext);
+
+  const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const sample = e.target.files[0];
+    const decodedAudio = await getAudioBufferFromFile(sample, ctx);
+    setAudioBuffers((audioBuffers) => ({
+      ...audioBuffers,
+      [e.target.id]: decodedAudio,
+    }));
+  };
+
   return (
     <section className="z-20">
       <label
