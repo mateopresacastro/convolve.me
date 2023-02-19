@@ -4,6 +4,7 @@ import FileInput from './FileInput';
 import ConvolveButton from './ConvolveButton';
 import Layout from './Layout';
 import { fileInputData, audioBuffersDefaultValues } from '../lib/defaultData';
+import Title from './Title';
 
 const Main = () => {
   const [audioBuffers, setAudioBuffers] = useState(audioBuffersDefaultValues);
@@ -11,6 +12,7 @@ const Main = () => {
   return (
     <Layout>
       <Blob />
+      <Title />
       {fileInputData.map((data) => (
         <FileInput
           setAudioBuffers={setAudioBuffers}
