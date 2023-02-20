@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getAudioUtils } from '../lib/audioUtils';
 import { AudioBuffersState } from '../types/types';
 import download from '../lib/download';

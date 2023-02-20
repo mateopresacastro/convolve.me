@@ -2,7 +2,7 @@
 
 const download = (audioBuffer: AudioBuffer): Promise<boolean | ErrorEvent> => {
   return new Promise((resolve, reject) => {
-    const worker = new Worker('/src/lib/recorderWorker.js');
+    const worker = new Worker('./src/lib/recorderWorker.js');
     // initialize the new worker
     worker.postMessage({
       command: 'init',
