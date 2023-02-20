@@ -1,18 +1,28 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { getAudioUtils } from '../lib/audioUtils';
-import { MyAudioContext } from '../contexts/MyAudioContext';
 import { AudioBuffersState } from '../types/types';
+import download from '../lib/download';
+import Processing from './Processing';
 
 const ConvolveButton = ({ audioBuffers }: AudioBuffersState) => {
-  const ctx = useContext(MyAudioContext);
-  const { compressor, gain, out } = getAudioUtils(ctx);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleConvolve = () => {
+  const handleConvolve = async () => {
     const { firstSample, secondSample } = audioBuffers;
-    const firstSampleSourceNode = new AudioBufferSourceNode(ctx, {
+
+    const offlineCtx = new OfflineAudioContext({
+      numberOfChannels: firstSample.numberOfChannels,
+      length: 44100 * 60,
+      sampleRate: 44100,
+    });
+
+    const { compressor, gain, out } = getAudioUtils(offlineCtx);
+
+    const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
       buffer: firstSample,
     });
-    const convolverNode = new ConvolverNode(ctx, {
+
+    const convolverNode = new ConvolverNode(offlineCtx, {
       buffer: secondSample,
     });
 
@@ -23,13 +33,19 @@ const ConvolveButton = ({ audioBuffers }: AudioBuffersState) => {
       .connect(out);
 
     firstSampleSourceNode.start();
+    setIsProcessing(true);
+    const renderedBuffer = await offlineCtx.startRendering();
+    const didDownload = await download(renderedBuffer);
+    setIsProcessing(didDownload === true && false);
   };
 
-  return (
+  return isProcessing ? (
+    <Processing />
+  ) : (
     <button
       onClick={handleConvolve}
       type="submit"
-      className="z-20 rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm transition duration-500 ease-in-out hover:text-zinc-800 hover:bg-zinc-300"
+      className="z-20 w-52 rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm transition duration-500 ease-in-out hover:bg-zinc-300 hover:text-zinc-800"
     >
       Convolve
     </button>

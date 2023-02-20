@@ -1,4 +1,4 @@
-const getAudioUtils = (ctx: AudioContext) => {
+const getAudioUtils = (ctx: AudioContext | OfflineAudioContext) => {
   const compressor = new DynamicsCompressorNode(ctx, { ratio: 20 });
   const gain = new GainNode(ctx, { gain: 0.5 });
   const out = ctx.destination;
