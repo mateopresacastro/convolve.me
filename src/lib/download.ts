@@ -1,8 +1,9 @@
 // https://stackoverflow.com/questions/62172398/convert-audiobuffer-to-arraybuffer-blob-for-wav-download
 
+const worker = new Worker(new URL('./recorderWorker.js', import.meta.url));
+
 const download = (audioBuffer: AudioBuffer): Promise<boolean | ErrorEvent> => {
   return new Promise((resolve, reject) => {
-    const worker = new Worker('/src/lib/recorderWorker.js');
     // initialize the new worker
     worker.postMessage({
       command: 'init',
