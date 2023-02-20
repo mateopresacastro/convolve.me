@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
-import { AudioBuffersState } from '../types/types';
 import download from '../lib/download';
 import Processing from './Processing';
+
+interface AudioBuffersState {
+  audioBuffers: {
+    firstSample: AudioBuffer | null;
+    secondSample: AudioBuffer | null;
+  };
+}
 
 const ConvolveButton = ({ audioBuffers }: AudioBuffersState) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -10,41 +16,43 @@ const ConvolveButton = ({ audioBuffers }: AudioBuffersState) => {
 
   const { firstSample, secondSample } = audioBuffers;
 
-  const offlineCtx = new OfflineAudioContext({
-    numberOfChannels: firstSample.numberOfChannels,
-    length: 44100 * 60,
-    sampleRate: 44100,
-  });
-
   const handleConvolve = async () => {
-    const { compressor, gain, out } = getAudioUtils(offlineCtx);
+    if (firstSample && secondSample) {
+      const offlineCtx = new OfflineAudioContext({
+        numberOfChannels: firstSample.numberOfChannels,
+        length: 44100 * 60,
+        sampleRate: 44100,
+      });
 
-    const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
-      buffer: firstSample,
-    });
+      const { compressor, gain, out } = getAudioUtils(offlineCtx);
 
-    const convolverNode = new ConvolverNode(offlineCtx, {
-      buffer: secondSample,
-    });
+      const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
+        buffer: firstSample,
+      });
 
-    firstSampleSourceNode
-      .connect(convolverNode)
-      .connect(gain)
-      .connect(compressor)
-      .connect(out);
+      const convolverNode = new ConvolverNode(offlineCtx, {
+        buffer: secondSample,
+      });
 
-    try {
-      firstSampleSourceNode.start();
-      setIsProcessing(true);
-      const renderedBuffer = await offlineCtx.startRendering();
-      const { waveFile, error } = await audioBufferToWave(renderedBuffer);
-      if (error) throw error;
-      download(waveFile!);
-    } catch (error) {
-      console.error(error);
-      setIsError(true);
-    } finally {
-      setIsProcessing(false);
+      firstSampleSourceNode
+        .connect(convolverNode)
+        .connect(gain)
+        .connect(compressor)
+        .connect(out);
+
+      try {
+        firstSampleSourceNode.start();
+        setIsProcessing(true);
+        const renderedBuffer = await offlineCtx.startRendering();
+        const { waveFile, error } = await audioBufferToWave(renderedBuffer);
+        if (error) throw error;
+        download(waveFile!);
+      } catch (error) {
+        console.error(error);
+        setIsError(true);
+      } finally {
+        setIsProcessing(false);
+      }
     }
   };
 

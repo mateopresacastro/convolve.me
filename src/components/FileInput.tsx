@@ -1,7 +1,17 @@
 import { ChangeEvent, useContext } from 'react';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
-import { FileInputProps } from '../types/types';
+
+export interface FileInputProps {
+  setAudioBuffers: React.Dispatch<
+    React.SetStateAction<{
+      firstSample: AudioBuffer | null;
+      secondSample: AudioBuffer | null;
+    }>
+  >;
+  label: string;
+  id: 'firstSample' | 'secondSample';
+}
 
 const FileInput = ({ setAudioBuffers, label, id }: FileInputProps) => {
   const ctx = useContext(MyAudioContext);
