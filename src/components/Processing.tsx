@@ -1,6 +1,6 @@
 export default function Processing() {
   return (
-    <div className="z-20 flex w-52 items-center justify-evenly rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm transition duration-500 ease-in-out hover:bg-zinc-300 hover:text-zinc-800">
+    <div className="z-20 flex w-52 items-center justify-evenly rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm">
       <button role="status" disabled>
         <svg
           aria-hidden="true"

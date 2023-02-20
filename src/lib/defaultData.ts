@@ -1,23 +1,23 @@
 const fileInputData = [
   {
-    label: 'Upload Sample One',
+    label: 'Sample One',
     id: 'firstSample' as 'firstSample',
   },
   {
-    label: 'Upload Sample Two',
+    label: 'Sample Two',
     id: 'secondSample' as 'secondSample',
   },
 ];
 const audioBuffersDefaultValues = {
   firstSample: new AudioBuffer({
     length: 1,
-    numberOfChannels: 1,
-    sampleRate: 41000,
+    numberOfChannels: 2,
+    sampleRate: 44100,
   }),
   secondSample: new AudioBuffer({
     length: 1,
-    numberOfChannels: 1,
-    sampleRate: 41000,
+    numberOfChannels: 2,
+    sampleRate: 44100,
   }),
 };
 
