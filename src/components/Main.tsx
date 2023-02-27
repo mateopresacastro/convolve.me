@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { RxGithubLogo } from 'react-icons/rx';
 import Blob from './Blob';
 import FileInput from './FileInput';
 import ConvolveButton from './ConvolveButton';
 import Layout from './Layout';
 import Title from './Title';
 import { fileInputData } from '../lib/defaultData';
+import GitHubLink from './GitHubLink.js';
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -36,6 +38,7 @@ const Main = () => {
         audioBuffers={audioBuffers}
         setAudioBuffers={setAudioBuffers}
       />
+      <GitHubLink />
     </Layout>
   );
 };
