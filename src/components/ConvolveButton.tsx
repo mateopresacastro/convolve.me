@@ -30,6 +30,7 @@ const ConvolveButton = ({
 
       const { compressor, gain, out } = getAudioUtils(offlineCtx);
 
+      // create source nodes
       const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
         buffer: firstSample,
       });
@@ -38,6 +39,7 @@ const ConvolveButton = ({
         buffer: secondSample,
       });
 
+      // connect the tree
       firstSampleSourceNode
         .connect(convolverNode)
         .connect(gain)

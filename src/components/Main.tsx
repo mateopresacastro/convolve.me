@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { RxGithubLogo } from 'react-icons/rx';
 import Blob from './Blob';
 import FileInput from './FileInput';
 import ConvolveButton from './ConvolveButton';
