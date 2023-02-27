@@ -30,7 +30,7 @@ const ConvolveButton = ({
 
       const { compressor, gain, out } = getAudioUtils(offlineCtx);
 
-      // create source nodes
+      // create nodes
       const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
         buffer: firstSample,
       });
