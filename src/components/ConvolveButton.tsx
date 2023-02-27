@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction, useCallback } from 'react';
 import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
 import download from '../lib/download';
 import Processing from './Processing';
@@ -25,8 +25,16 @@ const ConvolveButton = ({
 
   const { firstSample, secondSample } = audioBuffers;
 
+  const bothSamplesHaveTheSameNumberOfChannels = () => {
+    return firstSample?.numberOfChannels === secondSample?.numberOfChannels;
+  };
+
   const handleConvolve = async () => {
-    if (firstSample && secondSample) {
+    if (
+      firstSample &&
+      secondSample &&
+      bothSamplesHaveTheSameNumberOfChannels()
+    ) {
       // create offline context to render audio
       const offlineCtx = new OfflineAudioContext({
         numberOfChannels: firstSample.numberOfChannels,

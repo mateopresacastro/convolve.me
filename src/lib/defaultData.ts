@@ -9,17 +9,4 @@ const fileInputData = [
   },
 ];
 
-const audioBuffersDefaultValues = {
-  firstSample: new AudioBuffer({
-    length: 1,
-    numberOfChannels: 2,
-    sampleRate: 44100,
-  }),
-  secondSample: new AudioBuffer({
-    length: 1,
-    numberOfChannels: 2,
-    sampleRate: 44100,
-  }),
-};
-
-export { fileInputData, audioBuffersDefaultValues };
+export { fileInputData };

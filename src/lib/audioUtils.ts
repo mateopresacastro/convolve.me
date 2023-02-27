@@ -25,6 +25,19 @@ const audioBufferToWave = (
   audioBuffer: AudioBuffer
 ): Promise<audioBufferToWaveReturn> => {
   return new Promise((resolve, reject) => {
+    // if its mono, make it "stereo" so the worker can work with it.
+    if (audioBuffer.numberOfChannels === 1) {
+      console.log('im here');
+      const stereoAudioBuffer = new AudioBuffer({
+        numberOfChannels: 2,
+        length: audioBuffer.length,
+        sampleRate: audioBuffer.sampleRate,
+      });
+      stereoAudioBuffer.copyToChannel(audioBuffer.getChannelData(0), 0);
+      stereoAudioBuffer.copyToChannel(audioBuffer.getChannelData(0), 1);
+      audioBuffer = stereoAudioBuffer;
+    }
+
     // initialize the new worker
     recorderWorker.postMessage({
       command: 'init',
