@@ -19,7 +19,7 @@ const Main = () => {
     <Layout>
       <Blob />
       <Title />
-      <main className="mb-10 flex">
+      <div className="mb-10 flex">
         {fileInputData.map((data) => (
           <FileInput
             audioBuffers={audioBuffers}
@@ -29,7 +29,7 @@ const Main = () => {
             key={data.id}
           />
         ))}
-      </main>
+      </div>
       <ConvolveButton
         audioBuffers={audioBuffers}
         setAudioBuffers={setAudioBuffers}
