@@ -1,11 +1,10 @@
-var recLength = 0,
-  recBuffersL = [],
-  recBuffersR = [],
-  sampleRate;
+let recLength = 0;
+let recBuffersL: Float32Array[] = [];
+let recBuffersR: Float32Array[] = [];
+let sampleRate: number;
 
-
-self.onmessage = function(e) {
-  switch(e.data.command){
+self.onmessage = function (e) {
+  switch (e.data.command) {
     case 'init':
       init(e.data.config);
       break;
@@ -24,57 +23,60 @@ self.onmessage = function(e) {
   }
 };
 
-function init(config){
+function init(config: { sampleRate: number }) {
+  console.log('im on init');
   sampleRate = config.sampleRate;
 }
 
-function record(inputBuffer){
+function record(inputBuffer: Float32Array[]) {
+  console.log('im on record');
   recBuffersL.push(inputBuffer[0]);
   recBuffersR.push(inputBuffer[1]);
   recLength += inputBuffer[0].length;
 }
 
-function exportWAV(type){
-  var bufferL = mergeBuffers(recBuffersL, recLength);
-  var bufferR = mergeBuffers(recBuffersR, recLength);
-  var interleaved = interleave(bufferL, bufferR);
-  var dataview = encodeWAV(interleaved);
-  var audioBlob = new Blob([dataview], { type: type });
+function exportWAV(type: string) {
+  console.log('im on export wav');
+  const bufferL = mergeBuffers(recBuffersL, recLength);
+  const bufferR = mergeBuffers(recBuffersR, recLength);
+  const interleaved = interleave(bufferL, bufferR);
+  const dataview = encodeWAV(interleaved);
+  const audioBlob = new Blob([dataview], { type: type });
 
   self.postMessage(audioBlob);
 }
 
 function getBuffer() {
-  var buffers = [];
-  buffers.push( mergeBuffers(recBuffersL, recLength) );
-  buffers.push( mergeBuffers(recBuffersR, recLength) );
+  const buffers = [];
+  buffers.push(mergeBuffers(recBuffersL, recLength));
+  buffers.push(mergeBuffers(recBuffersR, recLength));
   self.postMessage(buffers);
 }
 
-function clear(){
+function clear() {
   recLength = 0;
   recBuffersL = [];
   recBuffersR = [];
 }
 
-function mergeBuffers(recBuffers, recLength){
+function mergeBuffers(recBuffers: Float32Array[], recLength: number) {
   var result = new Float32Array(recLength);
   var offset = 0;
-  for (var i = 0; i < recBuffers.length; i++){
+  for (var i = 0; i < recBuffers.length; i++) {
     result.set(recBuffers[i], offset);
     offset += recBuffers[i].length;
   }
   return result;
 }
 
-function interleave(inputL, inputR){
+function interleave(inputL: Float32Array, inputR: Float32Array) {
   var length = inputL.length + inputR.length;
   var result = new Float32Array(length);
 
   var index = 0,
     inputIndex = 0;
 
-  while (index < length){
+  while (index < length) {
     result[index++] = inputL[inputIndex];
     result[index++] = inputR[inputIndex];
     inputIndex++;
@@ -82,20 +84,24 @@ function interleave(inputL, inputR){
   return result;
 }
 
-function floatTo16BitPCM(output, offset, input){
-  for (var i = 0; i < input.length; i++, offset+=2){
+function floatTo16BitPCM(
+  output: DataView,
+  offset: number,
+  input: Float32Array
+) {
+  for (var i = 0; i < input.length; i++, offset += 2) {
     var s = Math.max(-1, Math.min(1, input[i]));
-    output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
   }
 }
 
-function writeString(view, offset, string){
-  for (var i = 0; i < string.length; i++){
+function writeString(view: DataView, offset: number, string: string) {
+  for (var i = 0; i < string.length; i++) {
     view.setUint8(offset + i, string.charCodeAt(i));
   }
 }
 
-function encodeWAV(samples){
+function encodeWAV(samples: Float32Array) {
   var buffer = new ArrayBuffer(44 + samples.length * 2);
   var view = new DataView(buffer);
 
