@@ -24,19 +24,16 @@ self.onmessage = function (e) {
 };
 
 function init(config: { sampleRate: number }) {
-  console.log('im on init');
   sampleRate = config.sampleRate;
 }
 
 function record(inputBuffer: Float32Array[]) {
-  console.log('im on record');
   recBuffersL.push(inputBuffer[0]);
   recBuffersR.push(inputBuffer[1]);
   recLength += inputBuffer[0].length;
 }
 
 function exportWAV(type: string) {
-  console.log('im on export wav');
   const bufferL = mergeBuffers(recBuffersL, recLength);
   const bufferR = mergeBuffers(recBuffersR, recLength);
   const interleaved = interleave(bufferL, bufferR);
