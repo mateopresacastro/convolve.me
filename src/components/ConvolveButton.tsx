@@ -56,7 +56,11 @@ const ConvolveButton = ({
         setIsError(true);
       } finally {
         setIsProcessing(false);
-        setAudioBuffers({ firstSample: null, secondSample: null });
+        setAudioBuffers((audioBuffers) => ({
+          ...audioBuffers,
+          firstSample: null,
+          secondSample: null,
+        }));
       }
     }
   };
