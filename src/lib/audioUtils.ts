@@ -27,7 +27,6 @@ const audioBufferToWave = (
   return new Promise((resolve, reject) => {
     // if its mono, make it "stereo" so the worker can work with it.
     if (audioBuffer.numberOfChannels === 1) {
-      console.log('im here');
       const stereoAudioBuffer = new AudioBuffer({
         numberOfChannels: 2,
         length: audioBuffer.length,
