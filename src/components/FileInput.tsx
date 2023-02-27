@@ -1,19 +1,13 @@
-import { ChangeEvent, useContext, Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
 import { RxUpload, RxCheck } from 'react-icons/rx';
+import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import type { AudioBuffersState } from './Main';
 
 export interface FileInputProps {
-  setAudioBuffers: Dispatch<
-    SetStateAction<{
-      firstSample: AudioBuffer | null;
-      secondSample: AudioBuffer | null;
-    }>
-  >;
-  audioBuffers: {
-    firstSample: AudioBuffer | null;
-    secondSample: AudioBuffer | null;
-  };
+  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
+  audioBuffers: AudioBuffersState;
   label: string;
   id: 'firstSample' | 'secondSample';
 }

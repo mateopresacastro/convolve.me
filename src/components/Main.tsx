@@ -6,11 +6,13 @@ import Layout from './Layout';
 import Title from './Title';
 import { fileInputData } from '../lib/defaultData';
 
+export interface AudioBuffersState {
+  firstSample: AudioBuffer | null;
+  secondSample: AudioBuffer | null;
+}
+
 const Main = () => {
-  const [audioBuffers, setAudioBuffers] = useState<{
-    firstSample: AudioBuffer | null;
-    secondSample: AudioBuffer | null;
-  }>({
+  const [audioBuffers, setAudioBuffers] = useState<AudioBuffersState>({
     firstSample: null,
     secondSample: null,
   });

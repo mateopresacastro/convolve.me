@@ -1,19 +1,13 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
 import download from '../lib/download';
 import Processing from './Processing';
+import type { Dispatch, SetStateAction } from 'react';
+import type { AudioBuffersState } from './Main';
 
 interface ConvolveButtonProps {
-  audioBuffers: {
-    firstSample: AudioBuffer | null;
-    secondSample: AudioBuffer | null;
-  };
-  setAudioBuffers: Dispatch<
-    SetStateAction<{
-      firstSample: AudioBuffer | null;
-      secondSample: AudioBuffer | null;
-    }>
-  >;
+  audioBuffers: AudioBuffersState;
+  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
 }
 
 const ConvolveButton = ({
