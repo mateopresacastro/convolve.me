@@ -3,7 +3,7 @@ import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
 import { RxUpload, RxCheck } from 'react-icons/rx';
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import type { AudioBuffersState } from './Main';
+import type { AudioBuffersState } from '../App';
 
 export interface FileInputProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;

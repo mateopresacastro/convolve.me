@@ -3,7 +3,7 @@ import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
 import download from '../lib/download';
 import Processing from './Processing';
 import type { Dispatch, SetStateAction } from 'react';
-import type { AudioBuffersState } from './Main';
+import type { AudioBuffersState } from '../App';
 
 interface ConvolveButtonProps {
   audioBuffers: AudioBuffersState;
