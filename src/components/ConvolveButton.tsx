@@ -1,9 +1,9 @@
-import { useState, Dispatch, SetStateAction, useCallback } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
 import download from '../lib/download';
 import Processing from './Processing';
 
-interface AudioBuffersState {
+interface ConvolveButtonProps {
   audioBuffers: {
     firstSample: AudioBuffer | null;
     secondSample: AudioBuffer | null;
@@ -19,22 +19,14 @@ interface AudioBuffersState {
 const ConvolveButton = ({
   audioBuffers,
   setAudioBuffers,
-}: AudioBuffersState) => {
+}: ConvolveButtonProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const { firstSample, secondSample } = audioBuffers;
 
-  const bothSamplesHaveTheSameNumberOfChannels = () => {
-    return firstSample?.numberOfChannels === secondSample?.numberOfChannels;
-  };
-
   const handleConvolve = async () => {
-    if (
-      firstSample &&
-      secondSample &&
-      bothSamplesHaveTheSameNumberOfChannels()
-    ) {
+    if (firstSample && secondSample) {
       // create offline context to render audio
       const offlineCtx = new OfflineAudioContext({
         numberOfChannels: firstSample.numberOfChannels,
