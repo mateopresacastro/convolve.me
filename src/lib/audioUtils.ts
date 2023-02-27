@@ -3,8 +3,10 @@ const recorderWorker = new Worker(
 );
 
 const getAudioUtils = (ctx: AudioContext | OfflineAudioContext) => {
-  const compressor = new DynamicsCompressorNode(ctx, { ratio: 20 });
-  const gain = new GainNode(ctx, { gain: 0.5 });
+  const compressor = new DynamicsCompressorNode(ctx, {
+    ratio: 20,
+  });
+  const gain = new GainNode(ctx, { gain: 0.1 });
   const out = ctx.destination;
   return { compressor, gain, out };
 };
