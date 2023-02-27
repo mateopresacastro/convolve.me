@@ -38,7 +38,7 @@ const ConvolveButton = ({
       // create offline context to render audio
       const offlineCtx = new OfflineAudioContext({
         numberOfChannels: firstSample.numberOfChannels,
-        length: 44100 * 60,
+        length: firstSample.length + secondSample.length,
         sampleRate: 44100,
       });
 
