@@ -1,19 +1,29 @@
-import { ChangeEvent, useContext } from 'react';
+import { ChangeEvent, useContext, Dispatch, SetStateAction } from 'react';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
+import { RxUpload, RxCheck } from 'react-icons/rx';
 
 export interface FileInputProps {
-  setAudioBuffers: React.Dispatch<
-    React.SetStateAction<{
+  setAudioBuffers: Dispatch<
+    SetStateAction<{
       firstSample: AudioBuffer | null;
       secondSample: AudioBuffer | null;
     }>
   >;
+  audioBuffers: {
+    firstSample: AudioBuffer | null;
+    secondSample: AudioBuffer | null;
+  };
   label: string;
   id: 'firstSample' | 'secondSample';
 }
 
-const FileInput = ({ setAudioBuffers, label, id }: FileInputProps) => {
+const FileInput = ({
+  setAudioBuffers,
+  audioBuffers,
+  label,
+  id,
+}: FileInputProps) => {
   const ctx = useContext(MyAudioContext);
 
   const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,22 +36,26 @@ const FileInput = ({ setAudioBuffers, label, id }: FileInputProps) => {
     }));
   };
 
+  const isBufferReady = audioBuffers[id] !== null;
+
   return (
-    <section className="z-20">
-      <label
-        className="mb-2 block text-sm font-medium text-gray-500"
-        htmlFor="file_input"
-        aria-label={label}
-      >
-        {label}
-        <input
-          className="mb-5 block w-96 cursor-pointer rounded border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
-          id={id}
-          type="file"
-          accept="audio/*"
-          onChange={handleSampleChange}
-        />
-      </label>
+    <section className="z-20 mx-14 mb-10">
+      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-zinc-900 transition duration-700 ease-in-out hover:bg-zinc-800">
+        <label htmlFor={id} aria-label={label}>
+          {isBufferReady ? (
+            <RxCheck className="h-5 w-5 cursor-pointer text-red-100" />
+          ) : (
+            <RxUpload className="h-4 w-4 cursor-pointer text-red-100" />
+          )}
+          <input
+            className="hidden"
+            id={id}
+            type="file"
+            accept="audio/*"
+            onChange={handleSampleChange}
+          />
+        </label>
+      </div>
     </section>
   );
 };

@@ -1,10 +1,10 @@
 export default function Processing() {
   return (
-    <div className="z-20 flex w-52 items-center justify-evenly rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold text-white shadow-sm">
+    <div className="z-20 flex w-52 items-center justify-evenly rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm text-white shadow-sm">
       <button role="status" disabled>
         <svg
           aria-hidden="true"
-          className="mr-2 inline h-5 w-5 animate-spin fill-gray-400 text-gray-200 dark:fill-gray-400 dark:text-gray-700"
+          className="mr-2 inline h-4 w-4 animate-spin fill-zinc-400 text-zinc-200 dark:fill-zinc-400 dark:text-zinc-700"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

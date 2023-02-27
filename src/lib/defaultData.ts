@@ -8,6 +8,7 @@ const fileInputData = [
     id: 'secondSample' as 'secondSample',
   },
 ];
+
 const audioBuffersDefaultValues = {
   firstSample: new AudioBuffer({
     length: 1,

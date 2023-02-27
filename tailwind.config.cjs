@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        rotate: 'rotate 10s linear infinite',
+        rotate: 'rotate 5s linear infinite',
       },
       keyframes: {
         rotate: {
@@ -14,7 +14,7 @@ module.exports = {
         },
       },
       blur: {
-        '4xl': '150px',
+        '4xl': '100px',
       },
     },
   },
