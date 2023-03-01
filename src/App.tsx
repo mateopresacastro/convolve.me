@@ -11,6 +11,7 @@ export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
   secondSample: AudioBuffer | null;
 }
+
 const App = () => {
   const [audioBuffers, setAudioBuffers] = useState<AudioBuffersState>({
     firstSample: null,

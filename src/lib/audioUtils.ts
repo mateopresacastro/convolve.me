@@ -11,11 +11,15 @@ const getAudioUtils = (ctx: AudioContext | OfflineAudioContext) => {
   return { compressor, gain, out };
 };
 
-const getAudioBufferFromFile = async (sample: File, ctx: AudioContext) => {
+const getAudioBufferFromFile = async (
+  sample: File | Blob,
+  ctx: AudioContext
+) => {
   const sampleUrl = URL.createObjectURL(sample);
   const res = await fetch(sampleUrl);
   const buffer = await res.arrayBuffer();
-  return ctx.decodeAudioData(buffer);
+  URL.revokeObjectURL(sampleUrl);
+  return await ctx.decodeAudioData(buffer);
 };
 
 interface audioBufferToWaveReturn {
@@ -57,7 +61,11 @@ const audioBufferToWave = (
     });
 
     // callback for `exportWAV`
+    // clear the internal buffers and resolve the promise
     recorderWorker.onmessage = (e) => {
+      recorderWorker.postMessage({
+        command: 'clear',
+      });
       resolve({ error: null, waveFile: e.data as Blob });
     };
 

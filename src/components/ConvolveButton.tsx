@@ -67,6 +67,9 @@ const ConvolveButton = ({
     }
   };
 
+  const isDisabled =
+    audioBuffers.firstSample === null || audioBuffers.secondSample === null;
+
   return isProcessing ? (
     <Processing />
   ) : isError ? (
@@ -80,8 +83,11 @@ const ConvolveButton = ({
   ) : (
     <button
       onClick={handleConvolve}
+      disabled={isDisabled}
       type="submit"
-      className="z-20 w-52 rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm text-white shadow-sm transition duration-700 ease-in-out hover:bg-zinc-800"
+      className={`${
+        isDisabled && `cursor-not-allowed`
+      } z-30 w-52 rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm text-white shadow-sm transition duration-700 ease-in-out hover:bg-zinc-800`}
     >
       Convolve
     </button>
