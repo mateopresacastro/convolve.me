@@ -8,11 +8,13 @@ import type { AudioBuffersState } from '../App';
 interface ConvolveButtonProps {
   audioBuffers: AudioBuffersState;
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
+  setConvolvedSampleWaveFile: Dispatch<SetStateAction<Blob | null>>;
 }
 
 const ConvolveButton = ({
   audioBuffers,
   setAudioBuffers,
+  setConvolvedSampleWaveFile,
 }: ConvolveButtonProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -46,11 +48,13 @@ const ConvolveButton = ({
         .connect(compressor)
         .connect(out);
 
+      firstSampleSourceNode.start();
+
       try {
-        firstSampleSourceNode.start();
         setIsProcessing(true);
         const renderedBuffer = await offlineCtx.startRendering();
         const waveFile = await audioBufferToWave(renderedBuffer);
+        setConvolvedSampleWaveFile(waveFile);
         download(waveFile);
       } catch (error) {
         console.error(error);
@@ -80,17 +84,19 @@ const ConvolveButton = ({
       Something went wrong
     </button>
   ) : (
-    <button
-      onClick={handleConvolve}
-      disabled={isDisabled}
-      className={`${
-        isDisabled
-          ? `cursor-not-allowed bg-zinc-300 text-zinc-500`
-          : `cursor-pointer bg-sky-600 text-zinc-100 hover:bg-sky-800`
-      } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-300 ease-in-out`}
-    >
-      <h1>{isDisabled ? 'Upload samples or record' : 'Convolve'}</h1>
-    </button>
+    <>
+      <button
+        onClick={handleConvolve}
+        disabled={isDisabled}
+        className={`${
+          isDisabled
+            ? `cursor-not-allowed bg-zinc-300 text-zinc-500`
+            : `cursor-pointer bg-sky-600 text-zinc-100 hover:bg-sky-800`
+        } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-300 ease-in-out`}
+      >
+        <h1>{isDisabled ? 'Upload samples or record' : 'Convolve Samples'}</h1>
+      </button>
+    </>
   );
 };
 
