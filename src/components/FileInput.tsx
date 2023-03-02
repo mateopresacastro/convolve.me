@@ -3,7 +3,7 @@ import { RxUpload } from 'react-icons/rx';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
-import PlayerControls from './PlayerControlls/PlayerControls';
+import PlayerControls from './PlayerControls/PlayerControls';
 
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';
