@@ -75,7 +75,7 @@ const ConvolveButton = ({
     <button
       onClick={() => setIsError(false)}
       type="submit"
-      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-white shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
+      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
     >
       Something went wrong
     </button>
@@ -85,10 +85,12 @@ const ConvolveButton = ({
       disabled={isDisabled}
       type="submit"
       className={`${
-        isDisabled && `cursor-not-allowed`
-      } z-30 w-52 rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm text-white shadow-sm transition duration-700 ease-in-out hover:bg-zinc-800`}
+        isDisabled
+          ? `cursor-not-allowed text-zinc-500`
+          : `cursor-pointer text-zinc-100`
+      } z-30 w-52 rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm  shadow-sm transition duration-700 ease-in-out hover:bg-zinc-800`}
     >
-      Convolve
+      <h1>Convolve</h1>
     </button>
   );
 };

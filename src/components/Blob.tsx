@@ -10,9 +10,9 @@ const Blob = () => {
       const { clientX, clientY } = event;
       myRef.current.animate(
         {
-          // -112 to center mouse cursor in the middle of the blob, which is 224px (h-56 in tailwind)
-          left: `${clientX - 112}px`,
-          top: `${clientY - 112}px`,
+          // -48 to center mouse cursor in the middle of the blob, which is 96px (h-24 in tailwind)
+          left: `${clientX - 48}px`,
+          top: `${clientY - 48}px`,
         },
         { duration: 3000, fill: 'forwards' }
       );
@@ -21,7 +21,7 @@ const Blob = () => {
 
   return (
     <div
-      className="absolute z-0 aspect-square h-56 animate-rotate rounded-full bg-gradient-to-r from-zinc-100 to-blue-200 blur-4xl filter"
+      className="absolute z-0 aspect-square h-24 animate-rotate rounded-full bg-gradient-to-r from-zinc-100 to-blue-900 blur-2xl filter"
       ref={myRef}
     ></div>
   );

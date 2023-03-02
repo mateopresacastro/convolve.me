@@ -21,8 +21,7 @@ const App = () => {
   return (
     <Layout>
       <Blob />
-      <Title />
-      <div className="mb-10 flex">
+      <div className="mb-10 flex items-center justify-center">
         {fileInputData.map((data) => (
           <FileInput
             audioBuffers={audioBuffers}
