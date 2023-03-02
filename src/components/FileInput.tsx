@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { RxUpload, RxCheck } from 'react-icons/rx';
-import Record from './Record';
+import Record from './MediaPlayer/Record';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
+import PlayerControls from './MediaPlayer/PlayerControls';
 
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';
@@ -36,10 +37,7 @@ const FileInput = ({
 
   return (
     <section className="z-20 mx-14 mb-10">
-      <div
-        //Todo: conditionally change style of input when isBufferReady
-        className={`flex h-32 w-32 items-center justify-evenly rounded-full`}
-      >
+      <div className="flex h-32 w-32 items-center justify-evenly rounded-full">
         <label htmlFor={id} aria-label={label}>
           <RxUpload className="h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out hover:text-zinc-900" />
           <input
@@ -50,7 +48,11 @@ const FileInput = ({
             onChange={handleSampleChange}
           />
         </label>
-        <Record id={id} setAudioBuffers={setAudioBuffers} />
+        <PlayerControls
+          id={id}
+          setAudioBuffers={setAudioBuffers}
+          audioBuffers={audioBuffers}
+        />
       </div>
     </section>
   );

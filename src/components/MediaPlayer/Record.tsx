@@ -1,12 +1,8 @@
 import { useContext, useState, useRef, Dispatch, SetStateAction } from 'react';
-import { AudioBuffersState } from '../App';
-import { MyAudioContext } from '../contexts/MyAudioContext';
-import { getAudioBufferFromFile } from '../lib/audioUtils';
-import {
-  BsFillRecordFill,
-  BsFillStopCircleFill,
-  BsStopFill,
-} from 'react-icons/bs';
+import { AudioBuffersState } from '../../App';
+import { MyAudioContext } from '../../contexts/MyAudioContext';
+import { getAudioBufferFromFile } from '../../lib/audioUtils';
+import { BsFillRecordFill } from 'react-icons/bs';
 
 interface RecordProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
@@ -65,15 +61,14 @@ const Record = ({ id, setAudioBuffers }: RecordProps) => {
     }
   };
 
-  return isRecording ? (
-    <BsStopFill
-      className="h-5 w-5 animate-[pulse_1s_ease-in-out_infinite] cursor-pointer text-red-500 transition duration-300 ease-in-out hover:text-red-400"
-      onClick={stopRecording}
-    />
-  ) : (
+  return (
     <BsFillRecordFill
-      className="h-5 w-5 cursor-pointer text-red-800 transition duration-300 ease-in-out hover:text-red-500"
-      onClick={record}
+      className={`h-5 w-5 ${
+        isRecording
+          ? ` animate-[pulse_0.5s_ease-in-out_infinite] text-red-500`
+          : `text-zinc-900  hover:text-zinc-500`
+      } cursor-pointer transition duration-300 ease-in-out`}
+      onClick={isRecording ? stopRecording : record}
     />
   );
 };
