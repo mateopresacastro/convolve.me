@@ -50,9 +50,8 @@ const ConvolveButton = ({
         firstSampleSourceNode.start();
         setIsProcessing(true);
         const renderedBuffer = await offlineCtx.startRendering();
-        const { waveFile, error } = await audioBufferToWave(renderedBuffer);
-        if (error) throw error;
-        download(waveFile!);
+        const waveFile = await audioBufferToWave(renderedBuffer);
+        download(waveFile);
       } catch (error) {
         console.error(error);
         setIsError(true);

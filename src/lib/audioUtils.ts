@@ -22,14 +22,7 @@ const getAudioBufferFromFile = async (
   return await ctx.decodeAudioData(buffer);
 };
 
-interface audioBufferToWaveReturn {
-  error: Error | null;
-  waveFile: Blob | null;
-}
-
-const audioBufferToWave = (
-  audioBuffer: AudioBuffer
-): Promise<audioBufferToWaveReturn> => {
+const audioBufferToWave = (audioBuffer: AudioBuffer): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     // if its mono, make it "stereo" so the worker can work with it.
     if (audioBuffer.numberOfChannels === 1) {
@@ -66,14 +59,11 @@ const audioBufferToWave = (
       recorderWorker.postMessage({
         command: 'clear',
       });
-      resolve({ error: null, waveFile: e.data as Blob });
+      resolve(e.data as Blob);
     };
 
     recorderWorker.onerror = (error) => {
-      reject({
-        error: new Error('Error while rendering to WAVE', { cause: error }),
-        waveFile: null,
-      });
+      reject(new Error('Error while rendering to WAVE', { cause: error }));
     };
   });
 };
