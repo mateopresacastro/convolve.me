@@ -21,7 +21,7 @@ const Blob = () => {
 
   return (
     <div
-      className="absolute z-0 aspect-square h-24 animate-rotate rounded-full bg-gradient-to-r from-zinc-100 to-blue-900 blur-2xl filter"
+      className="absolute z-0 aspect-square h-24 animate-rotate rounded-full bg-gradient-to-r from-zinc-100 to-blue-300 blur-2xl filter"
       ref={myRef}
     ></div>
   );

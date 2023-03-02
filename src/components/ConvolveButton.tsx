@@ -85,12 +85,10 @@ const ConvolveButton = ({
       disabled={isDisabled}
       type="submit"
       className={`${
-        isDisabled
-          ? `cursor-not-allowed text-zinc-500`
-          : `cursor-pointer text-zinc-100`
-      } z-30 w-52 rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm  shadow-sm transition duration-700 ease-in-out hover:bg-zinc-800`}
+        isDisabled && `cursor-not-allowed bg-zinc-300 text-zinc-500`
+      } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-700 ease-in-out`}
     >
-      <h1>Convolve</h1>
+      <h1>{isDisabled ? 'Upload samples or record' : 'Convolve'}</h1>
     </button>
   );
 };

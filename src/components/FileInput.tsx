@@ -38,10 +38,10 @@ const FileInput = ({
     <section className="z-20 mx-14 mb-10">
       <div
         //Todo: conditionally change style of input when isBufferReady
-        className={`rounded-ful flex h-32 w-32 items-center justify-evenly`}
+        className={`flex h-32 w-32 items-center justify-evenly rounded-full`}
       >
         <label htmlFor={id} aria-label={label}>
-          <RxUpload className="h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out hover:text-zinc-100" />
+          <RxUpload className="h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out hover:text-zinc-900" />
           <input
             className="hidden"
             id={id}
