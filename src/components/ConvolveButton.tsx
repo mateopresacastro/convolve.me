@@ -75,7 +75,7 @@ const ConvolveButton = ({
     <button
       onClick={() => setIsError(false)}
       type="submit"
-      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
+      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-md transition duration-700 ease-in-out hover:bg-red-700"
     >
       Something went wrong
     </button>
@@ -83,10 +83,11 @@ const ConvolveButton = ({
     <button
       onClick={handleConvolve}
       disabled={isDisabled}
-      type="submit"
       className={`${
-        isDisabled && `cursor-not-allowed bg-zinc-300 text-zinc-500`
-      } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-700 ease-in-out`}
+        isDisabled
+          ? `cursor-not-allowed bg-zinc-300 text-zinc-500`
+          : `cursor-pointer bg-sky-600 text-zinc-100 hover:bg-sky-800`
+      } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-300 ease-in-out`}
     >
       <h1>{isDisabled ? 'Upload samples or record' : 'Convolve'}</h1>
     </button>

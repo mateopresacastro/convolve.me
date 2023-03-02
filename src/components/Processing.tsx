@@ -3,11 +3,11 @@ export default function Processing() {
     <button
       role="status"
       disabled
-      className="z-20 flex w-52 items-center justify-center rounded-md bg-zinc-900 px-3.5 py-1.5 text-sm text-white shadow-sm"
+      className="z-20 flex w-52 items-center justify-center rounded-md bg-sky-600 px-3.5 py-1.5 text-sm text-white shadow-md"
     >
       <svg
         aria-hidden="true"
-        className="relative right-4 h-4 w-4 animate-spin fill-zinc-400 text-zinc-200 dark:fill-zinc-400 dark:text-zinc-700"
+        className="relative right-4 h-4 w-4 animate-spin fill-sky-100 text-sky-400"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
