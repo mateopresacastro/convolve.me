@@ -15,7 +15,7 @@ const PlayerControls = ({
   audioBuffers,
 }: IPlayerControlProps) => {
   return (
-    <div className="flex">
+    <div className="flex mx-3">
       <PlayStop id={id} audioBuffers={audioBuffers} />
       <Record id={id} setAudioBuffers={setAudioBuffers} />
     </div>

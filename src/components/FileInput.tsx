@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { RxUpload, RxCheck } from 'react-icons/rx';
-import Record from './PlayerControls/Record';
+import { RxUpload } from 'react-icons/rx';
+import { BsFillTrashFill } from 'react-icons/bs';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
 import PlayerControls from './PlayerControls/PlayerControls';
@@ -33,11 +33,18 @@ const FileInput = ({
     }));
   };
 
-  const isBufferReady = audioBuffers[id] !== null;
+  const deleteAudioBuffer = () => {
+    if (audioBuffers[id]) {
+      setAudioBuffers((audioBuffers) => ({
+        ...audioBuffers,
+        [id]: null,
+      }));
+    }
+  };
 
   return (
-    <section className="z-20 mx-14 mb-10">
-      <div className="flex h-32 w-32 items-center justify-evenly rounded-full">
+    <section className="z-20 mx-14">
+      <div className="flex h-20 w-32 items-center justify-evenly rounded-full">
         <label htmlFor={id} aria-label={label}>
           <RxUpload className="h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out hover:text-zinc-900" />
           <input
@@ -52,6 +59,12 @@ const FileInput = ({
           id={id}
           setAudioBuffers={setAudioBuffers}
           audioBuffers={audioBuffers}
+        />
+        <BsFillTrashFill
+          className={`${
+            audioBuffers[id] ? ` hover:text-red-600` : `hover:text-zinc-700`
+          } h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out`}
+          onClick={deleteAudioBuffer}
         />
       </div>
     </section>
