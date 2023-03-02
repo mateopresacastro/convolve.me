@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { RxUpload, RxCheck } from 'react-icons/rx';
-import Record from './MediaPlayer/Record';
+import Record from './PlayerControls/Record';
 import { getAudioBufferFromFile } from '../lib/audioUtils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
-import PlayerControls from './MediaPlayer/PlayerControls';
+import PlayerControls from './PlayerControls/PlayerControls';
 
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';
