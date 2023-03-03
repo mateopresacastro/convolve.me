@@ -42,7 +42,7 @@ const WaveForm = ({
     </div>
   ) : (
     <div className="flex h-20 w-64 flex-col items-center justify-center rounded-lg bg-zinc-100 shadow-inner">
-      <p className="text-xs italic text-zinc-300">No audio loaded yet...</p>
+      <p className="text-xs italic text-zinc-400">No audio loaded yet...</p>
     </div>
   );
 };
