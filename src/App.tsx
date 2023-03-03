@@ -17,8 +17,6 @@ const App = () => {
     firstSample: null,
     secondSample: null,
   });
-  const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
-    useState<Blob | null>(null);
 
   return (
     <Layout>
@@ -36,14 +34,13 @@ const App = () => {
                 label={data.label}
                 id={data.id}
               />
-              <WaveForm id={data.id} audioBuffers={audioBuffers} />
+              <WaveForm sample={audioBuffers[data.id]} />
             </div>
           ))}
         </div>
         <ConvolveButton
           audioBuffers={audioBuffers}
           setAudioBuffers={setAudioBuffers}
-          setConvolvedSampleWaveFile={setConvolvedSampleWaveFile}
         />
       </div>
       <GitHubLink />

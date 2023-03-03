@@ -4,19 +4,13 @@ import WaveSurfer from 'wavesurfer.js';
 import { AudioBuffersState } from '../App';
 import { audioBufferToWave } from '../lib/audioUtils';
 
-const WaveForm = ({
-  audioBuffers,
-  id,
-}: {
-  audioBuffers: AudioBuffersState;
-  id: 'firstSample' | 'secondSample';
-}) => {
+const WaveForm = ({ sample }: { sample: AudioBuffer | Blob | null }) => {
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let wavesurfer: wavesurfer;
     (async () => {
-      if (waveformRef.current && audioBuffers[id]) {
+      if (waveformRef.current && sample) {
         const OPTIONS = {
           container: waveformRef.current as unknown as HTMLDivElement,
           barHeight: 5,
@@ -28,15 +22,20 @@ const WaveForm = ({
           cursorColor: '#f4f4f5',
         };
         wavesurfer = WaveSurfer.create(OPTIONS);
-        const waveFile = await audioBufferToWave(audioBuffers[id]!);
+
+        const waveFile =
+          sample instanceof AudioBuffer
+            ? await audioBufferToWave(sample)
+            : sample;
+
         wavesurfer.loadBlob(waveFile);
       }
     })();
 
     return () => wavesurfer && wavesurfer.destroy();
-  }, [audioBuffers[id]]);
+  }, [sample]);
 
-  return audioBuffers[id] ? (
+  return sample ? (
     <div className="flex h-20 w-64 flex-col items-center justify-evenly rounded-lg bg-zinc-100 shadow-md">
       <div ref={waveformRef} className="w-56 px-9"></div>
     </div>

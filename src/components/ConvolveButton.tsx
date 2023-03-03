@@ -1,23 +1,26 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
 import download from '../lib/download';
 import Processing from './Processing';
+import ResultModal from './ResultModal';
 import type { Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';
 
 interface ConvolveButtonProps {
   audioBuffers: AudioBuffersState;
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
-  setConvolvedSampleWaveFile: Dispatch<SetStateAction<Blob | null>>;
 }
 
 const ConvolveButton = ({
   audioBuffers,
   setAudioBuffers,
-  setConvolvedSampleWaveFile,
 }: ConvolveButtonProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
+    useState<Blob | null>(null);
 
   const { firstSample, secondSample } = audioBuffers;
 
@@ -55,17 +58,18 @@ const ConvolveButton = ({
         const renderedBuffer = await offlineCtx.startRendering();
         const waveFile = await audioBufferToWave(renderedBuffer);
         setConvolvedSampleWaveFile(waveFile);
-        download(waveFile);
+        setShowModal(true);
+        // download(waveFile);
       } catch (error) {
         console.error(error);
         setIsError(true);
       } finally {
         setIsProcessing(false);
-        setAudioBuffers((audioBuffers) => ({
-          ...audioBuffers,
-          firstSample: null,
-          secondSample: null,
-        }));
+        // setAudioBuffers((audioBuffers) => ({
+        //   ...audioBuffers,
+        //   firstSample: null,
+        //   secondSample: null,
+        // }));
       }
     }
   };
@@ -90,12 +94,20 @@ const ConvolveButton = ({
         disabled={isDisabled}
         className={`${
           isDisabled
-            ? `cursor-not-allowed bg-sky-900 shadow-inner`
-            : `cursor-pointer bg-sky-600 shadow-md`
-        } z-30 w-52 rounded-md  px-3.5 py-1.5  text-sm text-zinc-100  transition  duration-300 ease-in-out hover:bg-sky-800`}
+            ? `cursor-not-allowed bg-sky-900 text-sky-100 shadow-inner`
+            : `cursor-pointer bg-sky-600 text-sky-100 shadow-md`
+        } w-52 rounded-md  px-3.5 py-1.5  text-sm  transition  duration-300 ease-in-out hover:bg-sky-700`}
       >
         <h1>{'Start ✨'}</h1>
       </button>
+      {showModal &&
+        createPortal(
+          <ResultModal
+            onClose={() => setShowModal(false)}
+            sample={convolvedSampleWaveFile}
+          />,
+          document.body
+        )}
     </>
   );
 };
