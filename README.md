@@ -17,3 +17,11 @@ or
   cd convolve.me/
   npm i && npm run dev
 ```
+
+## Todo
+
+- [ ] Create softclipper and/or handle gain reduction in a better way
+- [ ] Fade in and fade out
+- [ ] Cache convolved audio
+- [ ] Audio controls on modal
+- [ ] Sync wavesurfer playback visual feedback with audiocontext playback time
