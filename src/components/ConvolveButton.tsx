@@ -90,11 +90,11 @@ const ConvolveButton = ({
         disabled={isDisabled}
         className={`${
           isDisabled
-            ? `cursor-not-allowed bg-zinc-300 text-zinc-500`
-            : `cursor-pointer bg-sky-600 text-zinc-100 hover:bg-sky-800`
-        } z-30 w-52 rounded-md px-3.5 py-1.5 text-sm  shadow-md transition duration-300 ease-in-out`}
+            ? `cursor-not-allowed bg-sky-900 shadow-inner`
+            : `cursor-pointer bg-sky-600 shadow-md`
+        } z-30 w-52 rounded-md  px-3.5 py-1.5  text-sm text-zinc-100  transition  duration-300 ease-in-out hover:bg-sky-800`}
       >
-        <h1>{isDisabled ? 'Upload samples or record' : 'Convolve Samples'}</h1>
+        <h1>{'Convolve ✨'}</h1>
       </button>
     </>
   );

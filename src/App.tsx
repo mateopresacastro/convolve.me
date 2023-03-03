@@ -26,7 +26,10 @@ const App = () => {
     <Layout>
       <div className="mb-10 flex items-center justify-center">
         {fileInputData.map((data) => (
-          <div key={data.id}>
+          <div
+            key={data.id}
+            className="flex flex-col items-center justify-center"
+          >
             <FileInput
               audioBuffers={audioBuffers}
               setAudioBuffers={setAudioBuffers}

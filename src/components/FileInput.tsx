@@ -46,7 +46,7 @@ const FileInput = ({
   return (
     <section className="mx-14 flex h-20 w-52 items-center justify-evenly">
       <label htmlFor={id} aria-label={label}>
-        <RxUpload className="h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out hover:text-zinc-900" />
+        <RxUpload className="h-4 w-4 cursor-pointer rounded-full text-zinc-400 transition duration-300 ease-in-out hover:text-sky-600 " />
         <input
           className="hidden"
           id={id}

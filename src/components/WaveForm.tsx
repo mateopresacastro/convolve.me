@@ -37,9 +37,13 @@ const WaveForm = ({
   }, [audioBuffers[id]]);
 
   return audioBuffers[id] ? (
-    <div ref={waveformRef} className="max-w-10 mx-7 mb-10 h-3"></div>
+    <div className="flex h-20 w-64 flex-col items-center justify-evenly rounded-lg bg-zinc-100 shadow-md">
+      <div ref={waveformRef} className="w-56 px-9"></div>
+    </div>
   ) : (
-    <div className="mb-10 h-3"></div>
+    <div className="flex h-20 w-64 flex-col items-center justify-center rounded-lg bg-zinc-100 shadow-inner">
+      <p className="text-xs italic text-zinc-300">No audio loaded yet...</p>
+    </div>
   );
 };
 
