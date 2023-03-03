@@ -94,7 +94,7 @@ const ConvolveButton = ({
             : `cursor-pointer bg-sky-600 shadow-md`
         } z-30 w-52 rounded-md  px-3.5 py-1.5  text-sm text-zinc-100  transition  duration-300 ease-in-out hover:bg-sky-800`}
       >
-        <h1>{'Convolve ✨'}</h1>
+        <h1>{'Start ✨'}</h1>
       </button>
     </>
   );

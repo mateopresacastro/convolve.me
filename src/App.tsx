@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import { fileInputData } from './lib/defaultData';
 import GitHubLink from './components/GitHubLink';
 import WaveForm from './components/WaveForm';
-import BigWaveForm from './components/BigWaveForm';
+import Title from './components/Title';
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -22,28 +22,30 @@ const App = () => {
 
   return (
     <Layout>
-      <div className="mb-10 flex items-center justify-center">
-        {fileInputData.map((data) => (
-          <div
-            key={data.id}
-            className="flex flex-col items-center justify-center"
-          >
-            <FileInput
-              audioBuffers={audioBuffers}
-              setAudioBuffers={setAudioBuffers}
-              label={data.label}
-              id={data.id}
-            />
-            <WaveForm id={data.id} audioBuffers={audioBuffers} />
-          </div>
-        ))}
+      <Title />
+      <div className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-lg">
+        <div className="mb-10 flex items-center justify-center">
+          {fileInputData.map((data) => (
+            <div
+              key={data.id}
+              className="flex flex-col items-center justify-center"
+            >
+              <FileInput
+                audioBuffers={audioBuffers}
+                setAudioBuffers={setAudioBuffers}
+                label={data.label}
+                id={data.id}
+              />
+              <WaveForm id={data.id} audioBuffers={audioBuffers} />
+            </div>
+          ))}
+        </div>
+        <ConvolveButton
+          audioBuffers={audioBuffers}
+          setAudioBuffers={setAudioBuffers}
+          setConvolvedSampleWaveFile={setConvolvedSampleWaveFile}
+        />
       </div>
-      <ConvolveButton
-        audioBuffers={audioBuffers}
-        setAudioBuffers={setAudioBuffers}
-        setConvolvedSampleWaveFile={setConvolvedSampleWaveFile}
-      />
-      {/* <BigWaveForm convolvedSampleWaveFile={convolvedSampleWaveFile} /> */}
       <GitHubLink />
     </Layout>
   );
