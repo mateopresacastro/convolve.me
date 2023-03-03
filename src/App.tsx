@@ -20,8 +20,6 @@ const App = () => {
   const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
     useState<Blob | null>(null);
 
-  console.log({ convolvedSampleWaveFile });
-
   return (
     <Layout>
       <div className="mb-10 flex items-center justify-center">
