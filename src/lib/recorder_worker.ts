@@ -1,3 +1,8 @@
+/**
+ * Ported and modified from: https://github.com/mattdiamond/Recorderjs and
+ * licensed (MIT)
+ */
+
 let recLength = 0;
 let recBuffersL: Float32Array[] = [];
 let recBuffersR: Float32Array[] = [];
