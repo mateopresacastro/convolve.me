@@ -1,28 +1,25 @@
 const recorderWorker = new Worker(
-  new URL('./recorderWorker.ts', import.meta.url)
+  new URL('./recorder_worker.ts', import.meta.url)
 );
 
-const getAudioUtils = (ctx: AudioContext | OfflineAudioContext) => {
+function getAudioUtils(ctx: AudioContext | OfflineAudioContext) {
   const compressor = new DynamicsCompressorNode(ctx, {
     ratio: 20,
   });
   const gain = new GainNode(ctx, { gain: 0.1 });
   const out = ctx.destination;
   return { compressor, gain, out };
-};
+}
 
-const getAudioBufferFromFile = async (
-  sample: File | Blob,
-  ctx: AudioContext
-) => {
+async function getAudioBufferFromFile(sample: File | Blob, ctx: AudioContext) {
   const sampleUrl = URL.createObjectURL(sample);
   const res = await fetch(sampleUrl);
   const buffer = await res.arrayBuffer();
   URL.revokeObjectURL(sampleUrl);
   return await ctx.decodeAudioData(buffer);
-};
+}
 
-const audioBufferToWave = (audioBuffer: AudioBuffer): Promise<Blob> => {
+function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
   return new Promise((resolve, reject) => {
     // if its mono, make it "stereo" so the worker can work with it.
     if (audioBuffer.numberOfChannels === 1) {
@@ -66,6 +63,6 @@ const audioBufferToWave = (audioBuffer: AudioBuffer): Promise<Blob> => {
       reject(new Error('Error while rendering to WAVE', { cause: error }));
     };
   });
-};
+}
 
 export { getAudioUtils, getAudioBufferFromFile, audioBufferToWave };

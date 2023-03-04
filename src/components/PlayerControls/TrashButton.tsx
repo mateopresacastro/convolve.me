@@ -1,15 +1,16 @@
 import { BsFillTrashFill } from 'react-icons/bs';
 import type { AudioBuffersState } from '../../App';
 
-const TrashButton = ({
-  deleteAudioBuffer,
-  id,
-  audioBuffers,
-}: {
+interface TrashButtonProps {
   deleteAudioBuffer: () => void;
   id: 'firstSample' | 'secondSample';
   audioBuffers: AudioBuffersState;
-}) => {
+}
+export default function TrashButton({
+  deleteAudioBuffer,
+  id,
+  audioBuffers,
+}: TrashButtonProps) {
   return (
     <BsFillTrashFill
       className={`${
@@ -18,6 +19,4 @@ const TrashButton = ({
       onClick={deleteAudioBuffer}
     />
   );
-};
-
-export default TrashButton;
+}

@@ -1,6 +1,6 @@
 import { RxGithubLogo } from 'react-icons/rx';
 
-const GitHubLink = () => {
+export default function GitHubLink() {
   return (
     <footer className="absolute bottom-5 flex flex-col items-center justify-center">
       <a
@@ -12,6 +12,4 @@ const GitHubLink = () => {
       <p className="mt-3 text-xs text-zinc-400">By Mateo Presa</p>
     </footer>
   );
-};
-
-export default GitHubLink;
+}

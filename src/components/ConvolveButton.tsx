@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { getAudioUtils, audioBufferToWave } from '../lib/audioUtils';
+import { getAudioUtils, audioBufferToWave } from '../lib/audio_utils';
 import download from '../lib/download';
 import Processing from './Processing';
 import ResultModal from './ResultModal';
@@ -12,10 +12,7 @@ interface ConvolveButtonProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
 }
 
-const ConvolveButton = ({
-  audioBuffers,
-  setAudioBuffers,
-}: ConvolveButtonProps) => {
+export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -65,11 +62,6 @@ const ConvolveButton = ({
         setIsError(true);
       } finally {
         setIsProcessing(false);
-        // setAudioBuffers((audioBuffers) => ({
-        //   ...audioBuffers,
-        //   firstSample: null,
-        //   secondSample: null,
-        // }));
       }
     }
   };
@@ -110,6 +102,4 @@ const ConvolveButton = ({
         )}
     </>
   );
-};
-
-export default ConvolveButton;
+}

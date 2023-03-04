@@ -2,13 +2,13 @@ import download from '../lib/download';
 import WaveForm from './WaveForm';
 import { BsDownload, BsArrowLeft } from 'react-icons/bs';
 
-const ResultModal = ({
+export default function ResultModal({
   onClose,
   sample,
 }: {
   onClose: () => void;
   sample: Blob | null;
-}) => {
+}) {
   return (
     <>
       <div className="absolute top-0 h-full w-full bg-zinc-900 opacity-50"></div>
@@ -38,6 +38,4 @@ const ResultModal = ({
       </div>
     </>
   );
-};
-
-export default ResultModal;
+}

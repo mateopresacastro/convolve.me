@@ -1,7 +1,7 @@
 import { useContext, useState, useRef, Dispatch, SetStateAction } from 'react';
 import { AudioBuffersState } from '../../App';
 import { MyAudioContext } from '../../contexts/MyAudioContext';
-import { getAudioBufferFromFile } from '../../lib/audioUtils';
+import { getAudioBufferFromFile } from '../../lib/audio_utils';
 import { BsFillRecordFill } from 'react-icons/bs';
 
 interface RecordProps {
@@ -9,7 +9,7 @@ interface RecordProps {
   id: 'firstSample' | 'secondSample';
 }
 
-const Record = ({ id, setAudioBuffers }: RecordProps) => {
+export default function Record({ id, setAudioBuffers }: RecordProps) {
   const ctx = useContext(MyAudioContext);
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -71,6 +71,4 @@ const Record = ({ id, setAudioBuffers }: RecordProps) => {
       onClick={isRecording ? stopRecording : record}
     />
   );
-};
-
-export default Record;
+}

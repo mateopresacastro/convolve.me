@@ -2,7 +2,7 @@ import { useState } from 'react';
 import FileInput from './components/FileInput';
 import ConvolveButton from './components/ConvolveButton';
 import Layout from './components/Layout';
-import { fileInputData } from './lib/defaultData';
+import { fileInputData } from './lib/default_data';
 import GitHubLink from './components/GitHubLink';
 import WaveForm from './components/WaveForm';
 import Title from './components/Title';
@@ -12,7 +12,7 @@ export interface AudioBuffersState {
   secondSample: AudioBuffer | null;
 }
 
-const App = () => {
+export default function App() {
   const [audioBuffers, setAudioBuffers] = useState<AudioBuffersState>({
     firstSample: null,
     secondSample: null,
@@ -46,6 +46,4 @@ const App = () => {
       <GitHubLink />
     </Layout>
   );
-};
-
-export default App;
+}

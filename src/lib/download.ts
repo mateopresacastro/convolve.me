@@ -1,4 +1,4 @@
-const download = (blob: Blob) => {
+export default function download(blob: Blob) {
   const newFileURL = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = newFileURL;
@@ -7,6 +7,4 @@ const download = (blob: Blob) => {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(newFileURL);
-};
-
-export default download;
+}

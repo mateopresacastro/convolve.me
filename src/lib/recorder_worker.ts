@@ -3,7 +3,7 @@ let recBuffersL: Float32Array[] = [];
 let recBuffersR: Float32Array[] = [];
 let sampleRate: number;
 
-self.onmessage = function (e) {
+self.onmessage = (e) => {
   switch (e.data.command) {
     case 'init':
       init(e.data.config);

@@ -2,11 +2,13 @@ import { useRef, useEffect } from 'react';
 import wavesurfer from 'wavesurfer.js';
 import WaveSurfer from 'wavesurfer.js';
 
-const BigWaveForm = ({
-  convolvedSampleWaveFile,
-}: {
+interface BigWaveFormProps {
   convolvedSampleWaveFile: Blob | null;
-}) => {
+}
+
+export default function BigWaveForm({
+  convolvedSampleWaveFile,
+}: BigWaveFormProps) {
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,6 +34,4 @@ const BigWaveForm = ({
   }, [convolvedSampleWaveFile]);
 
   return <div ref={waveformRef} className="max-w-96 my-10 h-5 w-96"></div>;
-};
-
-export default BigWaveForm;
+}

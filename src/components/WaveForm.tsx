@@ -2,9 +2,13 @@ import { useRef, useEffect } from 'react';
 import wavesurfer from 'wavesurfer.js';
 import WaveSurfer from 'wavesurfer.js';
 import { AudioBuffersState } from '../App';
-import { audioBufferToWave } from '../lib/audioUtils';
+import { audioBufferToWave } from '../lib/audio_utils';
 
-const WaveForm = ({ sample }: { sample: AudioBuffer | Blob | null }) => {
+interface WaveFormProps {
+  sample: AudioBuffer | Blob | null;
+}
+
+export default function WaveForm({ sample }: WaveFormProps) {
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,6 +48,4 @@ const WaveForm = ({ sample }: { sample: AudioBuffer | Blob | null }) => {
       <p className="text-xs italic text-zinc-400">No audio loaded yet...</p>
     </div>
   );
-};
-
-export default WaveForm;
+}

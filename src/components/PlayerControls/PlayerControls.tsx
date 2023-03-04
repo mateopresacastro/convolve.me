@@ -3,23 +3,21 @@ import { AudioBuffersState } from '../../App';
 import Record from './Record';
 import PlayStop from './PlayStop';
 
-interface IPlayerControlProps {
+interface PlayerControlProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
   audioBuffers: AudioBuffersState;
   id: 'firstSample' | 'secondSample';
 }
 
-const PlayerControls = ({
+export default function PlayerControls({
   id,
   setAudioBuffers,
   audioBuffers,
-}: IPlayerControlProps) => {
+}: PlayerControlProps) {
   return (
-    <div className="flex mx-3">
+    <div className="mx-3 flex">
       <PlayStop id={id} audioBuffers={audioBuffers} />
       <Record id={id} setAudioBuffers={setAudioBuffers} />
     </div>
   );
-};
-
-export default PlayerControls;
+}

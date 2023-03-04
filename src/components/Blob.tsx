@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-const Blob = () => {
+export default function Blob() {
   const myRef = useRef<HTMLDivElement>(null);
 
   window.onpointermove = (event) => handlePointerMove(event);
@@ -25,6 +25,4 @@ const Blob = () => {
       ref={myRef}
     ></div>
   );
-};
-
-export default Blob;
+}

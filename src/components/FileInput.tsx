@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { RxUpload } from 'react-icons/rx';
 import { BsFillTrashFill } from 'react-icons/bs';
-import { getAudioBufferFromFile } from '../lib/audioUtils';
+import { getAudioBufferFromFile } from '../lib/audio_utils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
 import PlayerControls from './PlayerControls/PlayerControls';
 import TrashButton from './PlayerControls/TrashButton';
@@ -16,12 +16,12 @@ export interface FileInputProps {
   id: 'firstSample' | 'secondSample';
 }
 
-const FileInput = ({
+export default function FileInput({
   setAudioBuffers,
   audioBuffers,
   label,
   id,
-}: FileInputProps) => {
+}: FileInputProps) {
   const ctx = useContext(MyAudioContext);
 
   const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +67,4 @@ const FileInput = ({
       />
     </section>
   );
-};
-
-export default FileInput;
+}

@@ -3,12 +3,12 @@ import { BsFillPlayFill, BsFillStopFill } from 'react-icons/bs';
 import { AudioBuffersState } from '../../App';
 import { MyAudioContext } from '../../contexts/MyAudioContext';
 
-interface IPlayProps {
+interface PlayStopProps {
   audioBuffers: AudioBuffersState;
   id: 'firstSample' | 'secondSample';
 }
 
-const PlayStop = ({ audioBuffers, id }: IPlayProps) => {
+export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const ctx = useContext(MyAudioContext);
   const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
@@ -46,6 +46,4 @@ const PlayStop = ({ audioBuffers, id }: IPlayProps) => {
       />
     </>
   );
-};
-
-export default PlayStop;
+}
