@@ -75,7 +75,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
     <button
       onClick={() => setIsError(false)}
       type="submit"
-      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-md transition duration-700 ease-in-out hover:bg-red-700"
+      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
     >
       Something went wrong
     </button>
@@ -86,9 +86,9 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
         disabled={isDisabled}
         className={`${
           isDisabled
-            ? `cursor-not-allowed bg-sky-900 text-sky-100 shadow-inner`
-            : `cursor-pointer bg-sky-600 text-sky-100 shadow-md`
-        } w-52 rounded-md  px-3.5 py-1.5  text-sm  transition  duration-300 ease-in-out hover:bg-sky-700`}
+            ? `cursor-not-allowed bg-sky-900 text-sky-100`
+            : `cursor-pointer bg-sky-600 text-sky-100`
+        } shadow_sm w-52  rounded-md px-3.5  py-1.5  text-sm  transition duration-300 ease-in-out hover:bg-sky-700`}
       >
         <h1>{'Start ✨'}</h1>
       </button>

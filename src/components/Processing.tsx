@@ -3,7 +3,7 @@ export default function Processing() {
     <button
       role="status"
       disabled
-      className="z-20 flex w-52 items-center justify-center rounded-md bg-sky-600 px-3.5 py-1.5 text-sm text-white shadow-md"
+      className="z-20 flex w-52 items-center justify-center rounded-md bg-sky-600 px-3.5 py-1.5 text-sm text-white shadow-sm"
     >
       <svg
         aria-hidden="true"

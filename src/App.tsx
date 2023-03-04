@@ -21,7 +21,7 @@ export default function App() {
   return (
     <Layout>
       <Title />
-      <div className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-lg">
+      <div className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-sm">
         <div className="mb-10 flex items-center justify-center">
           {fileInputData.map((data) => (
             <div

@@ -40,7 +40,7 @@ export default function WaveForm({ sample }: WaveFormProps) {
   }, [sample]);
 
   return sample ? (
-    <div className="flex h-20 w-64 flex-col items-center justify-evenly rounded-lg bg-zinc-100 shadow-md">
+    <div className="flex h-20 w-64 flex-col items-center justify-evenly rounded-lg bg-zinc-100 shadow-sm">
       <div ref={waveformRef} className="w-56 px-9"></div>
     </div>
   ) : (
