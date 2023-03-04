@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { RxUpload } from 'react-icons/rx';
 import { getAudioBufferFromFile } from '../lib/audio_utils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
-import PlayerControls from './media_player/PlayerControls';
+import Player from './media_player/Player';
 import TrashButton from './TrashButton';
 
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
@@ -54,7 +54,7 @@ export default function FileInput({
           onChange={handleSampleChange}
         />
       </label>
-      <PlayerControls
+      <Player
         id={id}
         setAudioBuffers={setAudioBuffers}
         audioBuffers={audioBuffers}

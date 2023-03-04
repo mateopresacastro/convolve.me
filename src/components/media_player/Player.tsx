@@ -3,17 +3,17 @@ import { AudioBuffersState } from '../../App';
 import Record from './control_buttons/Record';
 import PlayStop from './control_buttons/PlayStop';
 
-interface PlayerControlProps {
+interface PlayerProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
   audioBuffers: AudioBuffersState;
   id: 'firstSample' | 'secondSample';
 }
 
-export default function PlayerControls({
+export default function Player({
   id,
   setAudioBuffers,
   audioBuffers,
-}: PlayerControlProps) {
+}: PlayerProps) {
   return (
     <div className="mx-3 flex">
       <PlayStop id={id} audioBuffers={audioBuffers} />

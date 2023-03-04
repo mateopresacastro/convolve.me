@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { RingLoader } from 'react-spinners';
 import { getAudioUtils, audioBufferToWave } from '../lib/audio_utils';
-import download from '../lib/download';
-import Processing from './Processing';
 import ResultModal from './ResultModal';
 import type { Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';
@@ -69,9 +68,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
   const isDisabled =
     audioBuffers.firstSample === null || audioBuffers.secondSample === null;
 
-  return isProcessing ? (
-    <Processing />
-  ) : isError ? (
+  return isError ? (
     <button
       onClick={() => setIsError(false)}
       type="submit"
@@ -84,13 +81,13 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
       <button
         onClick={handleConvolve}
         disabled={isDisabled}
-        className={`${
-          isDisabled
-            ? `cursor-not-allowed bg-sky-900 text-sky-100`
-            : `cursor-pointer bg-sky-600 text-sky-100`
-        } shadow_sm w-52  rounded-md px-3.5  py-1.5  text-sm  transition duration-300 ease-in-out hover:bg-sky-700`}
+        className={`${isDisabled ? `cursor-not-allowed` : `cursor-pointer`} ${
+          isProcessing && `cursor-auto`
+        } flex h-8 w-32 items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition duration-300 ease-in-out hover:bg-sky-200`}
       >
-        <h1>{'Start ✨'}</h1>
+        <p>
+          {isProcessing ? <RingLoader size={19} color="#075985" /> : 'Start'}
+        </p>
       </button>
       {showModal &&
         createPortal(
