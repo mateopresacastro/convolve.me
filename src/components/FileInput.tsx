@@ -1,10 +1,9 @@
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { RxUpload } from 'react-icons/rx';
-import { BsFillTrashFill } from 'react-icons/bs';
 import { getAudioBufferFromFile } from '../lib/audio_utils';
 import { MyAudioContext } from '../contexts/MyAudioContext';
-import PlayerControls from './PlayerControls/PlayerControls';
-import TrashButton from './PlayerControls/TrashButton';
+import PlayerControls from './media_player/PlayerControls';
+import TrashButton from './TrashButton';
 
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import type { AudioBuffersState } from '../App';

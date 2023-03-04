@@ -1,7 +1,7 @@
 import { useContext, useState, useRef, Dispatch, SetStateAction } from 'react';
-import { AudioBuffersState } from '../../App';
-import { MyAudioContext } from '../../contexts/MyAudioContext';
-import { getAudioBufferFromFile } from '../../lib/audio_utils';
+import { AudioBuffersState } from '../../../App';
+import { MyAudioContext } from '../../../contexts/MyAudioContext';
+import { getAudioBufferFromFile } from '../../../lib/audio_utils';
 import { BsFillRecordFill } from 'react-icons/bs';
 
 interface RecordProps {

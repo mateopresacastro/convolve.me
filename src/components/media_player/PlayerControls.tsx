@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { AudioBuffersState } from '../../App';
-import Record from './Record';
-import PlayStop from './PlayStop';
+import Record from './control_buttons/Record';
+import PlayStop from './control_buttons/PlayStop';
 
 interface PlayerControlProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
