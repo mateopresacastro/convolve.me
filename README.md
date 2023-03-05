@@ -23,6 +23,6 @@ or
 - [ ] Create softclipper and/or handle gain reduction in a better way
 - [ ] Fade in and fade out
 - [ ] Cache convolved audio
-- [ ] Audio controls on modal
+- [x] Audio controls on modal
 - [ ] Sync wavesurfer playback visual feedback with audiocontext playback time
-- [ ] Workk on mobile
+- [ ] Work on mobile

@@ -15,6 +15,9 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [renderedBuffer, setRenderedBuffer] = useState<AudioBuffer | null>(
+    null
+  );
   const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
     useState<Blob | null>(null);
 
@@ -52,6 +55,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
       try {
         setIsProcessing(true);
         const renderedBuffer = await offlineCtx.startRendering();
+        setRenderedBuffer(renderedBuffer);
         const waveFile = await audioBufferToWave(renderedBuffer);
         setConvolvedSampleWaveFile(waveFile);
         setShowModal(true);
@@ -94,6 +98,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
           <ResultModal
             onClose={() => setShowModal(false)}
             sample={convolvedSampleWaveFile}
+            buffer={renderedBuffer}
           />,
           document.body
         )}

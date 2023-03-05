@@ -1,20 +1,30 @@
 import download from '../lib/download';
 import WaveForm from './WaveForm';
 import { BsDownload, BsArrowLeft } from 'react-icons/bs';
+import PlayStop from './media_player/control_buttons/PlayStop.js';
+import { getAudioBufferFromFile } from 'lib/audio_utils';
 
 export default function ResultModal({
   onClose,
   sample,
+  buffer,
 }: {
   onClose: () => void;
   sample: Blob | null;
+  buffer: AudioBuffer | null;
 }) {
   return (
     <>
       <div className="absolute top-0 h-full w-full bg-zinc-900 opacity-50"></div>
       <div className="absolute top-0 z-20 flex h-full w-full items-center justify-center">
         <div className="absolute flex h-72 w-96 flex-col items-center justify-evenly rounded-lg bg-zinc-50 md:w-1/2">
-          <h3 className="text-xl font-bold text-zinc-500">Result</h3>
+          {/* <h3 className="text-xl font-bold text-zinc-500">Result</h3> */}
+          <div className="flex">
+            <PlayStop
+              audioBuffers={{ firstSample: buffer, secondSample: null }}
+              id="firstSample"
+            />
+          </div>
           <div className="z-40 text-zinc-500">
             <WaveForm sample={sample} />
           </div>
