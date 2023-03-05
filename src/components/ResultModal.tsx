@@ -17,13 +17,15 @@ export default function ResultModal({
     <>
       <div className="absolute top-0 h-full w-full bg-zinc-900 opacity-50"></div>
       <div className="absolute top-0 z-20 flex h-full w-full items-center justify-center">
-        <div className="absolute flex h-72 w-96 flex-col items-center justify-evenly rounded-lg bg-zinc-50 md:w-1/2">
-          {/* <h3 className="text-xl font-bold text-zinc-500">Result</h3> */}
-          <div className="flex">
-            <PlayStop
-              audioBuffers={{ firstSample: buffer, secondSample: null }}
-              id="firstSample"
-            />
+        <div className="xl:w-1/16 absolute flex h-72 w-96 flex-col items-center justify-evenly rounded-lg bg-zinc-50 shadow-2xl md:w-1/2 lg:w-1/2">
+          <div className="flex flex-col items-center justify-center">
+            <h3 className="mb-2 text-xl font-bold text-zinc-500">Result</h3>
+            <div className="flex">
+              <PlayStop
+                audioBuffers={{ firstSample: buffer, secondSample: null }}
+                id="firstSample"
+              />
+            </div>
           </div>
           <div className="z-40 text-zinc-500">
             <WaveForm sample={sample} />
