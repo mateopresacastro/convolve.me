@@ -24,6 +24,7 @@ export default function WaveForm({ sample }: WaveFormProps) {
           waveColor: '#a1a1aa',
           progressColor: '#3f3f46',
           cursorColor: '#f4f4f5',
+          hideScrollbar: true,
         };
         wavesurfer = WaveSurfer.create(OPTIONS);
 
@@ -40,8 +41,8 @@ export default function WaveForm({ sample }: WaveFormProps) {
   }, [sample]);
 
   return sample ? (
-    <div className="flex h-20 w-64 flex-col items-center justify-evenly rounded-lg bg-zinc-100 shadow-sm">
-      <div ref={waveformRef} className="w-56 px-9"></div>
+    <div className="flex h-20 w-64 flex-col items-center justify-evenly overflow-hidden rounded-lg bg-zinc-100 shadow-sm">
+      <div ref={waveformRef} className="w-full overflow-hidden px-9"></div>
     </div>
   ) : (
     <div className="flex h-20 w-64 flex-col items-center justify-center rounded-lg bg-zinc-100 shadow-inner">

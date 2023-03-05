@@ -22,7 +22,7 @@ export default function App() {
     <Layout>
       <Title />
       <div className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-sm">
-        <div className="mb-10 flex items-center justify-center">
+        <div className="mb-10 flex flex-col items-center justify-center md:flex-row">
           {fileInputData.map((data) => (
             <div
               key={data.id}
