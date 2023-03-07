@@ -24,5 +24,6 @@ or
 - [ ] Fade in and fade out
 - [ ] Cache convolved audio
 - [x] Audio controls on modal
+- [ ] Stop audio on modal close
 - [ ] Sync wavesurfer playback visual feedback with audiocontext playback time
 - [ ] Work on mobile
