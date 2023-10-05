@@ -29,7 +29,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
             const offlineCtx = new OfflineAudioContext({
                 numberOfChannels: firstSample.numberOfChannels,
                 length: firstSample.length + secondSample.length,
-                sampleRate: 44100,
+                sampleRate: 48000,
             });
 
             const { compressor, gain, out } = getAudioUtils(offlineCtx);
