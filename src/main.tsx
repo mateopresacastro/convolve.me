@@ -5,9 +5,9 @@ import MyAudioContextProvider from './contexts/MyAudioContext.js';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <MyAudioContextProvider>
-      <App />
-    </MyAudioContextProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <MyAudioContextProvider>
+            <App />
+        </MyAudioContextProvider>
+    </React.StrictMode>
 );
