@@ -4,14 +4,16 @@ import type { ReactNode } from 'react';
 export const MyAudioContext = createContext(new AudioContext());
 
 interface AudioContextProvider {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 export default function MyAudioContextProvider({
-  children,
+    children,
 }: AudioContextProvider) {
-  const [ctx] = useState(new AudioContext());
-  return (
-    <MyAudioContext.Provider value={ctx}>{children}</MyAudioContext.Provider>
-  );
+    const [ctx] = useState(new AudioContext());
+    return (
+        <MyAudioContext.Provider value={ctx}>
+            {children}
+        </MyAudioContext.Provider>
+    );
 }
