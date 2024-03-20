@@ -8,7 +8,7 @@ Upload two audio samples and click convolve. The result will be downloaded autom
 
 ## Try it
 
-Go to [convolve.me](https://www.convolve.me)
+Go to [convolve.me](https://convolve-me.vercel.app/)
 
 or
 
