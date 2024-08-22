@@ -2,7 +2,7 @@ import { RxGithubLogo } from "react-icons/rx";
 
 export default function GitHubLink() {
   return (
-    <footer className="absolute bottom-0 my-9 flex flex-col items-center justify-center">
+    <footer className="my-9 flex flex-col items-center justify-center justify-self-end">
       <a
         href="https://github.com/MateoPresaCastro/convolve.me"
         aria-label="Github"

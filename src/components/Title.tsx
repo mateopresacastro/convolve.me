@@ -29,7 +29,7 @@ export default function Title() {
   return (
     <section className="my-10 flex flex-col items-center justify-center">
       <motion.h1
-        className="mb-2 text-7xl font-medium text-zinc-700"
+        className="mb-2 text-5xl font-medium text-zinc-700"
         variants={container1}
         initial="hidden"
         animate="show"
