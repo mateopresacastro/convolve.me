@@ -6,6 +6,8 @@ import { fileInputData } from "./lib/default_data";
 import GitHubLink from "./components/github-link";
 import WaveForm from "./components/wave-form";
 import Title from "./components/title";
+import { motion } from "framer-motion";
+import { variants } from "./lib/animations";
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -21,7 +23,12 @@ export default function App() {
   return (
     <Layout>
       <Title />
-      <div className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-sm">
+      <motion.div
+        className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-sm"
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="mb-10 flex flex-col items-center justify-center md:flex-row">
           {fileInputData.map((data) => (
             <div
@@ -42,7 +49,7 @@ export default function App() {
           audioBuffers={audioBuffers}
           setAudioBuffers={setAudioBuffers}
         />
-      </div>
+      </motion.div>
       <GitHubLink />
     </Layout>
   );
