@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { RingLoader } from "react-spinners";
 import { getAudioUtils, audioBufferToWave } from "../lib/audio_utils";
-import ResultModal from "./ResultModal";
+import ResultModal from "./result-modal";
 import type { Dispatch, SetStateAction } from "react";
 import type { AudioBuffersState } from "../App";
 

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { RxUpload } from "react-icons/rx";
 import { getAudioBufferFromFile } from "../lib/audio_utils";
-import { MyAudioContext } from "../contexts/MyAudioContext";
-import Player from "./media_player/Player";
-import TrashButton from "./TrashButton";
+import { MyAudioContext } from "../contexts/my-audio-context";
+import Player from "./media_player/player";
+import TrashButton from "./trash-button";
 
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type { AudioBuffersState } from "../App";

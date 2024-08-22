@@ -1,7 +1,7 @@
 import download from "../lib/download";
-import WaveForm from "./WaveForm";
+import WaveForm from "./wave-form";
 import { BsDownload, BsArrowLeft } from "react-icons/bs";
-import PlayStop from "./media_player/control_buttons/PlayStop.js";
+import PlayStop from "./media_player/control_buttons/play-stop.js";
 import { getAudioBufferFromFile } from "lib/audio_utils";
 
 export default function ResultModal({

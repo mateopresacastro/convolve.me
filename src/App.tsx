@@ -1,11 +1,11 @@
 import { useState } from "react";
-import FileInput from "./components/FileInput";
-import ConvolveButton from "./components/ConvolveButton";
-import Layout from "./components/Layout";
+import FileInput from "./components/file-input";
+import ConvolveButton from "./components/convolve-button";
+import Layout from "./components/layout";
 import { fileInputData } from "./lib/default_data";
-import GitHubLink from "./components/GitHubLink";
-import WaveForm from "./components/WaveForm";
-import Title from "./components/Title";
+import GitHubLink from "./components/github-link";
+import WaveForm from "./components/wave-form";
+import Title from "./components/title";
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
