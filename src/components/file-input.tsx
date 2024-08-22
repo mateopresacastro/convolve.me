@@ -6,7 +6,7 @@ import Player from "./media_player/player";
 import TrashButton from "./trash-button";
 
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
-import type { AudioBuffersState } from "../App";
+import type { AudioBuffersState } from "../app";
 
 export interface FileInputProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;

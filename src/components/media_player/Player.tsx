@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { AudioBuffersState } from "../../App";
+import { AudioBuffersState } from "../../app";
 import Record from "./control_buttons/record";
 import PlayStop from "./control_buttons/play-stop";
 

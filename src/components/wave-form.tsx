@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import wavesurfer from "wavesurfer.js";
 import WaveSurfer from "wavesurfer.js";
-import { AudioBuffersState } from "../App";
+import { AudioBuffersState } from "../app";
 import { audioBufferToWave } from "../lib/audio_utils";
 
 interface WaveFormProps {

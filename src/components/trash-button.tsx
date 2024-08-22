@@ -1,5 +1,5 @@
 import { BsFillTrashFill } from "react-icons/bs";
-import type { AudioBuffersState } from "../App";
+import type { AudioBuffersState } from "../app";
 
 interface TrashButtonProps {
   deleteAudioBuffer: () => void;

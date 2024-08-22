@@ -1,5 +1,5 @@
 import { useContext, useState, useRef, Dispatch, SetStateAction } from "react";
-import { AudioBuffersState } from "../../../App";
+import { AudioBuffersState } from "../../../app";
 import { MyAudioContext } from "../../../contexts/my-audio-context";
 import { getAudioBufferFromFile } from "../../../lib/audio_utils";
 import { BsFillRecordFill } from "react-icons/bs";

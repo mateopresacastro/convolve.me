@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { BsFillPlayFill, BsFillStopFill } from "react-icons/bs";
-import { AudioBuffersState } from "../../../App";
+import { AudioBuffersState } from "../../../app";
 import { MyAudioContext } from "../../../contexts/my-audio-context";
 
 interface PlayStopProps {
