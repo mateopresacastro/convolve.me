@@ -3,6 +3,7 @@ import wavesurfer from "wavesurfer.js";
 import WaveSurfer from "wavesurfer.js";
 import { AudioBuffersState } from "../app";
 import { audioBufferToWave } from "../lib/audio_utils";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface WaveFormProps {
   sample: AudioBuffer | Blob | null;
@@ -40,13 +41,31 @@ export default function WaveForm({ sample }: WaveFormProps) {
     return () => wavesurfer && wavesurfer.destroy();
   }, [sample]);
 
-  return sample ? (
-    <div className="flex h-20 w-64 flex-col items-center justify-evenly overflow-hidden rounded-lg bg-zinc-100 shadow-sm">
-      <div ref={waveformRef} className="w-full overflow-hidden px-9"></div>
-    </div>
-  ) : (
-    <div className="flex h-20 w-64 flex-col items-center justify-center rounded-lg bg-zinc-100 shadow-inner">
-      <p className="text-xs italic text-zinc-400">No audio loaded yet...</p>
-    </div>
+  return (
+    <AnimatePresence mode="popLayout">
+      {sample ? (
+        <motion.div
+          key="waveform"
+          className="flex h-20 w-64 flex-col items-center justify-evenly overflow-hidden rounded-lg bg-zinc-100 shadow-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          <div ref={waveformRef} className="w-full overflow-hidden px-9"></div>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="placeholder"
+          className="flex h-20 w-64 flex-col items-center justify-center rounded-lg bg-zinc-100 shadow-inner"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          <p className="text-xs italic text-zinc-400">No audio loaded yet...</p>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
