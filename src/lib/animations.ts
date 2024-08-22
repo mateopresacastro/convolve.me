@@ -4,10 +4,10 @@ export const variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.9,
       type: "spring",
-      delay: 1,
-      bounce: 0.2,
+      delay: 1.5,
+      bounce: 0.4,
     },
   },
 };

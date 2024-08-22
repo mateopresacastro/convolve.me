@@ -5,6 +5,7 @@ import { getAudioUtils, audioBufferToWave } from "../lib/audio_utils";
 import ResultModal from "./result-modal";
 import type { Dispatch, SetStateAction } from "react";
 import type { AudioBuffersState } from "../app";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ConvolveButtonProps {
   audioBuffers: AudioBuffersState;
@@ -83,26 +84,27 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
     </button>
   ) : (
     <>
-      <button
-        onClick={handleConvolve}
-        disabled={isDisabled}
-        className={`${isDisabled ? `cursor-not-allowed` : `cursor-pointer`} ${
-          isProcessing && `cursor-auto`
-        } flex h-8 w-32 items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition duration-300 ease-in-out hover:bg-sky-200`}
-      >
-        <p>
-          {isProcessing ? <RingLoader size={19} color="#075985" /> : "Start"}
-        </p>
-      </button>
-      {showModal &&
-        createPortal(
-          <ResultModal
-            onClose={() => setShowModal(false)}
-            sample={convolvedSampleWaveFile}
-            buffer={renderedBuffer}
-          />,
-          document.body
-        )}
+      <AnimatePresence mode="popLayout">
+        <motion.button
+          onClick={handleConvolve}
+          disabled={isDisabled}
+          className={`${isDisabled ? `cursor-not-allowed` : `cursor-pointer`} ${
+            isProcessing && `cursor-auto`
+          } flex h-8 w-32 items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition duration-300 ease-in-out hover:bg-sky-200`}
+          layoutId="button"
+          exit={{ opacity: 0 }}
+        >
+          <p>
+            {isProcessing ? <RingLoader size={19} color="#075985" /> : "Start"}
+          </p>
+        </motion.button>
+      </AnimatePresence>
+      <ResultModal
+        onClose={() => setShowModal(false)}
+        sample={convolvedSampleWaveFile}
+        buffer={renderedBuffer}
+        isShowing={showModal}
+      />
     </>
   );
 }
