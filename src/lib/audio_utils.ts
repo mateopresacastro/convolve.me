@@ -6,7 +6,7 @@ function getAudioUtils(ctx: AudioContext | OfflineAudioContext) {
   const compressor = new DynamicsCompressorNode(ctx, {
     ratio: 20,
   });
-  const gain = new GainNode(ctx, { gain: 0.1 });
+  const gain = new GainNode(ctx, { gain: 1 });
   const out = ctx.destination;
   return { compressor, gain, out };
 }
@@ -36,7 +36,7 @@ function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
     // initialize the new worker
     recorderWorker.postMessage({
       command: "init",
-      config: { sampleRate: 44100 },
+      config: { sampleRate: audioBuffer.sampleRate },
     });
 
     // send the channel data from our buffer to the worker
@@ -60,7 +60,7 @@ function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
     };
 
     recorderWorker.onerror = (error) => {
-      reject(new Error("Error while rendering to WAVE", { cause: error }));
+      reject(new Error("Error while rendering to WAV", { cause: error }));
     };
   });
 }

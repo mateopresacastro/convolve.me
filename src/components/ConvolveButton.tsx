@@ -26,10 +26,11 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
   const handleConvolve = async () => {
     if (firstSample && secondSample) {
       // create offline context to render audio
+      console.log({ firstSample });
       const offlineCtx = new OfflineAudioContext({
         numberOfChannels: firstSample.numberOfChannels,
         length: firstSample.length + secondSample.length,
-        sampleRate: 48000,
+        sampleRate: firstSample.sampleRate,
       });
 
       const { compressor, gain, out } = getAudioUtils(offlineCtx);
