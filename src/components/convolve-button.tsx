@@ -78,7 +78,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
     <button
       onClick={() => setIsError(false)}
       type="submit"
-      className="z-20 w-52 rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-zinc-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
+      className="z-20 w-52 self-center rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-neutral-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
     >
       Something went wrong
     </button>

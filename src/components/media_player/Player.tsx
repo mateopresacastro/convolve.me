@@ -15,7 +15,7 @@ export default function Player({
   audioBuffers,
 }: PlayerProps) {
   return (
-    <div className="mx-3 flex">
+    <div className="mx-6 gap-2 flex">
       <PlayStop id={id} audioBuffers={audioBuffers} />
       <Record id={id} setAudioBuffers={setAudioBuffers} />
     </div>

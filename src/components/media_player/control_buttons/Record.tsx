@@ -63,10 +63,10 @@ export default function Record({ id, setAudioBuffers }: RecordProps) {
 
   return (
     <BsFillRecordFill
-      className={`h-5 w-5 ${
+      className={`h-4 w-4  ${
         isRecording
           ? ` animate-[pulse_0.5s_ease-in-out_infinite] text-red-500`
-          : `text-zinc-900  hover:text-zinc-500`
+          : `text-neutral-900  hover:text-neutral-500`
       } cursor-pointer transition duration-300 ease-in-out`}
       onClick={isRecording ? stopRecording : record}
     />

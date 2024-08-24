@@ -1,4 +1,5 @@
 import { BsFillTrashFill } from "react-icons/bs";
+import clsx from "clsx";
 import type { AudioBuffersState } from "../app";
 
 interface TrashButtonProps {
@@ -13,9 +14,10 @@ export default function TrashButton({
 }: TrashButtonProps) {
   return (
     <BsFillTrashFill
-      className={`${
-        audioBuffers[id] ? ` hover:text-red-600` : `hover:text-zinc-700`
-      } h-4 w-4 cursor-pointer text-zinc-400 transition duration-300 ease-in-out`}
+      className={clsx(
+        audioBuffers[id] ? "hover:text-red-600" : "hover:text-neutral-700",
+        "mr-3 h-3 w-3 cursor-pointer text-neutral-400 transition duration-300 ease-in-out"
+      )}
       onClick={deleteAudioBuffer}
     />
   );

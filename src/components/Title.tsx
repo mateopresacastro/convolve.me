@@ -27,9 +27,9 @@ export default function Title() {
   const title = "convolve.me";
   const desc = "Upload or record two samples and press start";
   return (
-    <section className="my-10 flex flex-col items-center justify-center">
+    <section className="flex flex-col items-start">
       <motion.h1
-        className="mb-2 text-5xl font-medium text-zinc-700"
+        className="text-lg font-medium text-neutral-700"
         variants={container1}
         initial="hidden"
         animate="show"
@@ -45,10 +45,11 @@ export default function Title() {
         ))}
       </motion.h1>
       <motion.p
-        className="text-zinc-500"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, type: "easeOut", delay: 0.7 }}
+        className="text-sm text-neutral-500"
+        variants={container1}
+        initial="hidden"
+        animate="show"
+        key="desc"
       >
         {desc.split(" ").map((word, index) => (
           <motion.span

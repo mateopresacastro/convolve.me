@@ -22,33 +22,36 @@ export default function App() {
 
   return (
     <Layout>
-      <Title />
+      <div></div>
       <motion.div
-        className="flex flex-col items-center justify-center rounded-lg bg-zinc-50 p-10 shadow-sm"
+        className="flex flex-col items-start justify-center"
         variants={variants}
         initial="hidden"
         animate="visible"
       >
-        <div className="mb-10 flex flex-col items-center justify-center md:flex-row">
-          {fileInputData.map((data) => (
-            <div
-              key={data.id}
-              className="flex flex-col items-center justify-center"
-            >
-              <FileInput
-                audioBuffers={audioBuffers}
-                setAudioBuffers={setAudioBuffers}
-                label={data.label}
-                id={data.id}
-              />
-              <WaveForm sample={audioBuffers[data.id]} />
-            </div>
-          ))}
+        <Title />
+        <div className="flex flex-col items-center justify-center">
+          <div className="my-10 flex flex-col items-center justify-center gap-6 md:flex-row">
+            {fileInputData.map((data) => (
+              <div
+                key={data.id}
+                className="flex flex-col items-center justify-center"
+              >
+                <WaveForm sample={audioBuffers[data.id]} />
+                <FileInput
+                  audioBuffers={audioBuffers}
+                  setAudioBuffers={setAudioBuffers}
+                  label={data.label}
+                  id={data.id}
+                />
+              </div>
+            ))}
+          </div>
+          <ConvolveButton
+            audioBuffers={audioBuffers}
+            setAudioBuffers={setAudioBuffers}
+          />
         </div>
-        <ConvolveButton
-          audioBuffers={audioBuffers}
-          setAudioBuffers={setAudioBuffers}
-        />
       </motion.div>
       <GitHubLink />
     </Layout>

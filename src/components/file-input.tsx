@@ -43,9 +43,9 @@ export default function FileInput({
   };
 
   return (
-    <section className="mx-14 flex h-20 w-52 items-center justify-evenly">
+    <section className="flex h-10 w-full items-center justify-between pt-1">
       <label htmlFor={id} aria-label={label}>
-        <RxUpload className="h-4 w-4 cursor-pointer rounded-full text-zinc-400 transition duration-300 ease-in-out hover:text-sky-600 " />
+        <RxUpload className="ml-3 h-4 w-4 cursor-pointer rounded-full text-neutral-400 transition duration-300 ease-in-out hover:text-sky-600" />
         <input
           className="hidden"
           id={id}

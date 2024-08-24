@@ -31,11 +31,13 @@ export default function ResultModal({
           }}
           key="result-modal"
         >
-          <div className="absolute inset-0 z-30 h-full w-full bg-zinc-900 opacity-50"></div>
+          <div className="absolute inset-0 z-30 h-full w-full bg-neutral-900 opacity-50"></div>
           <div className="absolute inset-0 z-40 flex h-full w-full items-center justify-center">
-            <div className="xl:w-1/16 absolute flex h-72 w-96 max-w-[50rem] flex-col items-center justify-evenly rounded-lg bg-zinc-50 shadow-2xl md:w-1/2 lg:w-1/2">
+            <div className="xl:w-1/16 md:w-1/2 lg:w-1/2 absolute flex h-72 w-96 max-w-[50rem] flex-col items-center justify-evenly rounded-lg bg-neutral-50 shadow-2xl">
               <div className="flex flex-col items-center justify-center">
-                <h3 className="mb-2 text-xl font-bold text-zinc-500">Result</h3>
+                <h3 className="mb-2 text-xl font-bold text-neutral-500">
+                  Result
+                </h3>
                 <div className="flex">
                   <PlayStop
                     audioBuffers={{
@@ -46,13 +48,13 @@ export default function ResultModal({
                   />
                 </div>
               </div>
-              <div className="z-40 text-zinc-500">
+              <div className="z-40 text-neutral-500">
                 <WaveForm sample={sample} />
               </div>
               <div className="flex w-96 justify-evenly">
                 <button
                   onClick={onClose}
-                  className="flex w-36 cursor-pointer items-center justify-evenly rounded-md px-3.5 py-1.5 text-sm text-zinc-700 underline-offset-4 hover:underline"
+                  className="flex w-36 cursor-pointer items-center justify-evenly rounded-md px-3.5 py-1.5 text-sm text-neutral-700 underline-offset-4 hover:underline"
                 >
                   <BsArrowLeft />
                   Go Back

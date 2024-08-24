@@ -37,13 +37,15 @@ export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
     <>
       <BsFillPlayFill
         className={clsx(
-          "h-5 w-5 cursor-pointer",
-          isPlaying ? ` text-green-500` : ` text-zinc-900 hover:text-zinc-500`
+          "h-4 w-4 cursor-pointer",
+          isPlaying
+            ? ` text-green-500`
+            : ` text-neutral-900 hover:text-neutral-500`
         )}
         onClick={playSample}
       />
       <BsFillStopFill
-        className="h-5 w-5 cursor-pointer  text-zinc-900 hover:text-zinc-500"
+        className="h-4 w-4 cursor-pointer  text-neutral-900 hover:text-neutral-500"
         onClick={stopSample}
       />
     </>
