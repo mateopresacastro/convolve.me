@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  LazyMotion,
-  domAnimation,
-} from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import FileInput from "./components/file-input";
 import ConvolveButton from "./components/convolve-button";
 import Layout from "./components/layout";
@@ -27,41 +22,35 @@ export default function App() {
   });
 
   return (
-    <LazyMotion features={domAnimation}>
-      <Layout>
-        <div></div>
-        <motion.div className="flex flex-col items-start justify-center" layout>
+    <Layout>
+      <div></div>
+      <div className="flex flex-col items-start justify-center">
+        <LayoutGroup>
           <Title />
-          <motion.div
-            className="flex w-full flex-col items-center justify-center pt-1"
-            layout
-          >
-            <motion.div
-              className="mb-10 mt-6 flex flex-col items-center justify-center gap-6 md:mb-10 md:flex-row"
-              layout
-            >
+          <motion.div className="flex w-full flex-col items-center justify-center pt-1">
+            <motion.div className="mb-10 mt-6 flex flex-col items-center justify-center gap-6 md:mb-10 md:flex-row">
               {fileInputData.map((data, i) => (
                 <motion.div
                   key={data.id}
                   className={clsx(
                     "flex flex-col items-center justify-center",
-                    i == 0 && "md:mb-0 mb-4"
+                    i == 0 && "mb-4 md:mb-0"
                   )}
                   variants={variants}
                   initial="hidden"
                   animate="show"
                   exit="hidden"
                   transition={{ ...transition, delay: 0.24 + i * 0.12 }}
-                  layoutId={data.id}
-                  layout
                 >
-                  <WaveForm sample={audioBuffers[data.id]} />
-                  <FileInput
-                    audioBuffers={audioBuffers}
-                    setAudioBuffers={setAudioBuffers}
-                    label={data.label}
-                    id={data.id}
-                  />
+                  <LayoutGroup key={data.id}>
+                    <WaveForm sample={audioBuffers[data.id]} id={data.id} />
+                    <FileInput
+                      audioBuffers={audioBuffers}
+                      setAudioBuffers={setAudioBuffers}
+                      label={data.label}
+                      id={data.id}
+                    />
+                  </LayoutGroup>
                 </motion.div>
               ))}
             </motion.div>
@@ -70,9 +59,9 @@ export default function App() {
               setAudioBuffers={setAudioBuffers}
             />
           </motion.div>
-        </motion.div>
-        <GitHubLink />
-      </Layout>
-    </LazyMotion>
+        </LayoutGroup>
+      </div>
+      <GitHubLink />
+    </Layout>
   );
 }

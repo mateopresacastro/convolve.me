@@ -109,6 +109,8 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
         animate="show"
         transition={{ ...transition, delay: 0.48 }}
         key="start-button"
+        layout="position"
+        layoutId="convolve-button"
       >
         <motion.span
           className="absolute left-1"

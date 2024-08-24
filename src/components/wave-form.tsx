@@ -7,9 +7,10 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface WaveFormProps {
   sample: AudioBuffer | Blob | null;
+  id: "firstSample" | "secondSample";
 }
 
-export default function WaveForm({ sample }: WaveFormProps) {
+export default function WaveForm({ sample, id }: WaveFormProps) {
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,30 +43,24 @@ export default function WaveForm({ sample }: WaveFormProps) {
   }, [sample]);
 
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode="wait">
       {sample ? (
         <motion.div
           key="waveform"
-          className="flex h-20 w-80 flex-col items-center justify-evenly overflow-hidden rounded-md bg-neutral-100 shadow-sm"
+          className="flex h-20 w-80 flex-col items-center justify-evenly overflow-hidden bg-neutral-100 shadow-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
+          style={{ borderRadius: "0.375rem" }}
+          layoutId={`${id}-waveform`}
         >
-          <div ref={waveformRef} className="w-full overflow-hidden px-9"></div>
+          <motion.div
+            ref={waveformRef}
+            className="w-full overflow-hidden px-9"
+          ></motion.div>
         </motion.div>
-      ) : (
-        <motion.div
-          key="placeholder"
-          className="flex h-20 w-80 flex-col items-center justify-center rounded-md bg-neutral-100 shadow-inner"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          <p className="text-xs text-neutral-400">No audio</p>
-        </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   );
 }

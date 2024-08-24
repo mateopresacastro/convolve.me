@@ -2,7 +2,6 @@ import { useContext, useState, useRef, Dispatch, SetStateAction } from "react";
 import { AudioBuffersState } from "../../../app";
 import { MyAudioContext } from "../../../contexts/my-audio-context";
 import { getAudioBufferFromFile } from "../../../lib/audio_utils";
-import { BsFillRecordFill } from "react-icons/bs";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
@@ -67,38 +66,39 @@ export default function Record({ id, setAudioBuffers }: RecordProps) {
   };
 
   return (
-    <motion.svg
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth="0"
-      viewBox="0 0 16 16"
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 1 }}
-      animate={
-        isRecording
-          ? {
-              opacity: [0.5, 1],
-              color: "red",
-              transition: {
-                duration: 0.3,
-                repeat: Infinity,
-                repeatType: "reverse",
-              },
-            }
-          : isLoading
-          ? { opacity: 0.5, color: "red" }
-          : { opacity: 1, color: "currentColor" }
-      }
-      key="record-button"
-      className={clsx(
-        "h-4 w-4 cursor-pointer text-neutral-900 hover:text-neutral-500  focus:outline-none"
-      )}
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-      onClick={isRecording ? stopRecording : record}
-    >
-      <path fillRule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"></path>
-    </motion.svg>
+    <motion.div layoutId={`record-icon-${id}`}>
+      <motion.svg
+        stroke="currentColor"
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 16 16"
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 1 }}
+        animate={
+          isRecording
+            ? {
+                opacity: [0.5, 1],
+                color: "red",
+                transition: {
+                  duration: 0.3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                },
+              }
+            : isLoading
+            ? { opacity: 0.5, color: "red" }
+            : { opacity: 1, color: "currentColor" }
+        }
+        className={clsx(
+          "h-4 w-4 cursor-pointer text-neutral-900 hover:text-neutral-500  focus:outline-none"
+        )}
+        height="1em"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+        onClick={isRecording ? stopRecording : record}
+      >
+        <path fillRule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"></path>
+      </motion.svg>
+    </motion.div>
   );
 }

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { AudioBuffersState } from "../../app";
 import Record from "./control_buttons/record";
 import PlayStop from "./control_buttons/play-stop";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface PlayerProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
@@ -15,9 +16,13 @@ export default function Player({
   audioBuffers,
 }: PlayerProps) {
   return (
-    <div className="mx-6 gap-2 flex">
-      <PlayStop id={id} audioBuffers={audioBuffers} />
+    <motion.div className="mx-6 flex gap-2">
+      <AnimatePresence mode="wait">
+        {audioBuffers[id] ? (
+          <PlayStop id={id} audioBuffers={audioBuffers} />
+        ) : null}
+      </AnimatePresence>
       <Record id={id} setAudioBuffers={setAudioBuffers} />
-    </div>
+    </motion.div>
   );
 }
