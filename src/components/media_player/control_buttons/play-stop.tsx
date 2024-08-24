@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useContext, useRef, useState } from "react";
 import { BsFillPlayFill, BsFillStopFill } from "react-icons/bs";
 import { AudioBuffersState } from "../../../app";
@@ -35,9 +36,10 @@ export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
   return (
     <>
       <BsFillPlayFill
-        className={`${
+        className={clsx(
+          "h-5 w-5 cursor-pointer",
           isPlaying ? ` text-green-500` : ` text-zinc-900 hover:text-zinc-500`
-        } h-5 w-5 cursor-pointer`}
+        )}
         onClick={playSample}
       />
       <BsFillStopFill
