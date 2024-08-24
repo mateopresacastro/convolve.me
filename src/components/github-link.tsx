@@ -8,8 +8,9 @@ export default function GitHubLink() {
       <motion.a
         href="https://github.com/MateoPresaCastro/convolve.me"
         aria-label="Github"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        variants={variants}
+        initial="hidden"
+        animate="show"
         transition={{ ...transition, delay: 0.72 }}
         key="github-link-a"
       >
