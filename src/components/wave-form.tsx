@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface WaveFormProps {
   sample: AudioBuffer | Blob | null;
-  id: "firstSample" | "secondSample";
+  id: "firstSample" | "secondSample" | "result";
 }
 
 export default function WaveForm({ sample, id }: WaveFormProps) {

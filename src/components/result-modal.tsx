@@ -37,7 +37,7 @@ export default function ResultModal({
                 </div>
               </div>
               <div className="z-40 text-neutral-500">
-                <WaveForm sample={sample} />
+                <WaveForm sample={sample} id="result" />
               </div>
               <div className="flex w-96 justify-evenly">
                 <button
