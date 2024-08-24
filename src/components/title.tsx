@@ -5,13 +5,14 @@ export default function Title() {
   const title = "convolve.me";
   const desc = "Record or upload two samples and press start.";
   return (
-    <section className="flex flex-col items-start">
+    <motion.div className="flex flex-col items-start md:mb-0 mb-4" layout layoutId="title">
       <motion.h1
-        className="text-lg font-medium text-neutral-700"
+        className="font-medium text-neutral-700"
         variants={variants}
         initial="hidden"
         animate="show"
         transition={transition}
+        layout
       >
         {title}
       </motion.h1>
@@ -24,6 +25,6 @@ export default function Title() {
       >
         {desc}
       </motion.p>
-    </section>
+    </motion.div>
   );
 }

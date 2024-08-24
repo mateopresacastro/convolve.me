@@ -7,6 +7,7 @@ import TrashButton from "./trash-button";
 
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import type { AudioBuffersState } from "../app";
+import { motion } from "framer-motion";
 
 export interface FileInputProps {
   setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
@@ -43,7 +44,10 @@ export default function FileInput({
   };
 
   return (
-    <section className="flex h-10 w-full items-center justify-between pt-1">
+    <motion.section
+      className="flex h-10 w-full items-center justify-between pt-1"
+      layoutId={`${id}-file-input`}
+    >
       <label htmlFor={id} aria-label={label}>
         <RxUpload className="ml-3 h-4 w-4 cursor-pointer rounded-full text-neutral-400 transition duration-300 ease-in-out hover:text-sky-600" />
         <input
@@ -64,6 +68,6 @@ export default function FileInput({
         deleteAudioBuffer={deleteAudioBuffer}
         audioBuffers={audioBuffers}
       />
-    </section>
+    </motion.section>
   );
 }
