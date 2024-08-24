@@ -2,7 +2,6 @@ import download from "../lib/download";
 import WaveForm from "./wave-form";
 import { BsDownload, BsArrowLeft } from "react-icons/bs";
 import PlayStop from "./media_player/control_buttons/play-stop.js";
-import { getAudioBufferFromFile } from "lib/audio_utils";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ResultModal({
@@ -19,18 +18,7 @@ export default function ResultModal({
   return (
     <AnimatePresence mode="wait">
       {isShowing && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { ease: "easeOut" },
-          }}
-          exit={{
-            opacity: 0,
-            transition: { ease: "easeOut" },
-          }}
-          key="result-modal"
-        >
+        <motion.div>
           <div className="absolute inset-0 z-30 h-full w-full bg-neutral-900 opacity-50"></div>
           <div className="absolute inset-0 z-40 flex h-full w-full items-center justify-center">
             <div className="xl:w-1/16 md:w-1/2 lg:w-1/2 absolute flex h-72 w-96 max-w-[50rem] flex-col items-center justify-evenly rounded-lg bg-neutral-50 shadow-2xl">
@@ -62,7 +50,6 @@ export default function ResultModal({
                 <motion.button
                   onClick={() => sample && download(sample)}
                   className="flex w-36 cursor-pointer items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition  duration-300 ease-in-out hover:bg-sky-200"
-                  layoutId="button"
                   exit={{ opacity: 0 }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

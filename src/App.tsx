@@ -7,7 +7,7 @@ import GitHubLink from "./components/github-link";
 import WaveForm from "./components/wave-form";
 import Title from "./components/title";
 import { motion } from "framer-motion";
-import { variants } from "./lib/animations";
+import { transition, variants } from "./lib/animations";
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -23,19 +23,18 @@ export default function App() {
   return (
     <Layout>
       <div></div>
-      <motion.div
-        className="flex flex-col items-start justify-center"
-        variants={variants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="flex flex-col items-start justify-center">
         <Title />
-        <div className="flex flex-col items-center justify-center">
-          <div className="my-10 flex flex-col items-center justify-center gap-6 md:flex-row">
-            {fileInputData.map((data) => (
-              <div
+        <div className="flex flex-col items-center justify-center pt-1">
+          <div className="mb-10 mt-6 flex flex-col items-center justify-center gap-6 md:flex-row">
+            {fileInputData.map((data, i) => (
+              <motion.div
                 key={data.id}
                 className="flex flex-col items-center justify-center"
+                variants={variants}
+                initial="hidden"
+                animate="show"
+                transition={{ ...transition, delay: 0.24 + i * 0.12 }}
               >
                 <WaveForm sample={audioBuffers[data.id]} />
                 <FileInput
@@ -44,7 +43,7 @@ export default function App() {
                   label={data.label}
                   id={data.id}
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
           <ConvolveButton
@@ -52,7 +51,7 @@ export default function App() {
             setAudioBuffers={setAudioBuffers}
           />
         </div>
-      </motion.div>
+      </div>
       <GitHubLink />
     </Layout>
   );

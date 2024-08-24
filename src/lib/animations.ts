@@ -1,13 +1,10 @@
 export const variants = {
-  hidden: { opacity: 0, y: 25 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.9,
-      type: "spring",
-      delay: 1.5,
-      bounce: 0.4,
-    },
-  },
+  hidden: { opacity: 0, transform: "translateY(10px)" },
+  show: { opacity: 1, transform: "translateY(0px)" },
+};
+
+export const transition = {
+  duration: 0.6,
+  type: "spring",
+  bounce: 0.2,
 };

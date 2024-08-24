@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import { RingLoader } from "react-spinners";
 import { getAudioUtils, audioBufferToWave } from "../lib/audio_utils";
 import ResultModal from "./result-modal";
 import type { Dispatch, SetStateAction } from "react";
 import type { AudioBuffersState } from "../app";
 import { AnimatePresence, motion } from "framer-motion";
+import { transition, variants } from "../lib/animations";
+import clsx from "clsx";
 
 interface ConvolveButtonProps {
   audioBuffers: AudioBuffersState;
@@ -84,21 +85,30 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
     </button>
   ) : (
     <>
-      <AnimatePresence mode="popLayout">
-        <motion.button
-          onClick={handleConvolve}
-          disabled={isDisabled}
-          className={`${isDisabled ? `cursor-not-allowed` : `cursor-pointer`} ${
-            isProcessing && `cursor-auto`
-          } flex h-8 w-32 items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition duration-300 ease-in-out hover:bg-sky-200`}
-          layoutId="button"
-          exit={{ opacity: 0 }}
-        >
-          <p>
-            {isProcessing ? <RingLoader size={19} color="#075985" /> : "Start"}
-          </p>
-        </motion.button>
-      </AnimatePresence>
+      <motion.button
+        onClick={handleConvolve}
+        disabled={isDisabled}
+        className={clsx(
+          {
+            "cursor-not-allowed": isDisabled,
+            "cursor-pointer": !isDisabled,
+            "cursor-auto": isProcessing,
+          },
+          "flex h-8 w-32 items-center justify-evenly rounded-md bg-sky-100 px-3.5 py-1.5 text-sm text-sky-800 shadow-sm transition duration-300 ease-in-out hover:bg-sky-200"
+        )}
+        variants={{
+          hidden: { opacity: 0, transform: "translateY(10px)" },
+          show: { opacity: 1, transform: "translateY(0px)" },
+        }}
+        initial="hidden"
+        animate="show"
+        transition={{ ...transition, delay: 0.48 }}
+        key="start-button"
+      >
+        <p>
+          {isProcessing ? <RingLoader size={19} color="#075985" /> : "Start"}
+        </p>
+      </motion.button>
       <ResultModal
         onClose={() => setShowModal(false)}
         sample={convolvedSampleWaveFile}

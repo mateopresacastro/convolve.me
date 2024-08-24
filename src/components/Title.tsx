@@ -1,65 +1,28 @@
-import { delay, motion } from "framer-motion";
-import { variants } from "../lib/animations";
-
-const container1 = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.03,
-    },
-  },
-};
-
-const item = {
-  hidden: {
-    y: "15%",
-    opacity: 0,
-  },
-  show: {
-    y: "0%",
-    opacity: 1,
-    transition: { duration: 0.75, type: "spring", bounce: 0.4 },
-  },
-};
+import { motion } from "framer-motion";
+import { variants, transition } from "../lib/animations";
 
 export default function Title() {
   const title = "convolve.me";
-  const desc = "Upload or record two samples and press start";
+  const desc = "Record or upload two samples and press start.";
   return (
     <section className="flex flex-col items-start">
       <motion.h1
         className="text-lg font-medium text-neutral-700"
-        variants={container1}
+        variants={variants}
         initial="hidden"
         animate="show"
+        transition={transition}
       >
-        {title.split("").map((char, index) => (
-          <motion.span
-            key={char + index}
-            variants={item}
-            className="inline-block"
-          >
-            {char}
-          </motion.span>
-        ))}
+        {title}
       </motion.h1>
       <motion.p
         className="text-sm text-neutral-500"
-        variants={container1}
+        variants={variants}
         initial="hidden"
         animate="show"
-        key="desc"
+        transition={{ ...transition, delay: 0.12 }}
       >
-        {desc.split(" ").map((word, index) => (
-          <motion.span
-            key={word + index}
-            variants={item}
-            className="mr-1 inline-block"
-          >
-            {word}
-          </motion.span>
-        ))}
+        {desc}
       </motion.p>
     </section>
   );
