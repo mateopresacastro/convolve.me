@@ -38,6 +38,8 @@ export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
     <motion.div
       className="flex items-center justify-center"
       exit={{ opacity: 0, filter: "blur(2px)" }}
+      initial={{ opacity: 0, filter: "blur(2px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
     >
       <motion.div layoutId={`play-icon-${id}`}>
         <motion.svg

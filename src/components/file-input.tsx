@@ -92,7 +92,7 @@ export default function FileInput({
           setAudioBuffers={setAudioBuffers}
           audioBuffers={audioBuffers}
         />
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {audioBuffers[id] ? (
             <TrashButton
               id={id}

@@ -16,7 +16,7 @@ export default function ResultModal({
   isShowing: boolean;
 }) {
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {isShowing && (
         <motion.div>
           <div className="absolute inset-0 z-30 h-full w-full bg-neutral-900 opacity-50"></div>

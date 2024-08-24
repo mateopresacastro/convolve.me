@@ -47,11 +47,18 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
       {sample ? (
         <motion.div
           key="waveform"
-          className="flex h-20 w-80 flex-col items-center justify-evenly overflow-hidden bg-neutral-100 shadow-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="flex h-20 w-80 flex-col items-center justify-evenly overflow-hidden"
+          initial={{ opacity: 0, filter: "blur(4px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          exit={{
+            opacity: 0,
+            filter: "blur(4px)",
+          }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            filter: { transition: { type: "easeOut" } },
+          }}
           style={{ borderRadius: "0.375rem" }}
           layoutId={`${id}-waveform`}
         >

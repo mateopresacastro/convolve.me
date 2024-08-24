@@ -30,7 +30,7 @@ export default function TrashButton({
           color: "#a3a3a3",
           opacity: 1,
         }}
-        exit={{ opacity: 0 }}
+        exit={{ opacity: 0, filter: "blur(4px)" }}
         transition={{ duration: 1, type: "spring" }}
         className="mr-3 h-3 w-3 cursor-pointer text-neutral-400 focus:outline-none"
         height="1em"
