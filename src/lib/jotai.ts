@@ -7,3 +7,8 @@ export const audioBuffersAtom = atom<AudioBuffersState>({
 });
 
 export const audioCtxAtom = atom<AudioContext>(new AudioContext());
+
+export const isRecordingAtom = atom({
+  firstSample: false,
+  secondSample: false,
+});
