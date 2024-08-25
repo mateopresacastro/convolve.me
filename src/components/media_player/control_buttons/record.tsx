@@ -19,6 +19,12 @@ export default function Record({ id }: RecordProps) {
   const record = async () => {
     try {
       if (!navigator.mediaDevices) return;
+
+      setAudioBuffers((audioBuffers) => ({
+        ...audioBuffers,
+        [id]: null,
+      }));
+
       setIsLoading(true);
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
