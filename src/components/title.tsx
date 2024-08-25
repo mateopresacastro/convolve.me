@@ -43,7 +43,7 @@ export default function Title() {
         animate="show"
         transition={{ ...transition, delay: 0.36 }}
       >
-        Record or upload your two samples and press start to convolve them:
+        Record or upload two audio files and press start to convolve them:
       </motion.p>
     </motion.div>
   );
