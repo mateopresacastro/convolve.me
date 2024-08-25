@@ -7,7 +7,7 @@ export default function Title() {
   return (
     <motion.div className="mb-4 flex flex-col items-start md:mb-0" layout>
       <motion.h1
-        className="font-medium text-neutral-700"
+        className="font-medium text-neutral-700 uppercase"
         variants={variants}
         initial="hidden"
         animate="show"

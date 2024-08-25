@@ -1,5 +1,3 @@
-import { BsFillTrashFill } from "react-icons/bs";
-import clsx from "clsx";
 import type { AudioBuffersState } from "../app";
 import { motion } from "framer-motion";
 
@@ -32,7 +30,7 @@ export default function TrashButton({
         }}
         exit={{ opacity: 0, filter: "blur(4px)" }}
         transition={{ duration: 1, type: "spring" }}
-        className="mr-3 h-3 w-3 cursor-pointer text-neutral-400 focus:outline-none"
+        className="mr-3 h-[1.1rem] w-[1.1rem] cursor-pointer text-neutral-400 focus:outline-none"
         height="1em"
         width="1em"
         xmlns="http://www.w3.org/2000/svg"

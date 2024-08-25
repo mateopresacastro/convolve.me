@@ -1,5 +1,5 @@
 const recorderWorker = new Worker(
-  new URL("./recorder_worker.ts", import.meta.url)
+  new URL("./recorder-worker.ts", import.meta.url)
 );
 
 function getAudioUtils(ctx: AudioContext | OfflineAudioContext) {

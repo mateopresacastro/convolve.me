@@ -1,32 +1,27 @@
+import clsx from "clsx";
+import ResultModal from "./result-modal";
 import { useState } from "react";
 import { RingLoader } from "react-spinners";
-import { getAudioUtils, audioBufferToWave } from "../lib/audio_utils";
-import ResultModal from "./result-modal";
-import type { Dispatch, SetStateAction } from "react";
-import type { AudioBuffersState } from "../app";
+import { getAudioUtils, audioBufferToWave } from "../lib/audio-utils";
 import { motion } from "framer-motion";
-import { transition, variants } from "../lib/animations";
-import clsx from "clsx";
+import { transition } from "../lib/animations";
 import { BsArrowRight } from "react-icons/bs";
+import { useAtomValue } from "jotai";
+import { audioBuffersAtom } from "../lib/jotai";
 
-interface ConvolveButtonProps {
-  audioBuffers: AudioBuffersState;
-  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
-}
-
-export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
+export default function StartButton() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const [renderedBuffer, setRenderedBuffer] = useState<AudioBuffer | null>(
     null
   );
+
   const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
     useState<Blob | null>(null);
 
-  const [isHovering, setIsHovering] = useState(false);
-
-  const { firstSample, secondSample } = audioBuffers;
+  const { firstSample, secondSample } = useAtomValue(audioBuffersAtom);
 
   const handleConvolve = async () => {
     if (!firstSample || !secondSample) return;
@@ -72,8 +67,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
     }
   };
 
-  const isDisabled =
-    audioBuffers.firstSample === null || audioBuffers.secondSample === null;
+  const isDisabled = firstSample === null || secondSample === null;
 
   return isError ? (
     <button
@@ -96,7 +90,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
             "cursor-pointer": !isDisabled,
             "cursor-auto": isProcessing,
           },
-          "relative flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 text-xs font-medium"
+          "relative flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 text-sm font-medium"
         )}
         variants={{
           hidden: {
@@ -116,7 +110,7 @@ export default function ConvolveButton({ audioBuffers }: ConvolveButtonProps) {
           className="absolute left-1"
           animate={{
             x: isHovering ? 12 : 0,
-            opacity: isHovering ? 1 : 0,
+            opacity: isHovering ? 2 : 0,
             filter: isHovering ? "blur(0px)" : "blur(0.5px)",
           }}
         >

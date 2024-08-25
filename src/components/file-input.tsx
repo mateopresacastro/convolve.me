@@ -1,28 +1,19 @@
-import { useContext } from "react";
-import { RxUpload } from "react-icons/rx";
-import { getAudioBufferFromFile } from "../lib/audio_utils";
-import { MyAudioContext } from "../contexts/my-audio-context";
+import { useContext, ChangeEvent } from "react";
+import { getAudioBufferFromFile } from "../lib/audio-utils";
+import { audioBuffersAtom, audioCtxAtom } from "../lib/jotai";
 import Player from "./media_player/player";
 import TrashButton from "./trash-button";
-
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
-import type { AudioBuffersState } from "../app";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { useAtom, useAtomValue } from "jotai";
 
 export interface FileInputProps {
-  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
-  audioBuffers: AudioBuffersState;
   label: string;
   id: "firstSample" | "secondSample";
 }
 
-export default function FileInput({
-  setAudioBuffers,
-  audioBuffers,
-  label,
-  id,
-}: FileInputProps) {
-  const ctx = useContext(MyAudioContext);
+export default function FileInput({ label, id }: FileInputProps) {
+  const ctx = useAtomValue(audioCtxAtom);
+  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
 
   const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -66,7 +57,7 @@ export default function FileInput({
             animate={{
               color: "#a3a3a3",
             }}
-            className="ml-3 h-[0.875rem] w-[0.875rem] cursor-pointer text-neutral-400 focus:outline-none"
+            className="ml-3 h-4 w-4 cursor-pointer text-neutral-400 focus:outline-none"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"

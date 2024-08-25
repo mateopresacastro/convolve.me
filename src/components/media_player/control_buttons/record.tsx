@@ -1,20 +1,20 @@
-import { useContext, useState, useRef, Dispatch, SetStateAction } from "react";
-import { AudioBuffersState } from "../../../app";
-import { MyAudioContext } from "../../../contexts/my-audio-context";
-import { getAudioBufferFromFile } from "../../../lib/audio_utils";
 import clsx from "clsx";
+import { useState, useRef } from "react";
+import { getAudioBufferFromFile } from "../../../lib/audio-utils";
 import { motion } from "framer-motion";
+import { audioBuffersAtom, audioCtxAtom } from "../../../lib/jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 interface RecordProps {
-  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
   id: "firstSample" | "secondSample";
 }
 
-export default function Record({ id, setAudioBuffers }: RecordProps) {
-  const ctx = useContext(MyAudioContext);
+export default function Record({ id }: RecordProps) {
+  const ctx = useAtomValue(audioCtxAtom);
   const [isRecording, setIsRecording] = useState(false);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const setAudioBuffers = useSetAtom(audioBuffersAtom);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
   const record = async () => {
     try {
@@ -90,7 +90,7 @@ export default function Record({ id, setAudioBuffers }: RecordProps) {
             : { opacity: 1, color: "currentColor" }
         }
         className={clsx(
-          "h-4 w-4 cursor-pointer text-neutral-900 hover:text-neutral-500  focus:outline-none"
+          "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500  focus:outline-none"
         )}
         height="1em"
         width="1em"

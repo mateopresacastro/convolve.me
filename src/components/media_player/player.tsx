@@ -10,11 +10,7 @@ interface PlayerProps {
   id: "firstSample" | "secondSample";
 }
 
-export default function Player({
-  id,
-  setAudioBuffers,
-  audioBuffers,
-}: PlayerProps) {
+export default function Player({ id, audioBuffers }: PlayerProps) {
   return (
     <motion.div className="mx-6 flex gap-2">
       <LayoutGroup id={`${id}-player-layout`}>
@@ -23,7 +19,7 @@ export default function Player({
             <PlayStop id={id} audioBuffers={audioBuffers} />
           ) : null}
         </AnimatePresence>
-        <Record id={id} setAudioBuffers={setAudioBuffers} />
+        <Record id={id} />
       </LayoutGroup>
     </motion.div>
   );

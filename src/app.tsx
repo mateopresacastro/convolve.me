@@ -1,14 +1,15 @@
-import { useState } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 import FileInput from "./components/file-input";
-import ConvolveButton from "./components/convolve-button";
 import Layout from "./components/layout";
-import { fileInputData } from "./lib/default_data";
+import { fileInputData } from "./lib/default-data";
 import GitHubLink from "./components/github-link";
 import WaveForm from "./components/wave-form";
 import Title from "./components/title";
 import { transition, variants } from "./lib/animations";
 import clsx from "clsx";
+import { useAtom, useAtomValue } from "jotai";
+import { audioBuffersAtom } from "./lib/jotai";
+import StartButton from "./components/start-button";
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -16,10 +17,7 @@ export interface AudioBuffersState {
 }
 
 export default function App() {
-  const [audioBuffers, setAudioBuffers] = useState<AudioBuffersState>({
-    firstSample: null,
-    secondSample: null,
-  });
+  const audioBuffers = useAtomValue(audioBuffersAtom);
 
   return (
     <Layout>
@@ -27,8 +25,8 @@ export default function App() {
       <div className="flex flex-col items-start justify-center">
         <LayoutGroup>
           <Title />
-          <motion.div className="flex w-full flex-col items-center justify-center pt-1">
-            <motion.div className="mb-10 mt-6 flex flex-col items-center justify-center gap-6 md:mb-10 md:flex-row">
+          <motion.div className="md:min-w-[664px] flex w-full min-w-[350px] flex-col items-center justify-center pt-1">
+            <motion.div className="md:min-h-[150px] mb-10 mt-6 flex flex-col items-center justify-between gap-6 md:mb-10 md:flex-row">
               {fileInputData.map((data, i) => (
                 <motion.div
                   key={data.id}
@@ -44,20 +42,12 @@ export default function App() {
                 >
                   <LayoutGroup key={data.id}>
                     <WaveForm sample={audioBuffers[data.id]} id={data.id} />
-                    <FileInput
-                      audioBuffers={audioBuffers}
-                      setAudioBuffers={setAudioBuffers}
-                      label={data.label}
-                      id={data.id}
-                    />
+                    <FileInput label={data.label} id={data.id} />
                   </LayoutGroup>
                 </motion.div>
               ))}
             </motion.div>
-            <ConvolveButton
-              audioBuffers={audioBuffers}
-              setAudioBuffers={setAudioBuffers}
-            />
+            <StartButton />
           </motion.div>
         </LayoutGroup>
       </div>

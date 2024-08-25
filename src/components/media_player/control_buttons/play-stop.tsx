@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { useContext, useRef, useState } from "react";
-import { BsFillPlayFill, BsFillStopFill } from "react-icons/bs";
+import { useRef, useState } from "react";
 import { AudioBuffersState } from "../../../app";
-import { MyAudioContext } from "../../../contexts/my-audio-context";
-import { LayoutGroup, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useAtomValue } from "jotai";
+import { audioCtxAtom } from "../../../lib/jotai";
 
 interface PlayStopProps {
   audioBuffers: AudioBuffersState;
@@ -12,26 +12,24 @@ interface PlayStopProps {
 
 export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const ctx = useContext(MyAudioContext);
+  const ctx = useAtomValue(audioCtxAtom);
   const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
 
   const playSample = () => {
-    if (audioBuffers[id] && !isPlaying) {
-      setIsPlaying(true);
-      const sampleSourceNode = new AudioBufferSourceNode(ctx, {
-        buffer: audioBuffers[id],
-      });
-      sourceNodeRef.current = sampleSourceNode;
-      sampleSourceNode.connect(ctx.destination);
-      sampleSourceNode.start();
-      sampleSourceNode.onended = () => setIsPlaying(false);
-    }
+    if (!audioBuffers[id] || isPlaying) return;
+    setIsPlaying(true);
+    const sampleSourceNode = new AudioBufferSourceNode(ctx, {
+      buffer: audioBuffers[id],
+    });
+    sourceNodeRef.current = sampleSourceNode;
+    sampleSourceNode.connect(ctx.destination);
+    sampleSourceNode.start();
+    sampleSourceNode.onended = () => setIsPlaying(false);
   };
 
   const stopSample = () => {
-    if (sourceNodeRef.current && isPlaying) {
-      sourceNodeRef.current.stop();
-    }
+    if (!sourceNodeRef.current || !isPlaying) return;
+    sourceNodeRef.current.stop();
   };
 
   return (
@@ -52,7 +50,7 @@ export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
           animate={{
             color: isPlaying ? "green" : "currentColor",
           }}
-          className={clsx("mr-2 h-4 w-4 cursor-pointer focus:outline-none")}
+          className={clsx("mr-2 h-6 w-6 cursor-pointer focus:outline-none")}
           onClick={playSample}
           height="1em"
           width="1em"
@@ -69,7 +67,7 @@ export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
           viewBox="0 0 16 16"
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 1 }}
-          className="h-4 w-4 cursor-pointer  text-neutral-900 focus:outline-none"
+          className="h-6 w-6 cursor-pointer  text-neutral-900 focus:outline-none"
           height="1em"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
