@@ -37,7 +37,7 @@ export default function FileInput({ label, id }: FileInputProps) {
   return (
     <LayoutGroup id={`${id}-file-input`}>
       <motion.section
-        className="flex h-10 w-full items-center justify-evenly"
+        className="flex h-10 w-full items-center justify-between"
         layoutId={`${id}-file-input`}
       >
         <AnimatePresence>

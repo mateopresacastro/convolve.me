@@ -65,7 +65,7 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
         >
           <motion.div
             ref={waveformRef}
-            className="w-full overflow-hidden px-9"
+            className="w-full overflow-hidden px-6"
           ></motion.div>
         </motion.div>
       ) : null}
