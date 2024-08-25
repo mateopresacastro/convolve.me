@@ -25,14 +25,13 @@ export default function App() {
       <div className="flex flex-col items-start justify-center">
         <LayoutGroup>
           <Title />
-          <motion.div className="flex w-full min-w-[350px] flex-col items-center justify-center pt-1 md:min-w-[664px]">
-            <motion.div className="relative flex w-full flex-col items-center justify-between gap-6 md:min-h-[150px] md:flex-row">
+          <motion.div className="flex min-h-[250px] w-full min-w-[350px] flex-col items-center justify-center pt-1 md:min-h-[150px] md:min-w-[664px]">
+            <motion.div className="relative flex min-h-[250px] w-full flex-col items-center justify-evenly md:min-h-[150px] md:flex-row">
               {fileInputData.map((data, i) => (
                 <motion.div
                   key={data.id}
                   className={clsx(
-                    "flex h-28 w-full items-center justify-center",
-                    i == 0 && "mb-4 md:mb-0"
+                    "flex h-28 w-full items-center justify-center"
                   )}
                   variants={variants}
                   initial="hidden"

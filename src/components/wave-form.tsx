@@ -3,6 +3,7 @@ import wavesurfer from "wavesurfer.js";
 import WaveSurfer from "wavesurfer.js";
 import { audioBufferToWave } from "../lib/audio-utils";
 import { AnimatePresence, motion } from "framer-motion";
+import clsx from "clsx";
 
 interface WaveFormProps {
   sample: AudioBuffer | Blob | null;
@@ -46,7 +47,9 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
       {sample ? (
         <motion.div
           key="waveform"
-          className="flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
+          className={clsx(
+            "flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
+          )}
           initial={{ opacity: 0, filter: "blur(4px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           exit={{

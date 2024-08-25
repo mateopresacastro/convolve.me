@@ -1,10 +1,8 @@
-import clsx from "clsx";
 import ResultModal from "./result-modal";
 import { useState } from "react";
 import { RingLoader } from "react-spinners";
 import { getAudioUtils, audioBufferToWave } from "../lib/audio-utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { transition } from "../lib/animations";
 import { BsArrowRight } from "react-icons/bs";
 import { useAtomValue } from "jotai";
 import { audioBuffersAtom } from "../lib/jotai";
@@ -77,7 +75,7 @@ export default function StartButton() {
             onHoverStart={() => setIsHovering(true)}
             onHoverEnd={() => setIsHovering(false)}
             disabled={isDisabled}
-            className="relative flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 text-sm font-medium"
+            className="absolute top-[33rem] flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 pt-10 md:top-[29rem] md:pt-0"
             variants={{
               hidden: {
                 opacity: 0,
@@ -101,7 +99,7 @@ export default function StartButton() {
             }}
           >
             <motion.span
-              className="absolute left-1"
+              className="absolute left-0"
               initial={{ opacity: 0 }}
               animate={{
                 x: isHovering ? 9 : 0,
