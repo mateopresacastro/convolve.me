@@ -78,7 +78,7 @@ export default function Record({ id }: RecordProps) {
   const isCurrentlyRecording = isRecording[id];
 
   return (
-    <motion.div layoutId={`record-icon-${id}`}>
+    <motion.div layoutId={`record-icon-${id}`} className="relative">
       <motion.svg
         stroke="currentColor"
         fill="currentColor"
@@ -95,7 +95,7 @@ export default function Record({ id }: RecordProps) {
             : { color: "currentColor" }
         }
         className={clsx(
-          "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500  focus:outline-none"
+          "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none"
         )}
         height="1em"
         width="1em"
@@ -104,6 +104,7 @@ export default function Record({ id }: RecordProps) {
       >
         <path fillRule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"></path>
       </motion.svg>
+      <p className="absolute text-[0.4rem] left-[0.37rem]">REC</p>
     </motion.div>
   );
 }

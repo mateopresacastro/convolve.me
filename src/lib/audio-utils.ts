@@ -2,16 +2,23 @@ const recorderWorker = new Worker(
   new URL("./recorder-worker.ts", import.meta.url)
 );
 
-function getAudioUtils(ctx: AudioContext | OfflineAudioContext) {
+export function getAudioUtils(ctx: AudioContext | OfflineAudioContext) {
   const compressor = new DynamicsCompressorNode(ctx, {
     ratio: 20,
+    threshold: -1,
+    attack: 0.003,
+    release: 0.01,
   });
+
   const gain = new GainNode(ctx, { gain: 1 });
   const out = ctx.destination;
   return { compressor, gain, out };
 }
 
-async function getAudioBufferFromFile(sample: File | Blob, ctx: AudioContext) {
+export async function getAudioBufferFromFile(
+  sample: File | Blob,
+  ctx: AudioContext
+) {
   const sampleUrl = URL.createObjectURL(sample);
   const res = await fetch(sampleUrl);
   const buffer = await res.arrayBuffer();
@@ -19,7 +26,7 @@ async function getAudioBufferFromFile(sample: File | Blob, ctx: AudioContext) {
   return await ctx.decodeAudioData(buffer);
 }
 
-function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
+export function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
   return new Promise((resolve, reject) => {
     // if its mono, make it "stereo" so the worker can work with it.
     if (audioBuffer.numberOfChannels === 1) {
@@ -64,5 +71,3 @@ function audioBufferToWave(audioBuffer: AudioBuffer): Promise<Blob> {
     };
   });
 }
-
-export { getAudioUtils, getAudioBufferFromFile, audioBufferToWave };

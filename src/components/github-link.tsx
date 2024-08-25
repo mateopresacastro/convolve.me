@@ -11,7 +11,7 @@ export default function GitHubLink() {
         variants={variants}
         initial="hidden"
         animate="show"
-        transition={{ ...transition, delay: 0.48 }}
+        transition={{ ...transition, delay: 0.72 }}
         key="github-link-a"
       >
         <RxGithubLogo className="h-4 w-4 cursor-pointer text-neutral-400 transition duration-300 ease-in-out hover:text-neutral-700" />

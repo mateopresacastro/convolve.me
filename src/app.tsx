@@ -7,7 +7,7 @@ import WaveForm from "./components/wave-form";
 import Title from "./components/title";
 import { transition, variants } from "./lib/animations";
 import clsx from "clsx";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { audioBuffersAtom } from "./lib/jotai";
 import StartButton from "./components/start-button";
 
@@ -21,11 +21,11 @@ export default function App() {
 
   return (
     <Layout>
-      <div className="flex flex-col items-start justify-center">
+      <div className="flex max-w-[664px] flex-col items-start justify-center">
         <LayoutGroup>
           <Title />
-          <motion.div className="flex min-h-[250px] w-full min-w-[350px] flex-col items-center justify-center md:min-h-[160px] md:min-w-[664px]">
-            <motion.div className="relative flex min-h-[350px] w-full flex-col items-center justify-evenly md:min-h-[150px] md:flex-row">
+          <motion.div className="flex h-72 w-80 flex-col items-center justify-center md:h-28 md:w-[640px]">
+            <motion.div className=" flex w-full flex-col items-center justify-evenly gap-7 md:flex-row">
               {fileInputData.map((data, i) => (
                 <motion.div
                   key={data.id}
@@ -36,7 +36,7 @@ export default function App() {
                   initial="hidden"
                   animate="show"
                   exit="hidden"
-                  transition={{ ...transition, delay: 0.24 + i * 0.12 }}
+                  transition={{ ...transition, delay: 0.48 + i * 0.12 }}
                 >
                   <LayoutGroup key={data.id}>
                     <motion.div className="flex flex-col items-center justify-center">
@@ -47,6 +47,8 @@ export default function App() {
                 </motion.div>
               ))}
             </motion.div>
+          </motion.div>
+          <motion.div className="flex h-24 w-full items-center justify-center">
             <StartButton />
           </motion.div>
         </LayoutGroup>
