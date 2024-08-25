@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <Layout>
-      <div className="flex max-w-[664px] flex-col items-start justify-center">
+      <div className="flex max-w-[664px] flex-col items-start justify-between">
         <LayoutGroup>
           <Title />
           <motion.div className="flex h-72 w-80 flex-col items-center justify-center md:h-28 md:w-[640px]">
@@ -53,7 +53,7 @@ export default function App() {
           </motion.div>
         </LayoutGroup>
       </div>
-      <GitHubLink />
+      {/* <GitHubLink /> */}
     </Layout>
   );
 }
