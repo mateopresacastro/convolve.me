@@ -14,29 +14,27 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let wavesurfer: wavesurfer;
+    if (!waveformRef.current || !sample) return;
+    const OPTIONS = {
+      container: waveformRef.current,
+      barHeight: 5,
+      barWidth: 1,
+      height: 30,
+      normalize: true,
+      waveColor: "#a1a1aa",
+      progressColor: "#3f3f46",
+      cursorColor: "#f4f4f5",
+      hideScrollbar: true,
+    };
+    const wavesurfer = WaveSurfer.create(OPTIONS);
+
     (async () => {
-      if (waveformRef.current && sample) {
-        const OPTIONS = {
-          container: waveformRef.current as unknown as HTMLDivElement,
-          barHeight: 5,
-          barWidth: 1,
-          height: 30,
-          normalize: true,
-          waveColor: "#a1a1aa",
-          progressColor: "#3f3f46",
-          cursorColor: "#f4f4f5",
-          hideScrollbar: true,
-        };
-        wavesurfer = WaveSurfer.create(OPTIONS);
+      const waveFile =
+        sample instanceof AudioBuffer
+          ? await audioBufferToWave(sample)
+          : sample;
 
-        const waveFile =
-          sample instanceof AudioBuffer
-            ? await audioBufferToWave(sample)
-            : sample;
-
-        wavesurfer.loadBlob(waveFile);
-      }
+      wavesurfer.loadBlob(waveFile);
     })();
 
     return () => wavesurfer && wavesurfer.destroy();
@@ -54,7 +52,8 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
           animate={{ opacity: 1, filter: "blur(0px)" }}
           exit={{
             opacity: 0,
-            filter: "blur(4px)",
+            filter: "blur(10px)",
+            y: 100,
           }}
           transition={{
             duration: 0.3,
