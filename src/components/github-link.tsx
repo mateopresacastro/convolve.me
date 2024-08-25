@@ -4,14 +4,14 @@ import { RxGithubLogo } from "react-icons/rx";
 
 export default function GitHubLink() {
   return (
-    <footer className="my-9 flex w-full flex-col items-center justify-center">
+    <footer className="flex w-full flex-col items-center justify-center h-10 absolute bottom-0">
       <motion.a
         href="https://github.com/MateoPresaCastro/convolve.me"
         aria-label="Github"
         variants={variants}
         initial="hidden"
         animate="show"
-        transition={{ ...transition, delay: 0.72 }}
+        transition={{ ...transition, delay: 0.48 }}
         key="github-link-a"
       >
         <RxGithubLogo className="h-4 w-4 cursor-pointer text-neutral-400 transition duration-300 ease-in-out hover:text-neutral-700" />

@@ -75,7 +75,7 @@ export default function StartButton() {
             onHoverStart={() => setIsHovering(true)}
             onHoverEnd={() => setIsHovering(false)}
             disabled={isDisabled}
-            className="absolute top-[33rem] flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 pt-10 md:top-[29rem] md:pt-0"
+            className="absolute top-[37rem] flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 pt-10 md:top-[31rem] md:pt-0"
             variants={{
               hidden: {
                 opacity: 0,

@@ -21,12 +21,11 @@ export default function App() {
 
   return (
     <Layout>
-      <div />
       <div className="flex flex-col items-start justify-center">
         <LayoutGroup>
           <Title />
-          <motion.div className="flex min-h-[250px] w-full min-w-[350px] flex-col items-center justify-center pt-1 md:min-h-[150px] md:min-w-[664px]">
-            <motion.div className="relative flex min-h-[250px] w-full flex-col items-center justify-evenly md:min-h-[150px] md:flex-row">
+          <motion.div className="flex min-h-[250px] w-full min-w-[350px] flex-col items-center justify-center md:min-h-[160px] md:min-w-[664px]">
+            <motion.div className="relative flex min-h-[350px] w-full flex-col items-center justify-evenly md:min-h-[150px] md:flex-row">
               {fileInputData.map((data, i) => (
                 <motion.div
                   key={data.id}
