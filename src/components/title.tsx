@@ -7,7 +7,7 @@ export default function Title() {
   return (
     <motion.div className="flex flex-col items-start md:mb-0" layout>
       <motion.h1
-        className="font-medium uppercase text-neutral-700"
+        className="text-lg font-medium uppercase text-neutral-700"
         variants={variants}
         initial="hidden"
         animate="show"
@@ -16,7 +16,7 @@ export default function Title() {
         {title}
       </motion.h1>
       <motion.p
-        className="relative w-full text-sm text-neutral-500"
+        className="relative w-full text-neutral-500"
         variants={variants}
         initial="hidden"
         animate="show"

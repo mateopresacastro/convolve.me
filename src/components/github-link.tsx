@@ -16,7 +16,7 @@ export default function GitHubLink() {
       >
         <RxGithubLogo className="h-4 w-4 cursor-pointer text-neutral-400 transition duration-300 ease-in-out hover:text-neutral-700" />
       </motion.a>
-      {/* <motion.p
+      <motion.p
         className="text-xs text-neutral-50"
         // initial={{ opacity: 0 }}
         // animate={{ opacity: 1 }}
@@ -25,7 +25,7 @@ export default function GitHubLink() {
       >
         By Mateo Presa
       </motion.p>
-      <div></div> */}
+      <div></div>
     </footer>
   );
 }
