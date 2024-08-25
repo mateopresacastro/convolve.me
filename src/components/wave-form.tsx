@@ -37,7 +37,7 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
       wavesurfer.loadBlob(waveFile);
     })();
 
-    return () => wavesurfer && wavesurfer.destroy();
+    return () => wavesurfer.destroy();
   }, [sample]);
 
   return (

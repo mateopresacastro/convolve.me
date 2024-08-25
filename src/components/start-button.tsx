@@ -79,7 +79,7 @@ export default function StartButton() {
             variants={{
               hidden: {
                 opacity: 0,
-                transform: "translateY(10px)",
+                transform: "translateY(32px)",
                 filter: "blur(1px)",
               },
               show: {
@@ -87,6 +87,11 @@ export default function StartButton() {
                 transform: "translateY(0px)",
                 filter: "blur(0px)",
               },
+            }}
+            transition={{
+              duration: 0.6,
+              type: "spring",
+              filter: { transition: { type: "easeOut" } },
             }}
             initial="hidden"
             animate="show"
@@ -96,6 +101,7 @@ export default function StartButton() {
             exit={{
               opacity: 0,
               filter: "blur(1px)",
+              transition: { duration: 0.3 },
             }}
           >
             <motion.span
