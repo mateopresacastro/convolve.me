@@ -53,7 +53,7 @@ export default function App() {
           </motion.div>
         </LayoutGroup>
       </div>
-      {/* <GitHubLink /> */}
+      <GitHubLink />
     </Layout>
   );
 }
