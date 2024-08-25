@@ -3,7 +3,7 @@ import ResultModal from "./result-modal";
 import { useState } from "react";
 import { RingLoader } from "react-spinners";
 import { getAudioUtils, audioBufferToWave } from "../lib/audio-utils";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { transition } from "../lib/animations";
 import { BsArrowRight } from "react-icons/bs";
 import { useAtomValue } from "jotai";
@@ -11,7 +11,6 @@ import { audioBuffersAtom } from "../lib/jotai";
 
 export default function StartButton() {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [renderedBuffer, setRenderedBuffer] = useState<AudioBuffer | null>(
@@ -25,6 +24,7 @@ export default function StartButton() {
 
   const handleConvolve = async () => {
     if (!firstSample || !secondSample) return;
+
     // create offline context to render audio
     const offlineCtx = new OfflineAudioContext({
       numberOfChannels: firstSample.numberOfChannels,
@@ -61,7 +61,6 @@ export default function StartButton() {
       setShowModal(true);
     } catch (error) {
       console.error(error);
-      setIsError(true);
     } finally {
       setIsProcessing(false);
     }
@@ -69,63 +68,65 @@ export default function StartButton() {
 
   const isDisabled = firstSample === null || secondSample === null;
 
-  return isError ? (
-    <button
-      onClick={() => setIsError(false)}
-      type="submit"
-      className="z-20 w-52 self-center rounded-md bg-red-800 px-3.5 py-1.5 text-sm text-neutral-100 shadow-sm transition duration-700 ease-in-out hover:bg-red-700"
-    >
-      Something went wrong
-    </button>
-  ) : (
-    <>
-      <motion.button
-        onClick={handleConvolve}
-        onHoverStart={() => setIsHovering(true)}
-        onHoverEnd={() => setIsHovering(false)}
-        disabled={isDisabled}
-        className={clsx(
-          {
-            "cursor-not-allowed": isDisabled,
-            "cursor-pointer": !isDisabled,
-            "cursor-auto": isProcessing,
-          },
-          "relative flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 text-sm font-medium"
-        )}
-        variants={{
-          hidden: {
-            opacity: 0,
-            transform: "translateY(10px)",
-          },
-          show: { opacity: 1, transform: "translateY(0px)" },
-        }}
-        initial="hidden"
-        animate="show"
-        transition={{ ...transition, delay: 0.48 }}
-        key="start-button"
-        layout="position"
-        layoutId="convolve-button"
-      >
-        <motion.span
-          className="absolute left-1"
-          animate={{
-            x: isHovering ? 12 : 0,
-            opacity: isHovering ? 2 : 0,
-            filter: isHovering ? "blur(0px)" : "blur(0.5px)",
-          }}
-        >
-          <BsArrowRight />
-        </motion.span>
-        <p>
-          {isProcessing ? <RingLoader size={19} color="#075985" /> : "Start"}
-        </p>
-      </motion.button>
-      <ResultModal
-        onClose={() => setShowModal(false)}
-        sample={convolvedSampleWaveFile}
-        buffer={renderedBuffer}
-        isShowing={showModal}
-      />
-    </>
+  return (
+    <AnimatePresence>
+      {isDisabled ? null : (
+        <>
+          <motion.button
+            onClick={handleConvolve}
+            onHoverStart={() => setIsHovering(true)}
+            onHoverEnd={() => setIsHovering(false)}
+            disabled={isDisabled}
+            className="relative flex h-8 w-24 items-center justify-center rounded-md px-3.5 py-1.5 text-sm font-medium"
+            variants={{
+              hidden: {
+                opacity: 0,
+                transform: "translateY(10px)",
+                filter: "blur(1px)",
+              },
+              show: {
+                opacity: 1,
+                transform: "translateY(0px)",
+                filter: "blur(0px)",
+              },
+            }}
+            initial="hidden"
+            animate="show"
+            key="start-button"
+            layout="position"
+            layoutId="convolve-button"
+            exit={{
+              opacity: 0,
+              filter: "blur(1px)",
+            }}
+          >
+            <motion.span
+              className="absolute left-1"
+              initial={{ opacity: 0 }}
+              animate={{
+                x: isHovering ? 9 : 0,
+                opacity: isHovering ? 1 : 0,
+                filter: isHovering ? "blur(0px)" : "blur(0.5px)",
+              }}
+            >
+              <BsArrowRight />
+            </motion.span>
+            <p>
+              {isProcessing ? (
+                <RingLoader size={19} color="#075985" />
+              ) : (
+                "Start"
+              )}
+            </p>
+          </motion.button>
+          <ResultModal
+            onClose={() => setShowModal(false)}
+            sample={convolvedSampleWaveFile}
+            buffer={renderedBuffer}
+            isShowing={showModal}
+          />
+        </>
+      )}
+    </AnimatePresence>
   );
 }

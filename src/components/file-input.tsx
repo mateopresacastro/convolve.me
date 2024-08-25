@@ -36,7 +36,7 @@ export default function FileInput({ label, id }: FileInputProps) {
   return (
     <LayoutGroup id={`${id}-file-input`}>
       <motion.section
-        className="flex h-10 w-full items-center justify-between pt-1"
+        className="flex h-10 w-full items-center justify-center"
         layoutId={`${id}-file-input`}
       >
         <motion.label

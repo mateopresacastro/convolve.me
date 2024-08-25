@@ -46,7 +46,7 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
       {sample ? (
         <motion.div
           key="waveform"
-          className="flex h-20 w-80 flex-col items-center justify-evenly overflow-hidden"
+          className="flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
           initial={{ opacity: 0, filter: "blur(4px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           exit={{
