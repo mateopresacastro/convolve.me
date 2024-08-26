@@ -1,35 +1,29 @@
 import clsx from "clsx";
 import { useState, useRef } from "react";
-import { getAudioBufferFromFile } from "../../../lib/audio-utils";
 import { motion } from "framer-motion";
-import {
-  audioBuffersAtom,
-  audioCtxAtom,
-  isRecordingAtom,
-} from "../../../lib/jotai";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+
+import { useAtom, useSetAtom } from "jotai";
+import type { Id } from "@/types";
+import { audioCtxAtom, audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
+import { getAudioBufferFromFile } from "@/lib/audio-utils";
 
 interface RecordProps {
-  id: "firstSample" | "secondSample";
+  id: Id;
 }
 
 export default function Record({ id }: RecordProps) {
-  const ctx = useAtomValue(audioCtxAtom);
-  const [isLoading, setIsLoading] = useState(false);
-  const setAudioBuffers = useSetAtom(audioBuffersAtom);
   const [isRecording, setIsRecording] = useAtom(isRecordingAtom);
+  const setAudioBuffers = useSetAtom(audioBuffersAtom);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
   const record = async () => {
     try {
       if (!navigator.mediaDevices) return;
-
       setAudioBuffers((audioBuffers) => ({
         ...audioBuffers,
         [id]: null,
       }));
 
-      setIsLoading(true);
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
@@ -41,19 +35,17 @@ export default function Record({ id }: RecordProps) {
       };
 
       mediaRecorder.onerror = () => {
-        throw new Error("Error recording audio from mic");
+        setIsRecording((prev) => ({ ...prev, [id]: false }));
       };
 
       mediaRecorder.onstop = async () => {
         const tracks = mediaStream.getTracks();
         tracks.forEach((track) => track.stop());
         setIsRecording((prev) => ({ ...prev, [id]: false }));
-        const decodedAudio = await getAudioBufferFromFile(
-          new Blob(audioChunks),
-          ctx
-        );
-        setAudioBuffers((audioBuffers) => ({
-          ...audioBuffers,
+        const blob = new Blob(audioChunks);
+        const decodedAudio = await getAudioBufferFromFile(blob);
+        setAudioBuffers((prev) => ({
+          ...prev,
           [id]: decodedAudio,
         }));
       };
@@ -61,18 +53,16 @@ export default function Record({ id }: RecordProps) {
       mediaRecorder.start();
       mediaRecorderRef.current = mediaRecorder;
       setIsRecording((prev) => ({ ...prev, [id]: true }));
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setIsRecording((prev) => ({ ...prev, [id]: false }));
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      mediaRecorderRef.current = null;
-    }
+    if (!mediaRecorderRef.current) return;
+    mediaRecorderRef.current.stop();
+    mediaRecorderRef.current = null;
   };
 
   const isCurrentlyRecording = isRecording[id];

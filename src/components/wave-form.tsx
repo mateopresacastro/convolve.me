@@ -41,7 +41,7 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
   }, [sample]);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       {sample ? (
         <motion.div
           key="waveform"

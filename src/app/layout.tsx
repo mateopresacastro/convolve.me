@@ -18,10 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, "flex h-screen w-screen flex-col items-center justify-center bg-neutral-50")}>
-      <Provider >
-          {children}
-      </Provider>
+      <body
+        className={clsx(
+          inter.className,
+          "flex h-screen w-screen flex-col items-center justify-center bg-neutral-50"
+        )}
+      >
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

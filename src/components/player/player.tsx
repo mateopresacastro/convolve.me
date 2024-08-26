@@ -1,26 +1,20 @@
-import { Dispatch, SetStateAction } from "react";
-import { AudioBuffersState } from "../../app";
-import Record from "./controls/record";
-import PlayStop from "./controls/play-stop";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { audioBuffersAtom } from "@/lib/jotai";
+import { useAtomValue } from "jotai";
 
-interface PlayerProps {
-  setAudioBuffers: Dispatch<SetStateAction<AudioBuffersState>>;
-  audioBuffers: AudioBuffersState;
-  id: "firstSample" | "secondSample";
-}
+import Record from "@/components/player/controls/record";
+import PlayStop from "@/components/player/controls/play-stop";
 
-export default function Player({ id, audioBuffers }: PlayerProps) {
+import type { Id } from "@/types";
+
+export default function Player({ id }: { id: Id }) {
+  const audioBuffers = useAtomValue(audioBuffersAtom);
   return (
     <motion.div className="mx-6 flex gap-2">
-      <LayoutGroup id={`${id}-player-layout`}>
-        <AnimatePresence mode="wait">
-          {audioBuffers[id] ? (
-            <PlayStop id={id} audioBuffers={audioBuffers} />
-          ) : null}
-        </AnimatePresence>
-        <Record id={id} />
-      </LayoutGroup>
+      <AnimatePresence mode="popLayout">
+        {audioBuffers[id] ? <PlayStop id={id} /> : null}
+      </AnimatePresence>
+      <Record id={id} />
     </motion.div>
   );
 }

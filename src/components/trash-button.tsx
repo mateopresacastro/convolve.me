@@ -1,16 +1,21 @@
-import type { AudioBuffersState } from "../app";
 import { motion } from "framer-motion";
 
-interface TrashButtonProps {
-  deleteAudioBuffer: () => void;
-  id: "firstSample" | "secondSample";
-  audioBuffers: AudioBuffersState;
-}
-export default function TrashButton({
-  deleteAudioBuffer,
-  id,
-  audioBuffers,
-}: TrashButtonProps) {
+import { audioBuffersAtom } from "@/lib/jotai";
+import { useAtom } from "jotai";
+
+import type { Id } from "@/types";
+
+export default function TrashButton({ id }: { id: Id }) {
+  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
+
+  const deleteAudioBuffer = () => {
+    if (!audioBuffers[id]) return;
+    setAudioBuffers((prev) => ({
+      ...prev,
+      [id]: null,
+    }));
+  };
+
   return (
     <motion.div layoutId={`trash-icon-${id}`}>
       <motion.svg

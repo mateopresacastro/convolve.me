@@ -1,19 +1,15 @@
 import clsx from "clsx";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useAtom } from "jotai";
-import { audioCtxAtom } from "../../../lib/jotai";
-import { AudioBuffersState } from "@/types";
+import { useAtom, useAtomValue } from "jotai";
+import { AudioBuffersState, Id } from "@/types";
+import { audioBuffersAtom, audioCtxAtom } from "@/lib/jotai";
 
-interface PlayStopProps {
-  audioBuffers: AudioBuffersState;
-  id: "firstSample" | "secondSample";
-}
-
-export default function PlayStop({ audioBuffers, id }: PlayStopProps) {
+export default function PlayStop({ id }: { id: Id }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [globalAudioCtx, setGlobalAudioCtx] = useAtom(audioCtxAtom);
   const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
+  const audioBuffers = useAtomValue(audioBuffersAtom);
 
   const playSample = () => {
     if (!audioBuffers[id] || isPlaying) return;
