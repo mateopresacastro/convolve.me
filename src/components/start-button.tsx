@@ -90,7 +90,6 @@ export default function StartButton() {
                 filter: "blur(1px)",
                 scale: 0.9,
               }}
-              key="start-button"
             >
               <motion.span
                 className="absolute left-0"
