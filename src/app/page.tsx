@@ -1,15 +1,18 @@
-import { LayoutGroup, motion } from "framer-motion";
-import FileInput from "./components/file-input";
-import Layout from "./components/layout";
-import { fileInputData } from "./lib/default-data";
-import GitHubLink from "./components/github-link";
-import WaveForm from "./components/wave-form";
-import Title from "./components/title";
-import { transition, variants } from "./lib/animations";
+"use client";
+
 import clsx from "clsx";
+import { LayoutGroup, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
-import { audioBuffersAtom } from "./lib/jotai";
-import StartButton from "./components/start-button";
+
+import { variants, transition } from "@/lib/animations";
+import { fileInputData } from "@/lib/default-data";
+import { audioBuffersAtom } from "@/lib/jotai";
+
+import FileInput from "@/components/file-input";
+import GitHubLink from "@/components/github-link";
+import StartButton from "@/components/start-button";
+import Title from "@/components/title";
+import WaveForm from "@/components/wave-form";
 
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
@@ -20,7 +23,7 @@ export default function App() {
   const audioBuffers = useAtomValue(audioBuffersAtom);
 
   return (
-    <Layout>
+    <>
       <div className="flex max-w-[664px] flex-col items-start justify-between">
         <LayoutGroup>
           <Title />
@@ -54,6 +57,6 @@ export default function App() {
         </LayoutGroup>
       </div>
       <GitHubLink />
-    </Layout>
+    </>
   );
 }
