@@ -18,7 +18,7 @@ export default function PlayStop({
   const currentBuffer = buffer ? buffer : audioBuffers[id];
 
   const play = () => {
-    if (!audioBuffers[id] || isPlaying) return;
+    if (!currentBuffer || currentBuffer instanceof Blob || isPlaying) return;
     setIsPlaying(true);
     const ctx = new AudioContext();
     const sampleSourceNode = new AudioBufferSourceNode(ctx, {

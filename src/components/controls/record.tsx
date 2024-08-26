@@ -71,6 +71,7 @@ export default function Record({ id }: RecordProps) {
     mediaRecorderRef.current = null;
   };
 
+  if (id === "waveFile" || id === "result") return null;
   const isCurrentlyRecording = isRecording[id];
 
   return (

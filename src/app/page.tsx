@@ -47,7 +47,7 @@ export default function App() {
             key="main-inputs"
           >
             {inputs.map(({ id, label }, i) => (
-              <Input key={id} label={label} id={id} i={i} />
+              <Input key={id} label={label} id={id} />
             ))}
           </motion.div>
         )}

@@ -23,6 +23,7 @@ export default function Upload({ id, label }: { id: Id; label: string }) {
     });
   };
 
+  if (id === "waveFile" || id === "result") return null;
   return (
     <AnimatePresence mode="popLayout" initial={false}>
       {!isRecording[id] && !audioBuffers[id] ? (
