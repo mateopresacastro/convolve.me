@@ -14,6 +14,7 @@ import StartButton from "@/components/start-button";
 import Title from "@/components/title";
 import WaveForm from "@/components/wave-form";
 
+
 export interface AudioBuffersState {
   firstSample: AudioBuffer | null;
   secondSample: AudioBuffer | null;

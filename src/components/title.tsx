@@ -1,5 +1,9 @@
+import { Newsreader } from "next/font/google";
 import { motion } from "framer-motion";
 import { variants, transition } from "../lib/animations";
+import clsx from "clsx";
+
+const newsreader = Newsreader({ subsets: ["latin"] });
 
 export default function Title() {
   const title = "Convolution";
@@ -21,10 +25,10 @@ export default function Title() {
         variants={variants}
         initial="hidden"
         animate="show"
-        className="text-neutral-700"
+        className={clsx(newsreader.className, "text-neutral-700")}
         transition={{ ...transition, delay: 0.12 }}
       >
-        /ˌkɑːnvəˈluːʃn/
+        /ˌkɑːn.vəˈluː.ʃən/
       </motion.p>
       <motion.p
         className="w-80 pt-2 text-sm text-neutral-600 md:w-[664px]"
