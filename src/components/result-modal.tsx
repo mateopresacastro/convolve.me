@@ -1,7 +1,7 @@
 import download from "../lib/download";
 import WaveForm from "./wave-form";
 import { BsDownload, BsArrowLeft } from "react-icons/bs";
-import PlayStop from "./player/controls/play-stop";
+import PlayStop from "./controls/play-stop";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ResultModal({
@@ -16,7 +16,7 @@ export default function ResultModal({
   isShowing: boolean;
 }) {
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {isShowing && (
         <motion.div>
           <div className="absolute inset-0 z-30 h-full w-full bg-neutral-900 opacity-50"></div>
@@ -27,13 +27,7 @@ export default function ResultModal({
                   Result
                 </h3>
                 <div className="flex">
-                  <PlayStop
-                    audioBuffers={{
-                      firstSample: buffer,
-                      secondSample: null,
-                    }}
-                    id="firstSample"
-                  />
+                  <PlayStop buffer={buffer} id="firstSample" />
                 </div>
               </div>
               <div className="z-40 text-neutral-500">

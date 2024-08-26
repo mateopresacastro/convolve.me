@@ -7,7 +7,7 @@ export type Id = "firstSample" | "secondSample";
 
 export type Label = "Sample One" | "Sample Two";
 
-export type FileInputData = {
+export type TFileInput = {
   label: Label;
   id: Id;
 };

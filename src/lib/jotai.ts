@@ -10,8 +10,6 @@ export const audioBuffersAtom = atom<AudioBuffersState>({
   secondSample: null,
 });
 
-export const audioCtxAtom = atom<AudioContext | null>(null);
-
 interface IsRecordingState {
   firstSample: boolean;
   secondSample: boolean;

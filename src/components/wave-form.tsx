@@ -1,17 +1,18 @@
-import { useRef, useEffect } from "react";
-import wavesurfer from "wavesurfer.js";
 import WaveSurfer from "wavesurfer.js";
-import { audioBufferToWave } from "../lib/audio-utils";
-import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import { useAtomValue } from "jotai";
+import { useRef, useEffect } from "react";
 
-interface WaveFormProps {
-  sample: AudioBuffer | Blob | null;
-  id: "firstSample" | "secondSample" | "result";
-}
+import { audioBuffersAtom } from "@/lib/jotai";
+import { audioBufferToWave } from "@/lib/audio-utils";
 
-export default function WaveForm({ sample, id }: WaveFormProps) {
+import { Id } from "@/types";
+
+export default function WaveForm({ id }: { id: Id }) {
   const waveformRef = useRef<HTMLDivElement>(null);
+  const audioBuffers = useAtomValue(audioBuffersAtom);
+  const sample = audioBuffers[id];
 
   useEffect(() => {
     if (!waveformRef.current || !sample) return;
@@ -41,31 +42,24 @@ export default function WaveForm({ sample, id }: WaveFormProps) {
   }, [sample]);
 
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode="popLayout" initial={false}>
       {sample ? (
         <motion.div
-          key="waveform"
-          className={clsx(
-            "flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
-          )}
           initial={{ opacity: 0, filter: "blur(4px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
-          exit={{
-            opacity: 0,
-            filter: "blur(10px)",
-            y: 100,
-          }}
-          transition={{
-            duration: 0.3,
-            type: "spring",
-            filter: { transition: { type: "easeOut" } },
-          }}
-          style={{ borderRadius: "0.375rem" }}
-          layoutId={`${id}-waveform`}
+          exit={{ opacity: 0, filter: "blur(4px)" }}
+          className="flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
+          key={`waveform-${id}`}
         >
           <motion.div
             ref={waveformRef}
             className="w-full overflow-hidden px-6"
+            exit={{
+              opacity: 0,
+              filter: "blur(4px)",
+              y: 100,
+            }}
+            key={`waveform-inner-${id}`}
           ></motion.div>
         </motion.div>
       ) : null}

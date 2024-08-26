@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useAtom, useSetAtom } from "jotai";
 import type { Id } from "@/types";
-import { audioCtxAtom, audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
+import { audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
 
 interface RecordProps {
@@ -13,8 +13,9 @@ interface RecordProps {
 
 export default function Record({ id }: RecordProps) {
   const [isRecording, setIsRecording] = useAtom(isRecordingAtom);
-  const setAudioBuffers = useSetAtom(audioBuffersAtom);
+  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const currentBuffer = audioBuffers[id];
 
   const record = async () => {
     try {
@@ -68,33 +69,47 @@ export default function Record({ id }: RecordProps) {
   const isCurrentlyRecording = isRecording[id];
 
   return (
-    <motion.div layoutId={`record-icon-${id}`} className="relative">
-      <motion.svg
-        stroke="currentColor"
-        fill="currentColor"
-        strokeWidth="0"
-        viewBox="0 0 16 16"
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 1 }}
-        animate={
-          isCurrentlyRecording
-            ? {
-                color: "red",
-                scale: 1.3,
-              }
-            : { color: "currentColor" }
-        }
-        className={clsx(
-          "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none"
-        )}
-        height="1em"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
-        onClick={isCurrentlyRecording ? stopRecording : record}
-      >
-        <path fillRule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"></path>
-      </motion.svg>
-      <p className="absolute text-[0.4rem] left-[0.37rem]">REC</p>
-    </motion.div>
+    <AnimatePresence mode="popLayout">
+      {!currentBuffer ? (
+        <motion.div layoutId={`record-icon-${id}`} className="relative">
+          <motion.svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 16 16"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 1 }}
+            exit={{ opacity: 0, filter: "blur(2px)" }}
+            initial={{ opacity: 1, filter: "blur(0px)" }}
+            animate={
+              isCurrentlyRecording
+                ? {
+                    color: "red",
+                    scale: 1.3,
+                  }
+                : { color: "currentColor" }
+            }
+            className={clsx(
+              "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none"
+            )}
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+            onClick={isCurrentlyRecording ? stopRecording : record}
+          >
+            <path
+              fillRule="evenodd"
+              d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"
+            ></path>
+          </motion.svg>
+          <motion.p
+            exit={{ opacity: 0, filter: "blur(2px)" }}
+            className="absolute text-[0.4rem] left-[0.37rem]"
+          >
+            REC
+          </motion.p>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
