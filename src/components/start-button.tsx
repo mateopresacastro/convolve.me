@@ -60,7 +60,7 @@ export default function StartButton() {
   const isDisabled = firstSample === null || secondSample === null;
 
   return (
-    <div className="flex h-24 w-full items-center justify-center">
+    <motion.div className="flex h-24 w-full items-center justify-center">
       <AnimatePresence mode="popLayout" initial={false}>
         {isDisabled ? null : (
           <>
@@ -69,6 +69,8 @@ export default function StartButton() {
               onHoverStart={() => setIsHovering(true)}
               onHoverEnd={() => setIsHovering(false)}
               disabled={isDisabled}
+              layoutId="start-button"
+              key="start-button"
               className={clsx(
                 inter.className,
                 "flex h-8 w-24 items-center justify-center rounded-md text-neutral-700"
@@ -112,6 +114,6 @@ export default function StartButton() {
           </>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

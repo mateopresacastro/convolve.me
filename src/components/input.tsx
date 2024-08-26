@@ -1,19 +1,12 @@
-import { motion } from "framer-motion";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Controls from "@/components/controls";
 import WaveForm from "@/components/wave-form";
 
 import type { Id } from "@/types";
 
-export default function Input({
-  label,
-  id,
-  i,
-}: {
-  label: string;
-  id: Id;
-  i: number;
-}) {
+export default function Input({ label, id }: { label: string; id: Id }) {
   return (
     <motion.div
       key={id}

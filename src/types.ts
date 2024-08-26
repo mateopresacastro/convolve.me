@@ -7,10 +7,8 @@ export type AudioBuffersState = {
   waveFile: Blob | null;
 };
 
-export type Label = "Sample One" | "Sample Two";
-
 export type TFileInput = {
-  label: Label;
+  label: string;
   id: Id;
 };
 

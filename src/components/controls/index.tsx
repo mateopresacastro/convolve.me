@@ -5,9 +5,11 @@ import Upload from "@/components/controls/upload";
 import PlayStop from "@/components/controls/play-stop";
 import Record from "@/components/controls/record";
 
+import type { Id } from "@/types";
+
 interface Controls {
   label: string;
-  id: "firstSample" | "secondSample";
+  id: Id;
 }
 
 export default function Controls({ label, id }: Controls) {

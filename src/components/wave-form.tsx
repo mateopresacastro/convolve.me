@@ -39,9 +39,11 @@ export default function WaveForm({ id }: { id: Id }) {
       wavesurfer.loadBlob(waveFile);
     })();
 
-    // return () => {
-    //   wavesurfer.destroy();
-    // };
+    return () => {
+      setTimeout(() => {
+        wavesurfer.destroy();
+      }, 50);
+    };
   }, [sample]);
 
   return (

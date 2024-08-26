@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { RxGithubLogo } from "react-icons/rx";
 
-export default function GitHubLink() {
+export default function Footer() {
   return (
     <motion.footer
       initial={{
