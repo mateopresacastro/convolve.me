@@ -1,20 +1,17 @@
 import clsx from "clsx";
-import { useState } from "react";
-import { RingLoader } from "react-spinners";
 import { AnimatePresence, motion } from "framer-motion";
-import { BsArrowRight } from "react-icons/bs";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { Inter } from "next/font/google";
 
-import { audioAtom } from "@/lib/atoms";
+import { audioAtom, isProcessingAtom } from "@/lib/atoms";
 import { getAudioUtils } from "@/lib/audio-utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function StartButton() {
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [isProcessing, setIsProcessing] = useAtom(isProcessingAtom);
   const [{ firstSample, secondSample }, setAudio] = useAtom(audioAtom);
+  const { result } = useAtomValue(audioAtom);
 
   const handleConvolve = async () => {
     if (!firstSample || !secondSample) return;
@@ -57,60 +54,40 @@ export default function StartButton() {
     }
   };
 
-  const isDisabled = firstSample === null || secondSample === null;
+  const isDisabled =
+    firstSample === null || secondSample === null || result !== null;
 
   return (
     <motion.div className="flex h-24 w-full items-center justify-center">
       <AnimatePresence mode="popLayout" initial={false}>
         {isDisabled ? null : (
-          <>
-            <motion.button
-              onClick={handleConvolve}
-              onHoverStart={() => setIsHovering(true)}
-              onHoverEnd={() => setIsHovering(false)}
-              disabled={isDisabled}
-              layoutId="start-button"
-              key="start-button"
-              className={clsx(
-                inter.className,
-                "flex h-8 w-24 items-center justify-center rounded-md text-neutral-700"
-              )}
-              initial={{
-                opacity: 0,
-                filter: "blur(1px)",
-                scale: 0.9,
-              }}
-              animate={{
-                opacity: 1,
-                filter: "blur(0px)",
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                filter: "blur(1px)",
-                scale: 0.9,
-              }}
-            >
-              <motion.span
-                className="absolute left-0"
-                initial={{ opacity: 0 }}
-                animate={{
-                  x: isHovering ? 9 : 0,
-                  opacity: isHovering ? 1 : 0,
-                  filter: isHovering ? "blur(0px)" : "blur(1px)",
-                }}
-              >
-                <BsArrowRight />
-              </motion.span>
-              <p className="cursor-pointer">
-                {isProcessing ? (
-                  <RingLoader size={19} color="#075985" />
-                ) : (
-                  "Start"
-                )}
-              </p>
-            </motion.button>
-          </>
+          <motion.button
+            onClick={handleConvolve}
+            disabled={isDisabled}
+            layoutId="start-button"
+            key="start-button"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className={clsx(
+              inter.className,
+              "flex h-8 w-24 items-center justify-center text-neutral-100 bg-neutral-800 text-xs"
+            )}
+            initial={{
+              opacity: 0,
+              scale: 0.9,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+            }}
+            style={{ borderRadius: 5 }}
+          >
+            {isProcessing ? "Processing..." : "Start"}
+          </motion.button>
         )}
       </AnimatePresence>
     </motion.div>

@@ -15,3 +15,4 @@ export const isRecordingAtom = atom<IsRecordingState>({
 
 export const sourceNodeAtom = atom<AudioBufferSourceNode | null>(null);
 export const audioContextAtom = atom<AudioContext | null>(null);
+export const isProcessingAtom = atom<boolean>(false);

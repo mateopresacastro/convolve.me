@@ -9,10 +9,20 @@ import Title from "@/components/title";
 import Inputs from "@/components/inputs";
 import Result from "@/components/result";
 
-import { audioAtom } from "@/lib/atoms";
+import { audioAtom, isProcessingAtom } from "@/lib/atoms";
+
+import { useMemo } from "react";
 
 export default function App() {
   const { result } = useAtomValue(audioAtom);
+  const isProcessing = useAtomValue(isProcessingAtom);
+
+  const Component = useMemo(() => {
+    if (isProcessing) return () => <h1>Processing...</h1>;
+    if (result) return Result;
+    return Inputs;
+  }, [result, isProcessing]);
+
   return (
     <MotionConfig
       transition={{
@@ -23,9 +33,9 @@ export default function App() {
     >
       <Title />
       <AnimatePresence mode="wait">
-        {result ? <Result /> : <Inputs />}
+        <Component />
       </AnimatePresence>
-      <StartButton />
+      {isProcessing ? null : <StartButton />}
       <GitHubLink />
     </MotionConfig>
   );
