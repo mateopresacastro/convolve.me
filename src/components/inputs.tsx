@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { forwardRef } from "react";
 
 import Controls from "@/components/controls";
 import WaveForm from "@/components/wave-form";
@@ -16,7 +17,7 @@ const inputs: Array<TFileInput> = [
   },
 ];
 
-export default function Inputs() {
+const Inputs = forwardRef(function Inputs() {
   return (
     <motion.div
       className="flex w-full flex-col items-center md:flex-row md:gap-0 gap-6 py-6 md:py-0"
@@ -30,7 +31,7 @@ export default function Inputs() {
       ))}
     </motion.div>
   );
-}
+});
 
 export function Input({ label, id }: { label: string; id: Id }) {
   return (
@@ -55,3 +56,5 @@ export function Input({ label, id }: { label: string; id: Id }) {
     </motion.div>
   );
 }
+
+export default Inputs;

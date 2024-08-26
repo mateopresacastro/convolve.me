@@ -109,8 +109,8 @@ export default function Record({ id }: RecordProps) {
           <motion.p
             exit={{ opacity: 0, filter: "blur(2px)" }}
             animate={{
-              y: isCurrentlyRecording ? -14 : 0,
-              color: isCurrentlyRecording ? "#FFFFF" : "#171717",
+              y: isCurrentlyRecording ? -15 : 0,
+              color: isCurrentlyRecording ? "#FFFFFF" : "#171717",
             }}
             className={clsx(
               inter.className,

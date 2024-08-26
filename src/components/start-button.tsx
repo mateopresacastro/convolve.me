@@ -15,8 +15,6 @@ export default function StartButton() {
 
   const handleConvolve = async () => {
     if (!firstSample || !secondSample) return;
-
-    // create offline context to render audio
     const offlineCtx = new OfflineAudioContext({
       numberOfChannels: firstSample.numberOfChannels,
       length: firstSample.length + secondSample.length,
@@ -25,7 +23,6 @@ export default function StartButton() {
 
     const { compressor, gain, out } = getAudioUtils(offlineCtx);
 
-    // create nodes
     const firstSampleSourceNode = new AudioBufferSourceNode(offlineCtx, {
       buffer: firstSample,
     });
@@ -34,7 +31,6 @@ export default function StartButton() {
       buffer: secondSample,
     });
 
-    // connect the tree
     firstSampleSourceNode
       .connect(convolverNode)
       .connect(gain)
@@ -50,12 +46,15 @@ export default function StartButton() {
     } catch (error) {
       console.error(error);
     } finally {
-      setIsProcessing(false);
+      setTimeout(() => setIsProcessing(false), 1500);
     }
   };
 
   const isDisabled =
-    firstSample === null || secondSample === null || result !== null;
+    firstSample === null ||
+    secondSample === null ||
+    result !== null ||
+    isProcessing === true;
 
   return (
     <motion.div className="flex h-24 w-full items-center justify-center">
@@ -75,18 +74,21 @@ export default function StartButton() {
             initial={{
               opacity: 0,
               scale: 0.9,
+              filter: "blur(1px)",
             }}
             animate={{
               opacity: 1,
               scale: 1,
+              filter: "blur(0px)",
             }}
             exit={{
               opacity: 0,
               scale: 0.9,
+              filter: "blur(1px)",
             }}
             style={{ borderRadius: 5 }}
           >
-            {isProcessing ? "Processing..." : "Start"}
+            Start
           </motion.button>
         )}
       </AnimatePresence>

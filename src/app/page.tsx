@@ -1,7 +1,8 @@
 "use client";
 
-import { AnimatePresence, MotionConfig } from "framer-motion";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { useAtomValue } from "jotai";
+import { forwardRef, useMemo } from "react";
 
 import GitHubLink from "@/components/footer";
 import StartButton from "@/components/start-button";
@@ -11,17 +12,27 @@ import Result from "@/components/result";
 
 import { audioAtom, isProcessingAtom } from "@/lib/atoms";
 
-import { useMemo } from "react";
+const Processing = forwardRef(function Processing() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, filter: "blur(1px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      exit={{ opacity: 0, filter: "blur(1px)" }}
+      className="flex md:h-[128px] h-[328px] w-full items-center justify-center text-sm"
+    >
+      Processing
+    </motion.div>
+  );
+});
 
 export default function App() {
   const { result } = useAtomValue(audioAtom);
   const isProcessing = useAtomValue(isProcessingAtom);
 
-  const Component = useMemo(() => {
-    if (isProcessing) return () => <h1>Processing...</h1>;
-    if (result) return Result;
-    return Inputs;
-  }, [result, isProcessing]);
+  const Component = useMemo(
+    () => (result ? Result : Inputs),
+    [result, isProcessing]
+  );
 
   return (
     <MotionConfig
@@ -32,10 +43,10 @@ export default function App() {
       }}
     >
       <Title />
-      <AnimatePresence mode="wait">
-        <Component />
+      <AnimatePresence mode="popLayout">
+        {isProcessing ? <Processing /> : <Component />}
       </AnimatePresence>
-      {isProcessing ? null : <StartButton />}
+      <StartButton />
       <GitHubLink />
     </MotionConfig>
   );

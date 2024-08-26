@@ -16,3 +16,9 @@ export type IsRecordingState = {
   firstSample: boolean;
   secondSample: boolean;
 };
+
+export type WsState = {
+  firstSample: WaveSurfer | null;
+  secondSample: WaveSurfer | null;
+  result: WaveSurfer | null;
+};
