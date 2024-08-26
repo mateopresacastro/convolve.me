@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import { Provider } from "jotai";
 import { Inter } from "next/font/google";
 
 import type { Metadata } from "next";
 import "./globals.css";
+import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
   title: "convolve.me",
   description: "Convolve two audio files together",
@@ -18,14 +19,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={clsx(
-          inter.className,
-          "flex h-screen w-screen flex-col items-center justify-center bg-neutral-50"
-        )}
-      >
-        <Provider>{children}</Provider>
-      </body>
+      <Provider>
+        <body
+          className={clsx(
+            inter.className,
+            "flex h-screen w-screen items-center justify-center bg-neutral-50"
+          )}
+        >
+          <main className="flex max-w-[50rem] flex-col items-center justify-center">
+            {children}
+          </main>
+        </body>
+      </Provider>
     </html>
   );
 }

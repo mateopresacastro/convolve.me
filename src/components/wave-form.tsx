@@ -1,6 +1,5 @@
 import WaveSurfer from "wavesurfer.js";
-import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, delay, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
 import { useRef, useEffect } from "react";
 
@@ -47,7 +46,7 @@ export default function WaveForm({ id }: { id: Id }) {
         <motion.div
           initial={{ opacity: 0, filter: "blur(4px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, filter: "blur(4px)" }}
+          exit={{ opacity: 0, filter: "blur(4px)", transition: { delay: 1 } }}
           className="flex h-16 w-80 flex-col items-center justify-center overflow-hidden"
           key={`waveform-${id}`}
         >

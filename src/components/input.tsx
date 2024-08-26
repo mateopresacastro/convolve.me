@@ -17,7 +17,7 @@ export default function Input({
   return (
     <motion.div
       key={id}
-      className="flex h-28 w-full items-center justify-center"
+      className="flex h-32 w-full items-center justify-center"
       initial={{
         opacity: 0,
         transform: "translateY(10px)",

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import TrashButton from "@/components/controls/trash-button";
+import TrashButton from "@/components/controls/trash";
 import Upload from "@/components/controls/upload";
 import PlayStop from "@/components/controls/play-stop";
 import Record from "@/components/controls/record";

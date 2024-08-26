@@ -24,7 +24,7 @@ export default function Upload({ id, label }: { id: Id; label: string }) {
   };
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="popLayout" initial={false}>
       {!isRecording[id] && !audioBuffers[id] ? (
         <motion.label
           htmlFor={id}

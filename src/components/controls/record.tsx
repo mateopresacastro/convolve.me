@@ -69,9 +69,9 @@ export default function Record({ id }: RecordProps) {
   const isCurrentlyRecording = isRecording[id];
 
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode="popLayout" initial={false}>
       {!currentBuffer ? (
-        <motion.div layoutId={`record-icon-${id}`} className="relative">
+        <motion.div layoutId={`center-control-${id}`} className="relative">
           <motion.svg
             stroke="currentColor"
             fill="currentColor"
@@ -80,15 +80,13 @@ export default function Record({ id }: RecordProps) {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 1 }}
             exit={{ opacity: 0, filter: "blur(2px)" }}
-            initial={{ opacity: 1, filter: "blur(0px)" }}
-            animate={
-              isCurrentlyRecording
-                ? {
-                    color: "red",
-                    scale: 1.3,
-                  }
-                : { color: "currentColor" }
-            }
+            initial={{ opacity: 0, filter: "blur(1px)" }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              scale: isCurrentlyRecording ? 1.3 : 1,
+              color: isCurrentlyRecording ? "red" : "currentColor",
+            }}
             className={clsx(
               "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none"
             )}

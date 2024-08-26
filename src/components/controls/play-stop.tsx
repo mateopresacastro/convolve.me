@@ -40,11 +40,23 @@ export default function PlayStop({
       {currentBuffer ? (
         <motion.div
           className="flex items-center justify-center"
-          exit={{ opacity: 0, filter: "blur(2px)" }}
-          initial={{ opacity: 0, filter: "blur(2px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
+          initial={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(10px)",
+          }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            transform: "translateY(0px)",
+          }}
+          exit={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(10px)",
+          }}
         >
-          <motion.div layoutId={`play-icon-${id}`} key={`play-icon-${id}`}>
+          <motion.div key={`play-icon-${id}`}>
             <motion.svg
               stroke="currentColor"
               fill="currentColor"
@@ -64,7 +76,7 @@ export default function PlayStop({
               <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
             </motion.svg>
           </motion.div>
-          <motion.div layoutId={`stop-icon-${id}`} key={`stop-icon-${id}`}>
+          <motion.div layoutId={`center-control-${id}`} key={`stop-icon-${id}`}>
             <motion.svg
               stroke="currentColor"
               fill="currentColor"

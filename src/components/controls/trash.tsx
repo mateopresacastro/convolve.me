@@ -7,18 +7,35 @@ import type { Id } from "@/types";
 
 export default function TrashButton({ id }: { id: Id }) {
   const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
-
+  const currentBuffer = audioBuffers[id];
   const deleteAudioBuffer = () => {
-    if (!audioBuffers[id]) return;
+    if (!currentBuffer) return;
     setAudioBuffers((prev) => ({
       ...prev,
       [id]: null,
     }));
   };
+
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      {audioBuffers[id] ? (
-        <motion.div layoutId={`trash-icon-${id}`}>
+    <AnimatePresence mode="popLayout">
+      {currentBuffer ? (
+        <motion.div
+          initial={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(10px)",
+          }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            transform: "translateY(0px)",
+          }}
+          exit={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(10px)",
+          }}
+        >
           <motion.svg
             stroke="currentColor"
             fill="currentColor"
@@ -26,15 +43,10 @@ export default function TrashButton({ id }: { id: Id }) {
             viewBox="0 0 16 16"
             whileHover={{
               scale: 1.2,
-              color: audioBuffers[id] ? "#dc2626" : "#a3a3a3",
+              color: "#dc2626",
             }}
             whileTap={{ scale: 1 }}
-            initial={{ opacity: 0 }}
-            animate={{
-              color: "#a3a3a3",
-              opacity: 1,
-            }}
-            exit={{ opacity: 0, filter: "blur(4px)" }}
+            animate={{ color: "#a3a3a3" }}
             className="ml-1 h-[1.1rem] w-[1.1rem] cursor-pointer text-neutral-400 focus:outline-none"
             xmlns="http://www.w3.org/2000/svg"
             onClick={deleteAudioBuffer}
