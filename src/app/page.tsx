@@ -34,14 +34,17 @@ export default function App() {
     [result, isProcessing]
   );
 
+  const transition = useMemo(
+    () => ({
+      type: "spring",
+      bounce: 0.4,
+      filter: { transition: { bounce: 0 } },
+    }),
+    []
+  );
+
   return (
-    <MotionConfig
-      transition={{
-        type: "spring",
-        bounce: 0.4,
-        filter: { transition: { bounce: 0 } },
-      }}
-    >
+    <MotionConfig transition={transition}>
       <Title />
       <AnimatePresence mode="popLayout">
         {isProcessing ? <Processing /> : <Component />}
