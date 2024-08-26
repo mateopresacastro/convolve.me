@@ -1,7 +1,7 @@
 import WaveSurfer from "wavesurfer.js";
-import { AnimatePresence, delay, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { audioBuffersAtom } from "@/lib/jotai";
 import { audioBufferToWave } from "@/lib/audio-utils";
@@ -9,12 +9,12 @@ import { audioBufferToWave } from "@/lib/audio-utils";
 import { Id } from "@/types";
 
 export default function WaveForm({ id }: { id: Id }) {
-  const waveformRef = useRef<HTMLDivElement>(null!);
+  const waveformRef = useRef<HTMLDivElement>(null);
   const audioBuffers = useAtomValue(audioBuffersAtom);
   const sample = audioBuffers[id];
 
   useEffect(() => {
-    if (!sample) return;
+    if (!sample || !waveformRef.current) return;
 
     const OPTIONS = {
       container: waveformRef.current,
@@ -39,29 +39,37 @@ export default function WaveForm({ id }: { id: Id }) {
       wavesurfer.loadBlob(waveFile);
     })();
 
-    return () => wavesurfer.destroy();
+    // return () => {
+    //   wavesurfer.destroy();
+    // };
   }, [sample]);
 
   return (
     <AnimatePresence mode="popLayout" initial={false}>
       {sample ? (
         <motion.div
-          initial={{ opacity: 0, filter: "blur(4px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, filter: "blur(4px)", transition: { delay: 1 } }}
+          initial={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(-17px)",
+          }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            transform: "translateY(0px)",
+          }}
+          exit={{
+            opacity: 0,
+            filter: "blur(4px)",
+            transform: "translateY(-17px)",
+          }}
           className="flex h-16 w-80 flex-col items-center justify-center overflow-hidden"
           key={`waveform-${id}`}
         >
           <motion.div
             ref={waveformRef}
             className="w-full overflow-hidden px-6"
-            exit={{
-              opacity: 0,
-              filter: "blur(4px)",
-              y: 100,
-            }}
-            key={`waveform-inner-${id}`}
-          ></motion.div>
+          />
         </motion.div>
       ) : null}
     </AnimatePresence>

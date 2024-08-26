@@ -31,9 +31,21 @@ export default function Upload({ id, label }: { id: Id; label: string }) {
           aria-label={label}
           layoutId={`${id}-file-input-label`}
           key={`${id}-file-input-label`}
-          exit={{ opacity: 0, filter: "blur(2px)" }}
-          initial={{ opacity: 0, filter: "blur(2px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
+          exit={{
+            opacity: 0,
+            filter: "blur(2px)",
+            transform: "translateX(-32px)",
+          }}
+          initial={{
+            opacity: 0,
+            filter: "blur(2px)",
+            transform: "translateX(-32px)",
+          }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            transform: "translateX(0px)",
+          }}
         >
           <motion.svg
             stroke="currentColor"
@@ -48,7 +60,7 @@ export default function Upload({ id, label }: { id: Id; label: string }) {
             animate={{
               color: "#a3a3a3",
             }}
-            className="h-4 w-4 cursor-pointer text-neutral-400 focus:outline-none"
+            className="h-4 w-4 cursor-pointer text-neutral-400 focus:outline-none mr-1"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"

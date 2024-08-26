@@ -111,7 +111,7 @@ export default function StartButton() {
                 animate={{
                   x: isHovering ? 9 : 0,
                   opacity: isHovering ? 1 : 0,
-                  filter: isHovering ? "blur(0px)" : "blur(0.5px)",
+                  filter: isHovering ? "blur(0px)" : "blur(1px)",
                 }}
               >
                 <BsArrowRight />

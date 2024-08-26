@@ -30,7 +30,7 @@ export default function App() {
       }}
     >
       <Title />
-      <div className="flex w-full flex-col items-center md:flex-row">
+      <div className="flex w-full flex-col items-center md:flex-row md:gap-0 gap-6 py-6 md:py-0">
         {inputs.map(({ id, label }, i) => (
           <Input key={id} label={label} id={id} i={i} />
         ))}

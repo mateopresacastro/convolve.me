@@ -78,18 +78,18 @@ export default function Record({ id }: RecordProps) {
             fill="currentColor"
             strokeWidth="0"
             viewBox="0 0 16 16"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 1 }}
+            whileHover={{ scale: isCurrentlyRecording ? 3.3 : 1.2 }}
+            whileTap={{ scale: isCurrentlyRecording ? 3 : 1 }}
             exit={{ opacity: 0, filter: "blur(2px)" }}
             initial={{ opacity: 0, filter: "blur(1px)" }}
             animate={{
-              opacity: 1,
+              opacity: isCurrentlyRecording ? [0.5, 1] : 1,
               filter: "blur(0px)",
-              scale: isCurrentlyRecording ? 1.3 : 1,
+              scale: isCurrentlyRecording ? 3 : 1,
               color: isCurrentlyRecording ? "red" : "currentColor",
             }}
             className={clsx(
-              "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none"
+              "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none ml-1"
             )}
             height="1em"
             width="1em"
@@ -103,7 +103,11 @@ export default function Record({ id }: RecordProps) {
           </motion.svg>
           <motion.p
             exit={{ opacity: 0, filter: "blur(2px)" }}
-            className="absolute text-[0.4rem] left-[0.37rem]"
+            animate={{
+              y: isCurrentlyRecording ? -14 : 0,
+              color: isCurrentlyRecording ? "white" : "currentColor",
+            }}
+            className="absolute text-[0.4rem] left-[0.635rem]"
           >
             REC
           </motion.p>
