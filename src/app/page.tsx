@@ -2,7 +2,7 @@
 
 import { LayoutGroup, motion, MotionConfig } from "framer-motion";
 
-import GitHubLink from "@/components/github-link";
+import GitHubLink from "@/components/github";
 import StartButton from "@/components/start-button";
 import Title from "@/components/title";
 import Input from "@/components/input";

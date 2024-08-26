@@ -9,12 +9,13 @@ import { audioBufferToWave } from "@/lib/audio-utils";
 import { Id } from "@/types";
 
 export default function WaveForm({ id }: { id: Id }) {
-  const waveformRef = useRef<HTMLDivElement>(null);
+  const waveformRef = useRef<HTMLDivElement>(null!);
   const audioBuffers = useAtomValue(audioBuffersAtom);
   const sample = audioBuffers[id];
 
   useEffect(() => {
-    if (!waveformRef.current || !sample) return;
+    if (!sample) return;
+
     const OPTIONS = {
       container: waveformRef.current,
       barHeight: 5,
@@ -26,6 +27,7 @@ export default function WaveForm({ id }: { id: Id }) {
       cursorColor: "#f4f4f5",
       hideScrollbar: true,
     };
+
     const wavesurfer = WaveSurfer.create(OPTIONS);
 
     (async () => {
