@@ -1,7 +1,7 @@
 import { useContext, ChangeEvent } from "react";
 import { getAudioBufferFromFile } from "../lib/audio-utils";
 import { audioBuffersAtom, audioCtxAtom, isRecordingAtom } from "../lib/jotai";
-import Player from "./media_player/player";
+import Player from "./player/player";
 import TrashButton from "./trash-button";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useAtom, useAtomValue } from "jotai";
@@ -19,11 +19,14 @@ export default function FileInput({ label, id }: FileInputProps) {
   const handleSampleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const sample = e.target.files[0];
-    const decodedAudio = await getAudioBufferFromFile(sample, ctx);
-    setAudioBuffers((audioBuffers) => ({
-      ...audioBuffers,
-      [e.target.id]: decodedAudio,
-    }));
+    const decodedAudio = await getAudioBufferFromFile(sample);
+    setAudioBuffers((audioBuffers) => {
+      console.log("audio buffers sample change", audioBuffers);
+      return {
+        ...audioBuffers,
+        [e.target.id]: decodedAudio,
+      };
+    });
   };
 
   const deleteAudioBuffer = () => {
@@ -47,6 +50,11 @@ export default function FileInput({ label, id }: FileInputProps) {
               aria-label={label}
               layoutId={`${id}-file-input-label`}
               exit={{ opacity: 0, filter: "blur(2px)" }}
+              initial={{ opacity: 0, filter: "blur(2px)" }}
+              animate={{
+                opacity: 1,
+                filter: "blur(0px)",
+              }}
             >
               <motion.svg
                 stroke="currentColor"
@@ -89,7 +97,7 @@ export default function FileInput({ label, id }: FileInputProps) {
           setAudioBuffers={setAudioBuffers}
           audioBuffers={audioBuffers}
         />
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {audioBuffers[id] ? (
             <TrashButton
               id={id}

@@ -1,3 +1,5 @@
+"use client"
+
 /**
  * Ported and modified from: https://github.com/mattdiamond/Recorderjs and
  * licensed (MIT)

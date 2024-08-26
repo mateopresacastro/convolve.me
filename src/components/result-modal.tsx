@@ -1,7 +1,7 @@
 import download from "../lib/download";
 import WaveForm from "./wave-form";
 import { BsDownload, BsArrowLeft } from "react-icons/bs";
-import PlayStop from "./media_player/control_buttons/play-stop";
+import PlayStop from "./player/controls/play-stop";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ResultModal({

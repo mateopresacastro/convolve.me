@@ -1,12 +1,11 @@
 import { atom } from "jotai";
-import { AudioBuffersState } from "../app";
 
-export const audioBuffersAtom = atom<AudioBuffersState>({
+export const audioBuffersAtom = atom({
   firstSample: null,
   secondSample: null,
 });
 
-export const audioCtxAtom = atom<AudioContext>(new AudioContext());
+export const audioCtxAtom = atom<AudioContext | null>(null);
 
 export const isRecordingAtom = atom({
   firstSample: false,

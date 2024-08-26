@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { AudioBuffersState } from "../../app";
-import Record from "./control_buttons/record";
-import PlayStop from "./control_buttons/play-stop";
+import Record from "./controls/record";
+import PlayStop from "./controls/play-stop";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 interface PlayerProps {

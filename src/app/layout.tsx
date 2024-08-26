@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <Provider >
         <main className="flex h-screen w-screen flex-col items-center justify-center bg-neutral-50">
           {children}
         </main>
+      </Provider>
       </body>
     </html>
   );
