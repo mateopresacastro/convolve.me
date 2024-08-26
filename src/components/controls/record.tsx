@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Inter } from "next/font/google";
 import { useAtom } from "jotai";
 
-import { audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
+import { audioAtom, isRecordingAtom } from "@/lib/jotai";
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
 
 import type { Id } from "@/types";
@@ -17,7 +17,7 @@ interface RecordProps {
 
 export default function Record({ id }: RecordProps) {
   const [isRecording, setIsRecording] = useAtom(isRecordingAtom);
-  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
+  const [audioBuffers, setAudioBuffers] = useAtom(audioAtom);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const currentBuffer = audioBuffers[id];
 

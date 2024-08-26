@@ -1,27 +1,20 @@
-import ResultModal from "./result-modal";
+import clsx from "clsx";
 import { useState } from "react";
 import { RingLoader } from "react-spinners";
-import { getAudioUtils, audioBufferToWave } from "../lib/audio-utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
-import { useAtomValue } from "jotai";
-import { audioBuffersAtom } from "@/lib/jotai";
+import { useAtom } from "jotai";
 import { Inter } from "next/font/google";
-import clsx from "clsx";
+
+import { audioAtom } from "@/lib/jotai";
+import { getAudioUtils } from "@/lib/audio-utils";
 
 const inter = Inter({ subsets: ["latin"] });
+
 export default function StartButton() {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [renderedBuffer, setRenderedBuffer] = useState<AudioBuffer | null>(
-    null
-  );
-
-  const [convolvedSampleWaveFile, setConvolvedSampleWaveFile] =
-    useState<Blob | null>(null);
-
-  const { firstSample, secondSample } = useAtomValue(audioBuffersAtom);
+  const [{ firstSample, secondSample }, setAudio] = useAtom(audioAtom);
 
   const handleConvolve = async () => {
     if (!firstSample || !secondSample) return;
@@ -55,11 +48,8 @@ export default function StartButton() {
 
     try {
       setIsProcessing(true);
-      const renderedBuffer = await offlineCtx.startRendering();
-      setRenderedBuffer(renderedBuffer);
-      const waveFile = await audioBufferToWave(renderedBuffer);
-      setConvolvedSampleWaveFile(waveFile);
-      setShowModal(true);
+      const result = await offlineCtx.startRendering();
+      setAudio((prev) => ({ ...prev, result }));
     } catch (error) {
       console.error(error);
     } finally {
@@ -119,12 +109,6 @@ export default function StartButton() {
                 )}
               </p>
             </motion.button>
-            <ResultModal
-              onClose={() => setShowModal(false)}
-              sample={convolvedSampleWaveFile}
-              buffer={renderedBuffer}
-              isShowing={showModal}
-            />
           </>
         )}
       </AnimatePresence>

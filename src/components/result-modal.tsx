@@ -27,11 +27,11 @@ export default function ResultModal({
                   Result
                 </h3>
                 <div className="flex">
-                  <PlayStop buffer={buffer} id="firstSample" />
+                  <PlayStop id="firstSample" />
                 </div>
               </div>
               <div className="z-40 text-neutral-500">
-                <WaveForm sample={sample} id="result" />
+                <WaveForm id="result" />
               </div>
               <div className="flex w-96 justify-evenly">
                 <button

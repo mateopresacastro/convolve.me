@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
 import { Id } from "@/types";
-import { audioBuffersAtom } from "@/lib/jotai";
+import { audioAtom } from "@/lib/jotai";
 
 export default function PlayStop({
   id,
@@ -14,7 +14,7 @@ export default function PlayStop({
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
-  const audioBuffers = useAtomValue(audioBuffersAtom);
+  const audioBuffers = useAtomValue(audioAtom);
   const currentBuffer = buffer ? buffer : audioBuffers[id];
 
   const play = () => {

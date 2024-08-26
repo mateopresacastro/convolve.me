@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-import { audioBuffersAtom } from "@/lib/jotai";
+import { audioAtom } from "@/lib/jotai";
 import { useAtom } from "jotai";
 
 import type { Id } from "@/types";
 
 export default function TrashButton({ id }: { id: Id }) {
-  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
+  const [audioBuffers, setAudioBuffers] = useAtom(audioAtom);
   const currentBuffer = audioBuffers[id];
 
   const deleteBuffer = () => {

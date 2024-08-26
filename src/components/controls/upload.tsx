@@ -2,13 +2,13 @@ import { useAtom, useAtomValue } from "jotai";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
-import { audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
+import { audioAtom, isRecordingAtom } from "@/lib/jotai";
 
 import type { Id } from "@/types";
 import type { ChangeEvent } from "react";
 
 export default function Upload({ id, label }: { id: Id; label: string }) {
-  const [audioBuffers, setAudioBuffers] = useAtom(audioBuffersAtom);
+  const [audioBuffers, setAudioBuffers] = useAtom(audioAtom);
   const isRecording = useAtomValue(isRecordingAtom);
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {

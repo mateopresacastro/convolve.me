@@ -3,14 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
 import { useRef, useEffect } from "react";
 
-import { audioBuffersAtom } from "@/lib/jotai";
+import { audioAtom } from "@/lib/jotai";
 import { audioBufferToWave } from "@/lib/audio-utils";
 
 import { Id } from "@/types";
 
 export default function WaveForm({ id }: { id: Id }) {
   const waveformRef = useRef<HTMLDivElement>(null);
-  const audioBuffers = useAtomValue(audioBuffersAtom);
+  const audioBuffers = useAtomValue(audioAtom);
   const sample = audioBuffers[id];
 
   useEffect(() => {

@@ -1,21 +1,12 @@
 import { atom } from "jotai";
+import type { AudioBuffersState, IsRecordingState } from "@/types";
 
-interface AudioBuffersState {
-  firstSample: AudioBuffer | null;
-  secondSample: AudioBuffer | null;
-  result: AudioBuffer | null;
-}
-
-export const audioBuffersAtom = atom<AudioBuffersState>({
+export const audioAtom = atom<AudioBuffersState>({
   firstSample: null,
   secondSample: null,
   result: null,
+  waveFile: null,
 });
-
-interface IsRecordingState {
-  firstSample: boolean;
-  secondSample: boolean;
-}
 
 export const isRecordingAtom = atom<IsRecordingState>({
   firstSample: false,
