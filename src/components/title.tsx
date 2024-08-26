@@ -1,6 +1,5 @@
 import { Newsreader } from "next/font/google";
 import { motion } from "framer-motion";
-import { variants, transition } from "../lib/animations";
 import clsx from "clsx";
 
 const newsreader = Newsreader({ subsets: ["latin"] });
@@ -13,39 +12,63 @@ export default function Title() {
     <motion.div className="flex w-full flex-col items-start md:mb-0">
       <motion.h1
         className="text-lg font-medium text-neutral-800"
-        variants={variants}
-        initial="hidden"
-        animate="show"
-        transition={transition}
+        initial={{
+          opacity: 0,
+          transform: "translateY(10px)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          opacity: 1,
+          transform: "translateY(0px)",
+          filter: "blur(0px)",
+        }}
       >
         {title}
       </motion.h1>
 
       <motion.p
-        variants={variants}
-        initial="hidden"
-        animate="show"
+        initial={{
+          opacity: 0,
+          transform: "translateY(10px)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          opacity: 1,
+          transform: "translateY(0px)",
+          filter: "blur(0px)",
+        }}
         className={clsx(newsreader.className, "text-neutral-700")}
-        transition={{ ...transition, delay: 0.12 }}
       >
         /ˌkɑːn.vəˈluː.ʃən/
       </motion.p>
       <motion.p
         className="w-80 pt-2 text-sm text-neutral-600 md:w-[664px]"
-        variants={variants}
-        initial="hidden"
-        animate="show"
-        transition={{ ...transition, delay: 0.24 }}
+        initial={{
+          opacity: 0,
+          transform: "translateY(10px)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          opacity: 1,
+          transform: "translateY(0px)",
+          filter: "blur(0px)",
+        }}
       >
         {desc}
       </motion.p>
 
       <motion.p
         className="w-80 py-6 text-sm text-neutral-600 md:w-[664px]"
-        variants={variants}
-        initial="hidden"
-        animate="show"
-        transition={{ ...transition, delay: 0.36 }}
+        initial={{
+          opacity: 0,
+          transform: "translateY(10px)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          opacity: 1,
+          transform: "translateY(0px)",
+          filter: "blur(0px)",
+        }}
       >
         Record or upload two audio files and press start to convolve them:
       </motion.p>

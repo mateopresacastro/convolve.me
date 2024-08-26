@@ -48,7 +48,7 @@ export default function WaveForm({ id }: { id: Id }) {
           initial={{ opacity: 0, filter: "blur(4px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           exit={{ opacity: 0, filter: "blur(4px)" }}
-          className="flex h-16 w-80 flex-col items-center justify-evenly overflow-hidden"
+          className="flex h-16 w-80 flex-col items-center justify-center overflow-hidden"
           key={`waveform-${id}`}
         >
           <motion.div

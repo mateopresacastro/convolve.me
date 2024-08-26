@@ -1,6 +1,4 @@
-import clsx from "clsx";
-import { LayoutGroup, motion } from "framer-motion";
-import { transition, variants } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 import Controls from "@/components/controls";
 import WaveForm from "@/components/wave-form";
@@ -19,18 +17,22 @@ export default function Input({
   return (
     <motion.div
       key={id}
-      className={clsx("flex h-28 w-full items-center justify-center")}
-      variants={variants}
-      initial="hidden"
-      animate="show"
-      transition={{ ...transition, delay: 0.48 + i * 0.12 }}
+      className="flex h-28 w-full items-center justify-center"
+      initial={{
+        opacity: 0,
+        transform: "translateY(10px)",
+        filter: "blur(1px)",
+      }}
+      animate={{
+        opacity: 1,
+        transform: "translateY(0px)",
+        filter: "blur(0px)",
+      }}
     >
-      <div className="flex flex-col items-center justify-center">
-        <LayoutGroup>
-          <WaveForm id={id} />
-          <Controls label={label} id={id} />
-        </LayoutGroup>
-      </div>
+      <motion.div className="flex flex-col items-center justify-center">
+        <WaveForm id={id} />
+        <Controls label={label} id={id} />
+      </motion.div>
     </motion.div>
   );
 }

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import type { Id } from "@/types";
 import { audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
