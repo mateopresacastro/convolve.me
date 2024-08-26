@@ -21,19 +21,20 @@ export default function Record({ id }: RecordProps) {
   const record = async () => {
     try {
       if (!navigator.mediaDevices) return;
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+      });
+
+      const mediaRecorder = new MediaRecorder(mediaStream);
+      const audioChunks: Blob[] = [];
+
       setAudioBuffers((audioBuffers) => ({
         ...audioBuffers,
         [id]: null,
       }));
 
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
-      const mediaRecorder = new MediaRecorder(mediaStream);
-      const audioChunks: Blob[] = [];
-
-      mediaRecorder.ondataavailable = async (e) => {
-        audioChunks.push(e.data);
+      mediaRecorder.ondataavailable = async ({ data }) => {
+        audioChunks.push(data);
       };
 
       mediaRecorder.onerror = () => {
