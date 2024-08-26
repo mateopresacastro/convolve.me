@@ -3,11 +3,13 @@ import { atom } from "jotai";
 interface AudioBuffersState {
   firstSample: AudioBuffer | null;
   secondSample: AudioBuffer | null;
+  result: AudioBuffer | null;
 }
 
 export const audioBuffersAtom = atom<AudioBuffersState>({
   firstSample: null,
   secondSample: null,
+  result: null,
 });
 
 interface IsRecordingState {

@@ -1,7 +1,7 @@
 import WaveSurfer from "wavesurfer.js";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 import { audioBuffersAtom } from "@/lib/jotai";
 import { audioBufferToWave } from "@/lib/audio-utils";

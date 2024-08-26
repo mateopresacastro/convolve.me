@@ -1,9 +1,10 @@
 import clsx from "clsx";
+
+import { Provider } from "jotai";
 import { Inter } from "next/font/google";
 
 import type { Metadata } from "next";
 import "./globals.css";
-import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
 

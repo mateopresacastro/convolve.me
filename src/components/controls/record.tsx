@@ -1,12 +1,15 @@
 import clsx from "clsx";
 import { useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
+import { Inter } from "next/font/google";
 import { useAtom } from "jotai";
+
 import { audioBuffersAtom, isRecordingAtom } from "@/lib/jotai";
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
 
 import type { Id } from "@/types";
+
+const inter = Inter({ subsets: ["latin"] });
 
 interface RecordProps {
   id: Id;
@@ -87,7 +90,7 @@ export default function Record({ id }: RecordProps) {
               opacity: isCurrentlyRecording ? [0.5, 1] : 1,
               filter: "blur(0px)",
               scale: isCurrentlyRecording ? 3 : 1,
-              color: isCurrentlyRecording ? "red" : "currentColor",
+              color: isCurrentlyRecording ? "#dc2626" : "#171717",
             }}
             className={clsx(
               "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none ml-1"
@@ -106,9 +109,12 @@ export default function Record({ id }: RecordProps) {
             exit={{ opacity: 0, filter: "blur(2px)" }}
             animate={{
               y: isCurrentlyRecording ? -14 : 0,
-              color: isCurrentlyRecording ? "white" : "currentColor",
+              color: isCurrentlyRecording ? "#FFFFF" : "#171717",
             }}
-            className="absolute text-[0.4rem] left-[0.635rem]"
+            className={clsx(
+              inter.className,
+              "absolute text-[0.4rem] left-[0.635rem]"
+            )}
           >
             REC
           </motion.p>

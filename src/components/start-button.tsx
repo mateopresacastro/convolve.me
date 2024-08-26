@@ -5,8 +5,11 @@ import { getAudioUtils, audioBufferToWave } from "../lib/audio-utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { useAtomValue } from "jotai";
-import { audioBuffersAtom } from "../lib/jotai";
+import { audioBuffersAtom } from "@/lib/jotai";
+import { Inter } from "next/font/google";
+import clsx from "clsx";
 
+const inter = Inter({ subsets: ["latin"] });
 export default function StartButton() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -76,34 +79,26 @@ export default function StartButton() {
               onHoverStart={() => setIsHovering(true)}
               onHoverEnd={() => setIsHovering(false)}
               disabled={isDisabled}
-              className="flex h-8 w-24 items-center justify-center rounded-md text-neutral-700 "
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  transform: "translateY(32px)",
-                  filter: "blur(1px)",
-                },
-                show: {
-                  opacity: 1,
-                  transform: "translateY(0px)",
-                  filter: "blur(0px)",
-                },
+              className={clsx(
+                inter.className,
+                "flex h-8 w-24 items-center justify-center rounded-md text-neutral-700"
+              )}
+              initial={{
+                opacity: 0,
+                filter: "blur(1px)",
+                scale: 0.9,
               }}
-              transition={{
-                duration: 0.6,
-                type: "spring",
-                filter: { transition: { type: "easeOut" } },
+              animate={{
+                opacity: 1,
+                filter: "blur(0px)",
+                scale: 1,
               }}
-              initial="hidden"
-              animate="show"
-              key="start-button"
-              layout="position"
-              layoutId="convolve-button"
               exit={{
                 opacity: 0,
                 filter: "blur(1px)",
-                transition: { duration: 0.3 },
+                scale: 0.9,
               }}
+              key="start-button"
             >
               <motion.span
                 className="absolute left-0"
@@ -116,7 +111,7 @@ export default function StartButton() {
               >
                 <BsArrowRight />
               </motion.span>
-              <p>
+              <p className="cursor-pointer">
                 {isProcessing ? (
                   <RingLoader size={19} color="#075985" />
                 ) : (
