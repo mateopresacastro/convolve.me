@@ -25,22 +25,19 @@ const Processing = forwardRef(function Processing() {
   );
 });
 
+const transition = {
+  type: "spring",
+  bounce: 0.4,
+  filter: { transition: { bounce: 0 } },
+};
+
 export default function App() {
-  const { result } = useAtomValue(audioAtom);
   const isProcessing = useAtomValue(isProcessingAtom);
+  const { result } = useAtomValue(audioAtom);
 
   const Component = useMemo(
     () => (result ? Result : Inputs),
     [result, isProcessing]
-  );
-
-  const transition = useMemo(
-    () => ({
-      type: "spring",
-      bounce: 0.4,
-      filter: { transition: { bounce: 0 } },
-    }),
-    []
   );
 
   return (
