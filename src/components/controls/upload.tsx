@@ -2,7 +2,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
-import { audioAtom, isRecordingAtom } from "@/lib/jotai";
+import { audioAtom, isRecordingAtom } from "@/lib/atoms";
 
 import type { Id } from "@/types";
 import type { ChangeEvent } from "react";

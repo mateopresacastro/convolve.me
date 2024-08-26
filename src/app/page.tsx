@@ -1,28 +1,15 @@
 "use client";
 
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
+import { useAtomValue } from "jotai";
 
 import GitHubLink from "@/components/footer";
 import StartButton from "@/components/start-button";
 import Title from "@/components/title";
-import Input from "@/components/input";
+import Inputs from "@/components/inputs";
 import Result from "@/components/result";
 
-import { audioAtom } from "@/lib/jotai";
-import { useAtomValue } from "jotai";
-
-import type { TFileInput } from "@/types";
-
-const inputs: Array<TFileInput> = [
-  {
-    label: "Sample one",
-    id: "firstSample",
-  },
-  {
-    label: "Sample two",
-    id: "secondSample",
-  },
-];
+import { audioAtom } from "@/lib/atoms";
 
 export default function App() {
   const { result } = useAtomValue(audioAtom);
@@ -36,25 +23,10 @@ export default function App() {
     >
       <Title />
       <AnimatePresence mode="wait">
-        {result ? (
-          <Result />
-        ) : (
-          <motion.div
-            className="flex w-full flex-col items-center md:flex-row md:gap-0 gap-6 py-6 md:py-0"
-            initial={{ opacity: 0, filter: "blur(1px)" }}
-            exit={{ opacity: 0, filter: "blur(1px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            key="main-inputs"
-          >
-            {inputs.map(({ id, label }, i) => (
-              <Input key={id} label={label} id={id} />
-            ))}
-          </motion.div>
-        )}
+        {result ? <Result /> : <Inputs />}
       </AnimatePresence>
       <StartButton />
       <GitHubLink />
     </MotionConfig>
   );
 }
-1;

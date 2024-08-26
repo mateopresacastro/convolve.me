@@ -12,3 +12,6 @@ export const isRecordingAtom = atom<IsRecordingState>({
   firstSample: false,
   secondSample: false,
 });
+
+export const sourceNodeAtom = atom<AudioBufferSourceNode | null>(null);
+export const audioContextAtom = atom<AudioContext | null>(null);

@@ -6,7 +6,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { useAtom } from "jotai";
 import { Inter } from "next/font/google";
 
-import { audioAtom } from "@/lib/jotai";
+import { audioAtom } from "@/lib/atoms";
 import { getAudioUtils } from "@/lib/audio-utils";
 
 const inter = Inter({ subsets: ["latin"] });

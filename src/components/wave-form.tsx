@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useAtomValue } from "jotai";
 import { useRef, useEffect } from "react";
 
-import { audioAtom } from "@/lib/jotai";
+import { audioAtom } from "@/lib/atoms";
 import { audioBufferToWave } from "@/lib/audio-utils";
 
 import { Id } from "@/types";

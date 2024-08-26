@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import Input from "@/components/input";
+import { Input } from "@/components/inputs";
 
 export default function Result() {
   const id = "result";

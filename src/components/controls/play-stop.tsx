@@ -1,43 +1,48 @@
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAtomValue } from "jotai";
-import { Id } from "@/types";
-import { audioAtom } from "@/lib/jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { audioAtom, audioContextAtom, sourceNodeAtom } from "@/lib/atoms";
 
-export default function PlayStop({
-  id,
-  buffer,
-}: {
-  id: Id;
-  buffer?: AudioBuffer;
-}) {
+import type { Id } from "@/types";
+
+export default function PlayStop({ id }: { id: Id }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
+  const [sourceNode, setSourceNode] = useAtom(sourceNodeAtom);
+  const [audioContext, setAudioContext] = useAtom(audioContextAtom);
   const audioBuffers = useAtomValue(audioAtom);
-  const currentBuffer = buffer ? buffer : audioBuffers[id];
+  const buffer = audioBuffers[id];
 
   const play = () => {
-    if (!currentBuffer || currentBuffer instanceof Blob || isPlaying) return;
+    if (!buffer || buffer instanceof Blob || isPlaying) return;
+    sourceNode?.disconnect();
+    setSourceNode(null);
     setIsPlaying(true);
-    const ctx = new AudioContext();
+
+    const ctx = audioContext ?? new AudioContext();
+    if (!audioContext) setAudioContext(ctx);
+
     const sampleSourceNode = new AudioBufferSourceNode(ctx, {
-      buffer: currentBuffer,
+      buffer,
     });
-    sourceNodeRef.current = sampleSourceNode;
     sampleSourceNode.connect(ctx.destination);
     sampleSourceNode.start();
-    sampleSourceNode.onended = () => setIsPlaying(false);
+    setSourceNode(sampleSourceNode);
+    sampleSourceNode.onended = () => {
+      setIsPlaying(false);
+      setSourceNode(null);
+    };
   };
 
   const stop = () => {
-    if (!sourceNodeRef.current || !isPlaying) return;
-    sourceNodeRef.current.stop();
+    if (!sourceNode || !isPlaying) return;
+    sourceNode?.stop();
+    setSourceNode(null);
   };
 
   return (
     <AnimatePresence mode="popLayout" initial={false}>
-      {currentBuffer ? (
+      {buffer ? (
         <motion.div
           className="flex items-center justify-center"
           initial={{

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Inter } from "next/font/google";
 import { useAtom } from "jotai";
 
-import { audioAtom, isRecordingAtom } from "@/lib/jotai";
+import { audioAtom, isRecordingAtom } from "@/lib/atoms";
 import { getAudioBufferFromFile } from "@/lib/audio-utils";
 
 import type { Id } from "@/types";

@@ -1,25 +1,30 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-import { audioAtom } from "@/lib/jotai";
-import { useAtom } from "jotai";
+import { audioAtom, sourceNodeAtom } from "@/lib/atoms";
+import { useAtom, useSetAtom } from "jotai";
 
 import type { Id } from "@/types";
 
 export default function TrashButton({ id }: { id: Id }) {
   const [audioBuffers, setAudioBuffers] = useAtom(audioAtom);
-  const currentBuffer = audioBuffers[id];
+  const [sourceNode, setSourceNode] = useAtom(sourceNodeAtom);
+  const buffer = audioBuffers[id];
 
   const deleteBuffer = () => {
-    if (!currentBuffer) return;
+    if (!buffer) return;
     setAudioBuffers((prev) => ({
       ...prev,
       [id]: null,
     }));
+
+    if (!sourceNode) return;
+    sourceNode.disconnect();
+    setSourceNode(null);
   };
 
   return (
     <AnimatePresence mode="popLayout">
-      {currentBuffer ? (
+      {buffer ? (
         <motion.div
           initial={{
             opacity: 0,
