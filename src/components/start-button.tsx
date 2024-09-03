@@ -13,7 +13,7 @@ export default function StartButton() {
   const [{ firstSample, secondSample }, setAudio] = useAtom(audioAtom);
   const { result } = useAtomValue(audioAtom);
 
-  const handleConvolve = async () => {
+  async function handleConvolve() {
     if (!firstSample || !secondSample) return;
     const offlineCtx = new OfflineAudioContext({
       numberOfChannels: firstSample.numberOfChannels,
@@ -48,7 +48,7 @@ export default function StartButton() {
     } finally {
       setTimeout(() => setIsProcessing(false), 1500);
     }
-  };
+  }
 
   const isDisabled =
     firstSample === null ||

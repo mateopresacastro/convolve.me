@@ -12,7 +12,7 @@ import Result from "@/components/result";
 
 import { audioAtom, isProcessingAtom } from "@/lib/atoms";
 
-const Processing = forwardRef(function Processing() {
+function Processing() {
   return (
     <motion.div
       initial={{ opacity: 0, filter: "blur(1px)" }}
@@ -23,7 +23,7 @@ const Processing = forwardRef(function Processing() {
       Processing
     </motion.div>
   );
-});
+}
 
 const transition = {
   type: "spring",

@@ -13,7 +13,7 @@ export default function PlayStop({ id }: { id: Id }) {
   const audioBuffers = useAtomValue(audioAtom);
   const buffer = audioBuffers[id];
 
-  const play = () => {
+  function play() {
     if (!buffer || buffer instanceof Blob || isPlaying) return;
     sourceNode?.disconnect();
     setSourceNode(null);
@@ -32,13 +32,13 @@ export default function PlayStop({ id }: { id: Id }) {
       setIsPlaying(false);
       setSourceNode(null);
     };
-  };
+  }
 
-  const stop = () => {
+  function stop() {
     if (!sourceNode || !isPlaying) return;
     sourceNode?.stop();
     setSourceNode(null);
-  };
+  }
 
   return (
     <AnimatePresence mode="popLayout" initial={false}>

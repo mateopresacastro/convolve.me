@@ -17,6 +17,22 @@ const inputs: Array<TFileInput> = [
   },
 ];
 
+const Inputs = forwardRef(function Inputs() {
+  return (
+    <motion.div
+      className="flex w-full flex-col items-center md:flex-row md:gap-0 gap-6 py-6 md:py-0"
+      initial={{ opacity: 0, filter: "blur(1px)" }}
+      exit={{ opacity: 0, filter: "blur(1px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      key="main-inputs"
+    >
+      {inputs.map(({ id, label }, i) => (
+        <Input key={id} label={label} id={id} />
+      ))}
+    </motion.div>
+  );
+});
+
 export function Input({ label, id }: { label: string; id: Id }) {
   return (
     <motion.div
@@ -40,21 +56,5 @@ export function Input({ label, id }: { label: string; id: Id }) {
     </motion.div>
   );
 }
-
-const Inputs = forwardRef(function Inputs() {
-  return (
-    <motion.div
-      className="flex w-full flex-col items-center md:flex-row md:gap-0 gap-6 py-6 md:py-0"
-      initial={{ opacity: 0, filter: "blur(1px)" }}
-      exit={{ opacity: 0, filter: "blur(1px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}
-      key="main-inputs"
-    >
-      {inputs.map(({ id, label }, i) => (
-        <Input key={id} label={label} id={id} />
-      ))}
-    </motion.div>
-  );
-});
 
 export default Inputs;

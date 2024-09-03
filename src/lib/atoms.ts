@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import type { AudioBuffersState, IsRecordingState, WsState } from "@/types";
+import type { AudioBuffersState, IsRecordingState } from "@/types";
 
 export const audioAtom = atom<AudioBuffersState>({
   firstSample: null,
