@@ -88,7 +88,7 @@ export default function StartButton() {
             }}
             style={{ borderRadius: 5 }}
           >
-            Start
+            Convolve
           </motion.button>
         )}
       </AnimatePresence>

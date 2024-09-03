@@ -10,6 +10,7 @@ import { audioBufferToWave, download } from "@/lib/audio-utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// forwardRef needed by framer-motion
 const Result = forwardRef(function Result() {
   const id = "result";
   const label = "Result";
@@ -37,7 +38,7 @@ const Result = forwardRef(function Result() {
         whileHover={{ scale: 1.05 }}
         className={clsx(
           inter.className,
-          "flex h-8 w-24 items-center justify-center text-neutral-100 bg-neutral-800 text-xs relative top-10"
+          "flex h-8 w-24 items-center justify-center text-neutral-100 bg-neutral-800 text-xs relative top-10 py-2"
         )}
         initial={{
           opacity: 0,

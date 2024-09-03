@@ -17,6 +17,7 @@ const inputs: Array<TFileInput> = [
   },
 ];
 
+// forwardRef needed by framer-motion
 const Inputs = forwardRef(function Inputs() {
   return (
     <motion.div

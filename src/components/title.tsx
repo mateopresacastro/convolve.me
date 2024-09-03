@@ -55,7 +55,7 @@ export default function Title() {
         initial={initial}
         animate={animate}
       >
-        Record or upload two audio files and press start to convolve them:
+        Record or upload two audio files and press convolve:
       </motion.p>
     </motion.div>
   );

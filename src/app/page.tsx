@@ -9,21 +9,9 @@ import StartButton from "@/components/start-button";
 import Title from "@/components/title";
 import Inputs from "@/components/inputs";
 import Result from "@/components/result";
+import Processing from "@/components/processing";
 
 import { audioAtom, isProcessingAtom } from "@/lib/atoms";
-
-function Processing() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, filter: "blur(1px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, filter: "blur(1px)" }}
-      className="flex md:h-[128px] h-[328px] w-full items-center justify-center text-sm"
-    >
-      Processing
-    </motion.div>
-  );
-}
 
 const transition = {
   type: "spring",
