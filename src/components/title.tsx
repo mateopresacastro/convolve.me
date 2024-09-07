@@ -1,9 +1,4 @@
-import clsx from "clsx";
 import { motion } from "framer-motion";
-import { Inter, Newsreader } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-const newsreader = Newsreader({ subsets: ["latin"] });
 
 const initial = {
   opacity: 0,
@@ -19,12 +14,7 @@ const animate = {
 
 export default function Title() {
   return (
-    <motion.div
-      className={clsx(
-        newsreader.className,
-        "flex w-full flex-col items-start md:mb-0"
-      )}
-    >
+    <motion.div className="flex w-full flex-col items-start md:mb-0">
       <motion.h1
         className="text-lg font-medium text-neutral-800"
         initial={initial}
@@ -33,13 +23,6 @@ export default function Title() {
         Convolution
       </motion.h1>
 
-      <motion.p
-        initial={initial}
-        animate={animate}
-        className={clsx(inter.className, "text-neutral-400 text-xs")}
-      >
-        /ˌkɑːn.vəˈluː.ʃən/
-      </motion.p>
       <motion.p
         className="w-80 pt-2 text-neutral-700 md:w-[664px]"
         initial={initial}
