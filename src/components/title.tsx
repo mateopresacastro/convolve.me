@@ -24,7 +24,7 @@ export default function Title() {
       </motion.h1>
 
       <motion.p
-        className="w-80 pt-2 text-neutral-700 md:w-[664px]"
+        className="w-80 pt-4 text-neutral-600 md:w-[664px]"
         initial={initial}
         animate={animate}
       >
@@ -34,7 +34,7 @@ export default function Title() {
       </motion.p>
 
       <motion.p
-        className="w-80 py-6 text-neutral-700 md:w-[664px]"
+        className="w-80 py-6 text-neutral-600 md:w-[664px]"
         initial={initial}
         animate={animate}
       >
