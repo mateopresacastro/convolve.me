@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { useAtomValue } from "jotai";
-import { forwardRef, useMemo } from "react";
 
 import GitHubLink from "@/components/footer";
 import StartButton from "@/components/start-button";
