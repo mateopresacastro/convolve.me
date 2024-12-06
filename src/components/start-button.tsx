@@ -54,7 +54,7 @@ export default function StartButton() {
     isProcessing === true;
 
   return (
-    <motion.div className="flex h-24 w-full items-center justify-center">
+    <motion.div className="flex h-16 w-full items-center justify-center">
       <AnimatePresence mode="popLayout" initial={false}>
         {isDisabled ? null : (
           <motion.button
