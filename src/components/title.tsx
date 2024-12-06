@@ -14,17 +14,13 @@ const animate = {
 
 export default function Title() {
   return (
-    <motion.div className="flex w-full flex-col items-start md:mb-0">
-      <motion.h1
-        className="text-lg font-medium text-neutral-800"
-        initial={initial}
-        animate={animate}
-      >
+    <motion.div className="flex w-full flex-col items-start text-sm text-neutral-950 md:mb-0">
+      <motion.h1 initial={initial} animate={animate}>
         Convolution
       </motion.h1>
 
       <motion.p
-        className="w-80 pt-4 text-neutral-600 md:w-[664px]"
+        className="w-80 pt-4 md:w-[664px]"
         initial={initial}
         animate={animate}
       >
@@ -34,7 +30,7 @@ export default function Title() {
       </motion.p>
 
       <motion.p
-        className="w-80 py-6 text-neutral-600 md:w-[664px]"
+        className="w-80 py-6 text-neutral-950 md:w-[664px]"
         initial={initial}
         animate={animate}
       >

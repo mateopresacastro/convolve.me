@@ -94,7 +94,7 @@ export default function Record({ id }: RecordProps) {
               color: isCurrentlyRecording ? "#dc2626" : "#171717",
             }}
             className={clsx(
-              "h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none ml-1"
+              "ml-1 h-6 w-6 cursor-pointer text-neutral-900 hover:text-neutral-500 focus:outline-none",
             )}
             height="1em"
             width="1em"
@@ -114,7 +114,7 @@ export default function Record({ id }: RecordProps) {
             }}
             className={clsx(
               inter.className,
-              "absolute text-[0.4rem] left-[0.635rem]"
+              "absolute left-[0.635rem] text-[0.4rem]",
             )}
           >
             REC

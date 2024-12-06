@@ -3,8 +3,8 @@ import { forwardRef } from "react";
 
 const Processing = forwardRef(function Processing() {
   const time = useTime();
-  const rotate1 = useTransform(time, [0, 1500], [0, 360], { clamp: false });
-  const rotate4 = useTransform(time, [0, 1200], [0, 360], { clamp: false });
+  const rotate1 = useTransform(time, [0, 1000], [0, 360], { clamp: false });
+  const rotate4 = useTransform(time, [0, 700], [0, 360], { clamp: false });
 
   return (
     <motion.div
@@ -14,11 +14,11 @@ const Processing = forwardRef(function Processing() {
       className="flex md:h-[128px] h-[328px] w-full items-center justify-center text-sm relative"
     >
       <motion.div
-        className="size-7 bg-neutral-800 rounded-lg absolute"
+        className="size-5 bg-neutral-800 rounded-md absolute"
         style={{ rotate: rotate1 }}
       />
       <motion.div
-        className="size-7 bg-neutral-800 rounded-lg absolute"
+        className="size-5 bg-neutral-800 rounded-md absolute"
         style={{ rotate: rotate4 }}
       />
       <motion.p
