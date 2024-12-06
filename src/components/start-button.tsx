@@ -1,12 +1,9 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAtom, useAtomValue } from "jotai";
-import { Inter } from "next/font/google";
 
 import { audioAtom, isProcessingAtom } from "@/lib/atoms";
 import { getAudioUtils } from "@/lib/audio-utils";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function StartButton() {
   const [isProcessing, setIsProcessing] = useAtom(isProcessingAtom);
@@ -68,8 +65,7 @@ export default function StartButton() {
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
             className={clsx(
-              inter.className,
-              "flex h-8 w-24 items-center justify-center text-neutral-100 bg-neutral-800 text-xs"
+              "flex h-8 w-24 items-center justify-center bg-neutral-800 text-xs text-neutral-100",
             )}
             initial={{
               opacity: 0,

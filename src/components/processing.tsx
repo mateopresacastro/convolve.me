@@ -4,25 +4,25 @@ import { forwardRef } from "react";
 const Processing = forwardRef(function Processing() {
   const time = useTime();
   const rotate1 = useTransform(time, [0, 1000], [0, 360], { clamp: false });
-  const rotate4 = useTransform(time, [0, 700], [0, 360], { clamp: false });
+  const rotate2 = useTransform(time, [0, 700], [0, 360], { clamp: false });
 
   return (
     <motion.div
       initial={{ opacity: 0, filter: "blur(1px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       exit={{ opacity: 0, filter: "blur(1px)" }}
-      className="flex md:h-[128px] h-[328px] w-full items-center justify-center text-sm relative"
+      className="relative flex h-[328px] w-full items-center justify-center text-sm md:h-[128px]"
     >
       <motion.div
-        className="size-5 bg-neutral-800 rounded-md absolute"
+        className="absolute size-3 rounded-sm bg-neutral-800"
         style={{ rotate: rotate1 }}
       />
       <motion.div
-        className="size-5 bg-neutral-800 rounded-md absolute"
-        style={{ rotate: rotate4 }}
+        className="absolute size-3 rounded-sm bg-neutral-800"
+        style={{ rotate: rotate2 }}
       />
       <motion.p
-        className="pt-20 text-sm"
+        className="pt-20 text-xs text-neutral-700"
         initial={{
           opacity: 0,
           filter: "blur(1px)",
