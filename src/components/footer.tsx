@@ -16,7 +16,7 @@ export default function Footer() {
         filter: "blur(0px)",
       }}
       key="github-link-a"
-      className="absolute bottom-0 flex w-full flex-col items-center justify-center py-6"
+      className="absolute bottom-0 hidden w-full flex-col items-center justify-center py-6 md:flex"
     >
       <Link
         href="https://github.com/MateoPresaCastro/convolve.me"
