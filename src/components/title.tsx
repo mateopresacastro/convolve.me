@@ -1,41 +1,17 @@
-import { motion } from "framer-motion";
-
-const initial = {
-  opacity: 0,
-  transform: "translateY(10px)",
-  filter: "blur(1px)",
-};
-
-const animate = {
-  opacity: 1,
-  transform: "translateY(0px)",
-  filter: "blur(0px)",
-};
-
 export default function Title() {
   return (
-    <motion.div className="flex w-full flex-col items-start text-sm text-neutral-950 md:mb-0">
-      <motion.h1 initial={initial} animate={animate}>
-        Convolution
-      </motion.h1>
+    <div className="flex w-full flex-col items-start text-sm text-neutral-950 md:mb-0">
+      <h1 className="text-4xl font-semibold tracking-tighter">Convolution</h1>
 
-      <motion.p
-        className="w-80 pt-4 md:w-[664px]"
-        initial={initial}
-        animate={animate}
-      >
+      <p className="w-80 pt-1 leading-7 text-neutral-500 md:w-[664px]">
         The process of multiplying two audio signals. The frequencies that are
         shared between the two will be accentuated, while the rest will be
         attenuated.
-      </motion.p>
+      </p>
 
-      <motion.p
-        className="w-80 py-6 text-neutral-950 md:w-[664px]"
-        initial={initial}
-        animate={animate}
-      >
+      <p className="w-80 py-2 text-neutral-500 md:w-[664px]">
         Record or upload two audio files and press convolve:
-      </motion.p>
-    </motion.div>
+      </p>
+    </div>
   );
 }
