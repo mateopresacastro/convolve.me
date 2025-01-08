@@ -21,9 +21,6 @@ const Result = forwardRef(function Result() {
   return (
     <motion.div
       className="flex h-[329px] w-full flex-col items-center justify-center gap-6 py-6 md:h-32 md:gap-0 md:py-0"
-      initial={{ opacity: 0, filter: "blur(1px)" }}
-      exit={{ opacity: 0, filter: "blur(1px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}
       key="main-inputs"
     >
       <Input key={id} label={label} id={id} />
